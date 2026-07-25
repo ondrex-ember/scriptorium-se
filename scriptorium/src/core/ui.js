@@ -10,6 +10,7 @@ const UI = {
         document.querySelectorAll('.nav-btn').forEach(e => e.classList.remove('active'));
         if (btn) btn.classList.add('active');
         this.currentScreen = name;
+        this.renderResourceTracker();
         if (this._dirty[name]) {
             this._dirty[name] = false;
             if (name === 'inv') { this.renderInventory(); }
@@ -39,6 +40,11 @@ const UI = {
                 themeSelector.value = GameState.settings.theme || 'default';
             }
 
+            const designSelector = document.getElementById('design-style-selector');
+            if (designSelector) {
+                designSelector.value = GameState.settings.designStyle || 'marniva';
+            }
+
             // Load fire volume slider
             const fireVolumeSlider = document.getElementById('fire-volume-slider');
             if (fireVolumeSlider) {
@@ -65,7 +71,7 @@ const UI = {
             if (tier3Option) tier3Option.style.display = tier3 ? 'flex' : 'none';
 
             // Nastavit aktuálně vybraný radio button
-            const currentTier = (typeof audioSys !== 'undefined') ? audioSys.musicTier : (GameState.settings.musicTier || 1);
+            const currentTier = (typeof audioSys !== 'undefined' && audioSys !== null) ? audioSys.musicTier : (GameState.settings?.musicTier || 1);
             const tierRadio = document.querySelector(`input[name="musicTier"][value="${currentTier}"]`);
             if (tierRadio) tierRadio.checked = true;
 
@@ -128,9 +134,8 @@ const UI = {
         // Porta — odhalit tlačítko v navigaci, jakmile GameState.flags.porta_active naskočí (Chronicon most)
         const _portaBtn = document.getElementById('lore-tab-porta');
         if (_portaBtn) _portaBtn.style.display = (GameState.flags && GameState.flags.porta_active) ? '' : 'none';
-        // Zakázky — stejná podmínka jako Porta (bez ní nejsou žádné závazkové dopisy)
-        const _commitBtn = document.getElementById('lore-tab-commitments');
-        if (_commitBtn) _commitBtn.style.display = (GameState.flags && GameState.flags.porta_active) ? '' : 'none';
+
+        this.renderResourceTracker();
 
         const s = this.currentScreen || 'home';
         if (s === 'home') {
@@ -152,71 +157,201 @@ const UI = {
         else if (s === 'garden') { this.renderGarden(); }
         this.renderRecords();
         this.renderGamesTab();
-        this.updateResourceTrackers();
         const allScreens = ['home', 'inv', 'craft', 'lore', 'garden'];
         allScreens.forEach(sc => { if (sc !== s) this._dirty[sc] = true; });
         this._dirty.cellarium = true;
     },
 
-    updateResourceTrackers: function () {
+    toggleResourceTracker: function (e) {
+        if (e && e.stopPropagation) e.stopPropagation();
+        if (typeof GameState === 'undefined' || !GameState) return;
+        if (!GameState.ui) GameState.ui = {};
+        GameState.ui.resTrackerCollapsed = !GameState.ui.resTrackerCollapsed;
+        this.renderResourceTracker();
+    },
+
+    renderResourceTracker: function () {
         const bars = document.querySelectorAll('.resource-tracker-bar');
-        if (!bars || bars.length === 0) return;
-
-        const trackedItems = [
-            { id: 'wood', icon: '🌲', label: 'Dřevo' },
-            { id: 'stick', icon: '🌿', label: 'Větve' },
-            { id: 'fat', icon: '🥩', label: 'Tuk' },
-            { id: 'flint_shard', icon: '🔪', label: 'Úštěpky' },
-            { id: 'string', icon: '➰', label: 'Provaz' },
-            { id: 'clay', icon: '🧱', label: 'Hlína' },
-            { id: 'raw_stone', icon: '🪨', label: 'Kámen' },
-            { id: 'herbs', icon: '🌱', label: 'Byliny' },
-            { id: 'grain', icon: '🌾', label: 'Obilí' },
-            { id: 'water', icon: '💧', label: 'Voda' },
-            { id: 'parchment', icon: '📜', label: 'Pergamen' },
-            { id: 'ink_gall', icon: '✒️', label: 'Inkoust' },
-            { id: 'candle', icon: '🕯️', label: 'Svíčka' },
-            { id: 'charcoal', icon: '⬛', label: 'Uhlí' }
-        ];
-
-        const inv = (typeof GameState !== 'undefined' && GameState.inventory) || {};
-        let htmlPills = '';
-
-        trackedItems.forEach(item => {
-            const count = inv[item.id] || 0;
-            if (count > 0 || ['wood', 'stick', 'fat', 'flint_shard', 'string'].includes(item.id)) {
-                const isZero = count === 0;
-                let clickTarget = 'inv';
-                if (['wood', 'stick', 'fat', 'flint_shard', 'string', 'raw_stone'].includes(item.id)) {
-                    clickTarget = 'home';
-                }
-                const nameLabel = (typeof iName === 'function') ? iName(item.id) : item.label;
-                const valStr = count >= 1000 ? (count / 1000).toFixed(1) + 'k' : count;
-                htmlPills += `
-                <div class="res-pill ${isZero ? 'res-pill-empty' : ''}" onclick="UI.switchScreen('${clickTarget}')" title="${nameLabel}">
-                    <span class="res-pill-icon">${item.icon}</span>
-                    <span class="res-pill-label">${nameLabel}:</span>
-                    <span class="res-pill-val">${valStr}</span>
-                </div>`;
-            }
-        });
-
-        if (!htmlPills) {
-            bars.forEach(b => b.innerHTML = '');
+        if (!bars.length) return;
+        if (typeof GameState === 'undefined' || !GameState || !GameState.inventory) {
+            bars.forEach(el => { el.innerHTML = ''; });
             return;
         }
 
-        const trackerHtml = `
-            <div class="res-tracker-container">
-                <div class="res-tracker-title" onclick="UI.switchScreen('inv')">📦 Suroviny:</div>
-                <div class="res-tracker-pills">
-                    ${htmlPills}
-                </div>
-            </div>`;
+        if (!GameState.ui) GameState.ui = {};
+        const isCollapsed = !!GameState.ui.resTrackerCollapsed;
 
-        bars.forEach(b => {
-            b.innerHTML = trackerHtml;
+        const lang = (GameState.settings && GameState.settings.language) || 'cs';
+        const isCs = lang === 'cs';
+        const sc = this.currentScreen || 'home';
+
+        const inv = GameState.inventory || {};
+
+        let barTitle = isCs ? 'Suroviny:' : 'Supplies:';
+        let barIcon = '📦';
+        let items = [];
+
+        if (sc === 'home' || sc === 'craft') {
+            barTitle = isCs ? 'Suroviny:' : 'Supplies:';
+            barIcon = '📦';
+            const woodCount = (inv.wood || 0) + (inv.log || 0);
+            const branchCount = inv.stick || 0;
+            const tallowCount = inv.fat || 0;
+            const flakeCount = inv.sharp_stone || 0;
+            const rockCount = inv.rock || 0;
+            const ropeCount = inv.rope || 0;
+            const fiberCount = inv.fiber || 0;
+
+            items = [
+                { id: 'wood', icon: '🌲', label: isCs ? 'Dřevo' : 'Wood', count: woodCount, key: 'wood' },
+                { id: 'stick', icon: '🌿', label: isCs ? 'Větve' : 'Branches', count: branchCount, key: 'stick' },
+                { id: 'fat', icon: '🥩', label: isCs ? 'Tuk' : 'Tallow', count: tallowCount, key: 'fat' },
+                { id: 'sharp_stone', icon: '🔪', label: isCs ? 'Úštěpky' : 'Flakes', count: flakeCount, subCount: rockCount, subLabel: isCs ? 'Kameny' : 'Rocks', key: 'sharp_stone' },
+                { id: 'rope', icon: '➰', label: isCs ? 'Provaz' : 'Twine', count: ropeCount, subCount: fiberCount, subLabel: isCs ? 'Vlákna' : 'Fibers', key: 'rope' }
+            ];
+        } else if (sc === 'garden') {
+            barTitle = isCs ? 'Zahrada:' : 'Garden:';
+            barIcon = '🌱';
+            const waterCount = inv.water || 0;
+            const herbCount = (inv.herbs || 0) + (inv.seeds || 0);
+            const berryCount = (inv.berries || 0) + (inv.apple || 0) + (inv.fruit || 0);
+            const ashCount = (inv.ash || 0) + (inv.fertilizer || 0);
+            const stickCount = inv.stick || 0;
+
+            items = [
+                { id: 'water', icon: '💧', label: isCs ? 'Voda' : 'Water', count: waterCount, key: 'water' },
+                { id: 'herbs', icon: '🌱', label: isCs ? 'Sazenice/Byliny' : 'Herbs', count: herbCount, key: 'herbs' },
+                { id: 'berries', icon: '🍎', label: isCs ? 'Plody/Úroda' : 'Harvest', count: berryCount, key: 'berries' },
+                { id: 'ash', icon: '🔥', label: isCs ? 'Popel/Hnojivo' : 'Ash/Fertilizer', count: ashCount, key: 'ash' },
+                { id: 'stick', icon: '🌿', label: isCs ? 'Větve' : 'Branches', count: stickCount, key: 'stick' }
+            ];
+        } else if (sc === 'inv') {
+            barTitle = isCs ? 'Zásoby:' : 'Pantry:';
+            barIcon = '🥖';
+            const waterCount = inv.water || 0;
+            const breadCount = inv.bread || 0;
+            const meatCount = (inv.meat || 0) + (inv.fish || 0) + (inv.meat_cooked || 0);
+            const pieCount = inv.pie || 0;
+            const eggCount = inv.egg || 0;
+
+            items = [
+                { id: 'water', icon: '💧', label: isCs ? 'Voda' : 'Water', count: waterCount, key: 'water' },
+                { id: 'bread', icon: '🍞', label: isCs ? 'Chléb' : 'Bread', count: breadCount, key: 'bread' },
+                { id: 'meat', icon: '🍖', label: isCs ? 'Maso/Ryby' : 'Meat/Fish', count: meatCount, key: 'meat' },
+                { id: 'pie', icon: '🥧', label: isCs ? 'Koláč' : 'Pie', count: pieCount, key: 'pie' },
+                { id: 'egg', icon: '🥚', label: isCs ? 'Vejce' : 'Eggs', count: eggCount, key: 'egg' }
+            ];
+        } else if (sc === 'scriptorium' || sc === 'lore') {
+            barTitle = isCs ? 'Písařství:' : 'Scribe:';
+            barIcon = '🖋️';
+            const paperCount = inv.paper || 0;
+            const parchmentCount = inv.parchment || 0;
+            const inkCount = (inv.ink || 0) + (inv.ink_gall || 0);
+            const quillCount = inv.quill || 0;
+            const coinCount = GameState.coins || inv.coins || 0;
+
+            items = [
+                { id: 'paper', icon: '📄', label: isCs ? 'Papír' : 'Paper', count: paperCount, key: 'paper' },
+                { id: 'parchment', icon: '📜', label: isCs ? 'Pergamen' : 'Parchment', count: parchmentCount, key: 'parchment' },
+                { id: 'ink', icon: '🖋️', label: isCs ? 'Inkoust' : 'Ink', count: inkCount, key: 'ink' },
+                { id: 'quill', icon: '✒️', label: isCs ? 'Brky' : 'Quills', count: quillCount, key: 'quill' },
+                { id: 'coins', icon: '💰', label: isCs ? 'Mince' : 'Coins', count: coinCount, key: 'coins' }
+            ];
+        } else if (sc === 'library') {
+            barTitle = isCs ? 'Knihovna:' : 'Library:';
+            barIcon = '📚';
+            const resPoints = GameState.researchPoints || 0;
+            const paperCount = inv.paper || 0;
+
+            let unlockedCount = 0;
+            let readCount = 0;
+            let totalCount = 0;
+            if (typeof LibraryDB !== 'undefined' && LibraryDB.books) {
+                totalCount = LibraryDB.books.length;
+                const stateLib = GameState.library || {};
+                const unlockedArr = stateLib.unlockedBooks || [];
+                const readArr = stateLib.readBooks || [];
+                unlockedCount = unlockedArr.length;
+                readCount = readArr.length;
+            }
+
+            items = [
+                { id: 'research', icon: '🧠', label: isCs ? 'Výzkum' : 'Research', count: resPoints, key: 'research' },
+                { id: 'unlocked', icon: '📚', label: isCs ? 'Odemčeno' : 'Unlocked', count: unlockedCount, subCount: totalCount, subLabel: isCs ? 'Celkem' : 'Total', key: 'unlocked' },
+                { id: 'read', icon: '📖', label: isCs ? 'Přečteno' : 'Read', count: readCount, subCount: totalCount, subLabel: isCs ? 'Celkem' : 'Total', key: 'read' },
+                { id: 'paper', icon: '📄', label: isCs ? 'Papír' : 'Paper', count: paperCount, key: 'paper' }
+            ];
+        } else {
+            barTitle = isCs ? 'Suroviny:' : 'Supplies:';
+            barIcon = '📦';
+            const woodCount = (inv.wood || 0) + (inv.log || 0);
+            const branchCount = inv.stick || 0;
+            const paperCount = inv.paper || 0;
+            items = [
+                { id: 'wood', icon: '🌲', label: isCs ? 'Dřevo' : 'Wood', count: woodCount, key: 'wood' },
+                { id: 'stick', icon: '🌿', label: isCs ? 'Větve' : 'Branches', count: branchCount, key: 'stick' },
+                { id: 'paper', icon: '📄', label: isCs ? 'Papír' : 'Paper', count: paperCount, key: 'paper' }
+            ];
+        }
+
+        if (isCollapsed) {
+            const cleanTitle = barTitle.replace(':', '');
+            const html = `
+                <button class="res-tracker-toggle-btn collapsed-btn" onclick="UI.toggleResourceTracker(event)" title="${isCs ? 'Klikni pro rozbalení' : 'Click to expand'}">
+                    ${barIcon} <span class="res-tracker-title-text">${cleanTitle}</span> <span class="res-tracker-icon">➕</span>
+                </button>
+            `;
+            bars.forEach(el => {
+                el.classList.add('is-collapsed');
+                el.innerHTML = html;
+            });
+            return;
+        }
+
+        bars.forEach(el => { el.classList.remove('is-collapsed'); });
+
+        const clickTarget = sc === 'home' ? 'craft' : sc;
+
+        let html = `
+            <div class="res-tracker-container">
+                <span class="res-tracker-title" onclick="UI.switchScreen('${clickTarget}')" title="${isCs ? 'Detail' : 'Detail'}">
+                    ${barIcon} <span class="res-tracker-title-text">${barTitle}</span>
+                </span>
+                <div class="res-tracker-pills">
+        `;
+
+        items.forEach(item => {
+            const isZero = item.count === 0 && (!item.subCount || item.subCount === 0);
+            let valStr = `${item.count}`;
+            if (item.subCount !== undefined && item.subCount > 0) {
+                let subTag = '';
+                if (item.key === 'sharp_stone') subTag = '⛰️';
+                else if (item.key === 'rope') subTag = '🌾';
+
+                if (item.key === 'unlocked' || item.key === 'read') {
+                    valStr = `${item.count}<span class="res-subval" title="${item.subLabel}">/${item.subCount}</span>`;
+                } else {
+                    valStr += ` <span class="res-subval" title="${item.subLabel}">(${item.subCount}${subTag ? ' ' + subTag : ''})</span>`;
+                }
+            }
+            html += `
+                <div class="res-pill ${isZero ? 'res-pill-empty' : ''}" onclick="UI.switchScreen('${clickTarget}')" title="${item.label}">
+                    <span class="res-pill-icon">${item.icon}</span>
+                    <span class="res-pill-label">${item.label}:</span>
+                    <span class="res-pill-val">${valStr}</span>
+                </div>
+            `;
         });
+
+        html += `
+                </div>
+                <button class="res-tracker-close-btn" onclick="UI.toggleResourceTracker(event)" title="${isCs ? 'Sbalit' : 'Collapse'}">
+                    ✖
+                </button>
+            </div>
+        `;
+
+        bars.forEach(el => { el.innerHTML = html; });
     },
 
     showItemModal: function (id) {
@@ -1120,7 +1255,6 @@ const UI = {
         const _lcalEl = document.getElementById('lore-calendarium-content'); if (_lcalEl) _lcalEl.style.display = 'none';
         const _lperEl = document.getElementById('lore-persona-content'); if (_lperEl) _lperEl.style.display = 'none';
         const _lportEl = document.getElementById('lore-porta-content'); if (_lportEl) _lportEl.style.display = 'none';
-        const _lcommitEl = document.getElementById('lore-commitments-content'); if (_lcommitEl) _lcommitEl.style.display = 'none';
 
         // Remove active class from all buttons
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -1148,8 +1282,6 @@ const UI = {
             if (_lperEl) { _lperEl.style.display = 'block'; if (typeof PersonaSystem !== 'undefined') PersonaSystem.render(); }
         } else if (tab === 'porta') {
             if (_lportEl) { _lportEl.style.display = 'block'; if (typeof PortaSystem !== 'undefined') PortaSystem.render(); }
-        } else if (tab === 'commitments') {
-            if (_lcommitEl) { _lcommitEl.style.display = 'block'; if (typeof CommitmentsSystem !== 'undefined') CommitmentsSystem.render(); }
         }
     },
 
@@ -1158,7 +1290,7 @@ const UI = {
         GameState.ui.libraryTab = tab;
 
         // Hide all library tabs
-        const tabs = ['books', 'games', 'news', 'scrinium', 'kronika', 'kraj', 'studovna'];
+        const tabs = ['books', 'games', 'news', 'scrinium', 'kronika', 'kraj'];
         tabs.forEach(t => {
             const el = document.getElementById('library-' + t + '-content');
             if (el) el.style.display = 'none';
@@ -1188,9 +1320,6 @@ const UI = {
         } else if (tab === 'kraj') {
             const el = document.getElementById('library-kraj-content');
             if (el) { el.style.display = 'block'; UI.renderChroniconWindow(); }
-        } else if (tab === 'studovna') {
-            const el = document.getElementById('library-studovna-content');
-            if (el) { el.style.display = 'block'; if (typeof StudovnaSystem !== 'undefined') StudovnaSystem.render(); }
         }
     },
 
@@ -1593,36 +1722,36 @@ const UI = {
         const _bartolomejRel = (GameState.persona && GameState.persona.influence && GameState.persona.influence.bartolomej) || 0;
         const _libLang = (GameState.settings && GameState.settings.language) || 'cs';
         h += `
-            <div style="margin-bottom:20px;padding:15px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:5px;">
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-                    <div style="display:flex;align-items:center;gap:10px;flex:1;">
-                        <div style="font-size:2rem;">🖋️</div>
-                        <div style="flex:1;">
+            <div style="margin-bottom:20px;padding:12px;background:var(--bg-card);border:1px solid var(--border-color);border-radius:5px;">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;">
+                    <div style="display:flex;align-items:center;gap:10px;min-width:180px;flex:1;">
+                        <div style="font-size:1.8rem;flex-shrink:0;">🖋️</div>
+                        <div>
                             <strong>${t('library_lore.npc_scribe.name')}</strong>
                             <div class="text-sm" style="color:var(--ink-secondary);">
                                 ${t('library_lore.npc_scribe.scribe_short')}
                             </div>
                         </div>
                     </div>
-                    <button class="craft-btn" onclick="LibraryHelpers.scribeVisit()">
-                        ${_libLang === 'en' ? '💬 Talk' : '💬 Promluvit'}
-                    </button>
-                    <button class="craft-btn" onclick="LibraryHelpers.scribeAskTopic()">
-                        ${_libLang === 'en' ? '🗣️ Ask' : '🗣️ Zeptat se'}
-                    </button>
-                    <button class="craft-btn" onclick="LibraryHelpers.scribeAIChat()">
-                        ${_libLang === 'en' ? '🗨️ Chat' : '🗨️ Pokecat'}
-                    </button>
-                    <button class="craft-btn" onclick="LibraryHelpers.scribeTrade()">
-                        ${t('library_lore.npc_scribe.opt_trade')}
-                    </button>
+                    <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
+                        <button class="craft-btn" style="font-size:0.75rem;padding:4px 8px;min-width:auto;min-height:32px;white-space:nowrap;" onclick="LibraryHelpers.scribeVisit()">
+                            ${_libLang === 'en' ? '💬 Talk' : '💬 Promluvit'}
+                        </button>
+                        <button class="craft-btn" style="font-size:0.75rem;padding:4px 8px;min-width:auto;min-height:32px;white-space:nowrap;" onclick="LibraryHelpers.scribeAskTopic()">
+                            ${_libLang === 'en' ? '🗣️ Ask' : '🗣️ Zeptat se'}
+                        </button>
+                        <button class="craft-btn" style="font-size:0.75rem;padding:4px 8px;min-width:auto;min-height:32px;white-space:nowrap;" onclick="LibraryHelpers.scribeAIChat()">
+                            ${_libLang === 'en' ? '🗨️ Chat' : '🗨️ Pokecat'}
+                        </button>
+                        <button class="craft-btn" style="font-size:0.75rem;padding:4px 8px;min-width:auto;min-height:32px;white-space:nowrap;" onclick="LibraryHelpers.scribeTrade()">
+                            ${t('library_lore.npc_scribe.opt_trade')}
+                        </button>
+                        ${_bartolomejRel >= 25 ? `
+                        <button class="craft-btn" style="font-size:0.75rem;padding:4px 8px;min-width:auto;min-height:32px;white-space:nowrap;" onclick="LibraryHelpers.scribeTradeChoice()">
+                            ${_libLang === 'en' ? '🖋️ Choose Book (10x Paper)' : '🖋️ Vybrat knihu (10x Papír)'}
+                        </button>` : ''}
+                    </div>
                 </div>
-                ${_bartolomejRel >= 25 ? `
-                <div style="display:flex;justify-content:flex-end;">
-                    <button class="craft-btn" onclick="LibraryHelpers.scribeTradeChoice()">
-                        ${_libLang === 'en' ? '🖋️ Choose a Book (10x Paper)' : '🖋️ Vybrat knihu (10x Papír)'}
-                    </button>
-                </div>` : ''}
             </div>
         `;
 
@@ -2616,8 +2745,27 @@ const UI = {
     },
 
     openAboutModal: function () {
-        document.getElementById('about-modal').style.display = 'block';
-        document.body.style.overflow = 'hidden';
+        const modal = document.getElementById('about-modal');
+        if (modal) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            if (typeof TutorialSystem !== 'undefined') {
+                const btnToggle = document.getElementById('btn-toggle-tutorial');
+                const btnReset = document.getElementById('btn-reset-tutorial');
+                const isRunning = GameState.tutorial && GameState.tutorial.active;
+                if (btnToggle) {
+                    btnToggle.textContent = isRunning ? '⏸️ POZASTAVIT TUTORIAL' : '🚀 SPUSTIT TUTORIAL REŽIM';
+                    btnToggle.onclick = function() {
+                        if (isRunning) TutorialSystem.stopTutorial();
+                        else TutorialSystem.startTutorialFromModal();
+                        UI.openAboutModal();
+                    };
+                }
+                if (btnReset) {
+                    btnReset.style.display = (GameState.tutorial && (GameState.tutorial.step > 0 || GameState.tutorial.completed)) ? 'inline-block' : 'none';
+                }
+            }
+        }
     },
 
     closeAboutModal: function () {
