@@ -381,6 +381,8 @@ const STRINGS_en = {
     },
     lore: {
         tabResearch: 'Research',
+        tabTasks: '📜 Daily Horarium',
+        tabManuscripts: '✒️ Transcriptions',
         tabCodex: 'Codex',
         tabNotebooks: '📓 Notebooks',
         tabAchievements: 'Achievements',

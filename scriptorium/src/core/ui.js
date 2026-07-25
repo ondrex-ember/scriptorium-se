@@ -1142,7 +1142,8 @@ const UI = {
         const _t = window.t || t;
         const _lang = (GameState.settings && GameState.settings.language) || 'cs';
         const notesLabel = _lang === 'en' ? 'Notes:' : 'Zápisky:';
-        let h = `<div style="text-align:center;margin-bottom:15px;border:1px solid var(--accent-gold);padding:10px;">${notesLabel} <strong>${res}</strong> 📜</div>`;
+        let h = `<div id="manuscript-copy-widget">${typeof ManuscriptCopySystem !== 'undefined' ? ManuscriptCopySystem.renderWidget() : ''}</div>`;
+        h += `<div style="text-align:center;margin-bottom:15px;border:1px solid var(--accent-gold);padding:10px;">${notesLabel} <strong>${res}</strong> 📜</div>`;
         TechTree.forEach(tech => {
             const done = GameState.researchedTechs.includes(tech.id);
             let canResearch = res >= tech.cost;
@@ -1251,6 +1252,8 @@ const UI = {
         document.getElementById('lore-codex-content').style.display = 'none';
         document.getElementById('lore-notebooks-content').style.display = 'none';
         document.getElementById('lore-achievements-content').style.display = 'none';
+        const _ltasksEl = document.getElementById('lore-tasks-content'); if (_ltasksEl) _ltasksEl.style.display = 'none';
+        const _lmsEl = document.getElementById('lore-manuscripts-content'); if (_lmsEl) _lmsEl.style.display = 'none';
         const _lichEl = document.getElementById('lore-iching-content'); if (_lichEl) _lichEl.style.display = 'none';
         const _lcalEl = document.getElementById('lore-calendarium-content'); if (_lcalEl) _lcalEl.style.display = 'none';
         const _lperEl = document.getElementById('lore-persona-content'); if (_lperEl) _lperEl.style.display = 'none';
@@ -1264,6 +1267,10 @@ const UI = {
         if (tab === 'research') {
             document.getElementById('lore-research-content').style.display = 'block';
             UI.renderScriptorium();
+        } else if (tab === 'tasks') {
+            if (_ltasksEl) { _ltasksEl.style.display = 'block'; if (typeof MonasticTasksSystem !== 'undefined') MonasticTasksSystem.render(); }
+        } else if (tab === 'manuscripts') {
+            if (_lmsEl) { _lmsEl.style.display = 'block'; if (typeof ManuscriptCopySystem !== 'undefined') ManuscriptCopySystem.renderPage(); }
         } else if (tab === 'codex') {
             document.getElementById('lore-codex-content').style.display = 'block';
             UI.renderCodex();

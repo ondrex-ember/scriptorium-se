@@ -405,7 +405,9 @@ const STRINGS_cs = {
 
     },
     lore: {
-        tabResearch: 'Research',
+        tabResearch: 'Výzkum',
+        tabTasks: '📜 Denní řád',
+        tabManuscripts: '✒️ Opisování rukopisů',
         tabCodex: 'Codex',
         tabNotebooks: '📓 Zápisníky',
         tabAchievements: 'Achievementy',

@@ -73,6 +73,8 @@ const JS_MAIN = [
     'src/systems/PersonaSystem.js',
     'src/systems/PortaSystem.js',
     'src/systems/CommitmentsSystem.js',
+    'src/systems/MonasticTasksSystem.js',
+    'src/systems/ManuscriptCopySystem.js',
     'src/systems/SecretsSystem.js',
     'src/systems/athanor.js',
     'src/systems/GamesSystem.js',

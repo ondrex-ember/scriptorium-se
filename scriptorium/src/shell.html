@@ -3270,6 +3270,32 @@
                 </div>
             </div>
 
+            <!-- OPISOVÁNÍ RUKOPISŮ & DENNÍ ŘÁD GUIDE -->
+            <div style="margin-bottom: 20px; padding: 16px; background: var(--bg-card); border: 1px solid var(--accent-gold); border-radius: 6px;">
+                <h3 style="margin: 0 0 10px; color: var(--accent-gold); font-family: 'Cinzel Decorative'; font-size: 1.1rem;">
+                    ✒️ HERNÍ MECHANIKA: OPISOVÁNÍ RUKOPISŮ
+                </h3>
+                <p style="font-size: 0.88rem; line-height: 1.5; margin-bottom: 8px;">
+                    Opisování středověkých kodexů je hlavní duchovní i vědeckou prací v klášterním skriptoriu.
+                </p>
+                <ul style="font-size: 0.85rem; margin: 0 0 12px 18px; padding: 0; line-height: 1.5;">
+                    <li><strong>Aktivní rukopis:</strong> Vyber si z 6 vzácných kodexů (od 10 folií u Žaltáře sv. Anselma až po 120 folií u monumentálního Codex Gigas).</li>
+                    <li><strong>Spotřeba surovin:</strong> Každé opsané folium spotřebuje <strong>1 Inkoust</strong>, <strong>1 Pergamen</strong> a trochu tvé energie (Vigor).</li>
+                    <li><strong>Způsob opisování:</strong> Můžeš pisat ručně po 1 či 5 foliích, nebo zapnout <strong>Automatiku</strong> (opisuje automaticky každých 2,5 s).</li>
+                    <li><strong>Odměny a bonusy:</strong> Za každé folium získáváš <strong>+3 Zápisky</strong> (Vědění) a XP. Dokončení celého kodexu přináší balík Zápisků, Pergamenu a trvalé zvýšení efektivity psaní.</li>
+                </ul>
+
+                <h3 style="margin: 14px 0 8px; color: var(--accent-gold); font-family: 'Cinzel Decorative'; font-size: 1.05rem;">
+                    📜 HERNÍ MECHANIKA: DENNÍ ŘÁD (HORARIUM)
+                </h3>
+                <ul style="font-size: 0.85rem; margin: 0 0 0 18px; padding: 0; line-height: 1.5;">
+                    <li><strong>7 Kanonických hodin:</strong> Vigilie (2–5h), Laudes (5–7h), Prima (7–12h), Sexta (12–15h), Nona (15–18h), Vesperae (18–20h) a Completorium (20–24h).</li>
+                    <li><strong>Časové okno:</strong> Každou modlitbu a povinnost lze odříkat <strong>pouze ve vyhrazeném klášterním čase</strong>. Mimo toto okno tlačítko čeká.</li>
+                    <li><strong>Včasný bonus:</strong> Splnění povinnosti v přesný čas dává navíc významné bonusové odměny (Vigor, Svíčky, Zápisky).</li>
+                    <li><strong>Dokonalý den:</strong> Splnění všech 7 hodin v jednom dni odemkne bonus <i>Dokonalý denní řád</i> a zvyšuje denní sérii (Streak).</li>
+                </ul>
+            </div>
+
             <div
                 style="margin-bottom: 20px; padding: 12px; background: var(--bg-card); border-left: 3px solid var(--accent-gold);">
                 <strong data-i18n="about.version">Verze:</strong> 7.9 "Ferrum et Herba"<br>
@@ -3828,6 +3854,10 @@
                         style="margin-top:10px; margin-bottom:15px; display: flex; flex-wrap: wrap; gap: 5px;">
                         <button id="lore-tab-research" class="filter-btn active"
                             onclick="UI.switchLoreTab('research', this)" data-i18n="lore.tabResearch">Research</button>
+                        <button id="lore-tab-tasks" class="filter-btn" onclick="UI.switchLoreTab('tasks', this)"
+                            data-i18n="lore.tabTasks">📜 Denní řád</button>
+                        <button id="lore-tab-manuscripts" class="filter-btn" onclick="UI.switchLoreTab('manuscripts', this)"
+                            data-i18n="lore.tabManuscripts">✒️ Opisování rukopisů</button>
                         <button id="lore-tab-codex" class="filter-btn" onclick="UI.switchLoreTab('codex', this)"
                             data-i18n="lore.tabCodex">Codex</button>
                         <button id="lore-tab-notebooks" class="filter-btn" onclick="UI.switchLoreTab('notebooks', this)"
@@ -3845,6 +3875,8 @@
                         <button id="lore-tab-commitments" class="filter-btn" onclick="UI.switchLoreTab('commitments', this)" style="display:none;">📋 Zakázky</button>
                     </div>
                     <div id="lore-research-content" style="margin-top:20px;"></div>
+                    <div id="lore-tasks-content" style="margin-top:20px; display:none;"></div>
+                    <div id="lore-manuscripts-content" style="margin-top:20px; display:none;"></div>
                     <div id="lore-codex-content" style="margin-top:20px; display:none;"></div>
                     <div id="lore-notebooks-content" style="margin-top:20px; display:none;"></div>
                     <div id="lore-achievements-content" style="margin-top:20px; display:none;"></div>
