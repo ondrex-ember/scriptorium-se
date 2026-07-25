@@ -420,4 +420,99 @@ const LettersDB = [
     ]
   },
 
+  {
+    id: 'l24_voskar',
+    sender_cs: 'Voskař', sender_en: 'The Wax Chandler',
+    seal: 'church',
+    title_cs: 'List voskařův na uvítanou', title_en: 'The Wax Chandler\'s Letter of Welcome',
+    text_cs: '„Bratře, slyšel jsem, že klášter už zapaluje svíce vlastní výroby. Přesto — u kostela vždycky uvítám dalšího odběratele vosku, i kdyby jen jako pojistku pro léta, kdy vlastní úly zklamou. — Voskař u kostela“',
+    text_en: '"Brother, I hear the monastery already lights candles of its own making. Still — by the church I always welcome another taker of wax, if only as insurance for years when your own hives disappoint. — The Wax Chandler by the Church"',
+    trigger: function () { return (GameState.researchedTechs || []).includes('tech_candle'); },
+    choices: [
+      { label_cs: '🕯️ Odpovědět přátelsky', label_en: '🕯️ Reply in friendship',
+        effect: function () { if (typeof SaeculumSystem !== 'undefined' && SaeculumSystem.addContactRelation) SaeculumSystem.addContactRelation('voskar', 2); },
+        notify_cs: 'Voskař potěšen odpovědí. (Voskař +2)', notify_en: 'The chandler is pleased by the reply. (Wax Chandler +2)' }
+    ]
+  },
+  {
+    id: 'l25_lovec',
+    sender_cs: 'Lovec', sender_en: 'The Hunter',
+    seal: 'village',
+    title_cs: 'List lovcův o stopách', title_en: 'The Hunter\'s Letter about Tracks',
+    text_cs: '„Bratře, v lese za mokřady jsem viděl stopy zvěře, jakou jsem tam léta nezahlédl. Bude-li klášter chtít maso na hostinu, vím, kde hledat — jen ať vím dřív, kdy hostina bude, zvěř nečeká na pozvánky. — Lovec“',
+    text_en: '"Brother, in the forest beyond the wetlands I saw tracks of game I have not seen there in years. Should the monastery want meat for a feast, I know where to look — only let me know beforehand when the feast shall be, for game does not wait on invitations. — The Hunter"',
+    trigger: function () { return (GameState.researchedTechs || []).includes('tech_de_animalibus'); },
+    choices: [
+      { label_cs: '🏹 Objednat maso předem', label_en: '🏹 Order meat in advance',
+        effect: function () { if (typeof SaeculumSystem !== 'undefined' && SaeculumSystem.addContactRelation) SaeculumSystem.addContactRelation('lovec', 3); },
+        notify_cs: 'Lovec si poznamenal objednávku. (Lovec +3)', notify_en: 'The hunter noted the order. (Hunter +3)' }
+    ]
+  },
+  {
+    id: 'l26_sklar',
+    sender_cs: 'Sklář', sender_en: 'The Glassmaker',
+    seal: 'scholars',
+    title_cs: 'List sklářův o benátských zrcadlech', title_en: 'The Glassmaker\'s Letter about Venetian Mirrors',
+    text_cs: '„Bratře, závidím Benátčanům jejich zrcadla, ale co umím, umím poctivě — křivule a alembiky, co nepraskají při prvním ohřevu. Kdyby skriptorium potřebovalo sklo pro laboratoř, dejte vědět, dřív než pec vychladne na zimu. — Sklář z hutě v lesích“',
+    text_en: '"Brother, I envy the Venetians their mirrors, but what I know, I know honestly — retorts and alembics that do not crack at first heating. Should the scriptorium need glass for its laboratory, let me know before the furnace cools for winter. — The Glassmaker from the Forest Works"',
+    trigger: function () {
+      return (GameState.researchedTechs || []).includes('tech_czech_glass')
+          && (GameState.library && GameState.library.readBooks || []).includes('book_czech_glass');
+    },
+    choices: [
+      { label_cs: '🔮 Odpovědět se zájmem', label_en: '🔮 Reply with interest',
+        effect: function () { if (typeof SaeculumSystem !== 'undefined' && SaeculumSystem.addContactRelation) SaeculumSystem.addContactRelation('sklar', 3); },
+        notify_cs: 'Sklář potěšen zájmem skriptoria. (Sklář +3)', notify_en: 'The glassmaker is pleased by the scriptorium\'s interest. (Glassmaker +3)' }
+    ]
+  },
+  {
+    id: 'l27_kamenik',
+    sender_cs: 'Kameník', sender_en: 'The Stonemason',
+    seal: 'village',
+    title_cs: 'List kameníkův od lomu', title_en: 'The Stonemason\'s Letter from the Quarry',
+    text_cs: '„Bratře, lom mi dal pěkný kus kamene, rovný a bez puklin — škoda by bylo dát ho na obyčejnou zeď. Kdyby kostel potřeboval něco důstojnějšího, nahrobek nebo chrlič, mám na to ruce i kámen zrovna teď. — Kameník od lomu“',
+    text_en: '"Brother, the quarry has given me a fine block of stone, straight and without cracks — a shame to put it in an ordinary wall. Should the church need something more dignified, a gravestone or a gargoyle, I have both the hands and the stone for it right now. — The Stonemason from the Quarry"',
+    trigger: function () { return (GameState.researchedTechs || []).includes('tech_carpentaria'); },
+    choices: [
+      { label_cs: '🪨 Odpovědět se zájmem', label_en: '🪨 Reply with interest',
+        effect: function () { if (typeof SaeculumSystem !== 'undefined' && SaeculumSystem.addContactRelation) SaeculumSystem.addContactRelation('kamenik', 3); },
+        notify_cs: 'Kameník si poznamenal zájem kláštera. (Kameník +3)', notify_en: 'The stonemason noted the monastery\'s interest. (Stonemason +3)' }
+    ]
+  },
+  {
+    id: 'l28_rybar',
+    sender_cs: 'Rybář', sender_en: 'The Fisherman',
+    seal: 'village',
+    title_cs: 'List rybářův o úhořích', title_en: 'The Fisherman\'s Letter about Eels',
+    text_cs: '„Bratře, síť mi dnes přinesla víc úhořů, než unesu domů. Ve vašem rybníce prý úhoře nechováte — škoda, na postní den nemá ryba lepšího souseda na talíři. První nabídka patří vám, než je odnesu na trh. — Rybář od říčky“',
+    text_en: '"Brother, my net brought in more eels today than I can carry home. Your pond, I hear, keeps none — a pity, for on a fasting day no fish has a better companion on the plate. The first offer is yours, before I carry them to market. — The Fisherman by the Stream"',
+    trigger: function () { return (GameState.researchedTechs || []).includes('tech_piscina_administratio'); },
+    choices: [
+      { label_cs: '🎣 Koupit úhoře (−9 grošů, +3 uhor)', label_en: '🎣 Buy the eels (−9 groschen, +3 eel)',
+        effect: function () {
+          if (typeof CellariumSystem !== 'undefined' && CellariumSystem.addGrose) CellariumSystem.addGrose(-9);
+          if (typeof Game !== 'undefined' && Game.addItem) Game.addItem('uhor', 3);
+          if (typeof SaeculumSystem !== 'undefined' && SaeculumSystem.addContactRelation) SaeculumSystem.addContactRelation('rybar', 2);
+        },
+        notify_cs: 'Úhoři koupeni. (−9 grošů, +3 úhoř, Rybář +2)', notify_en: 'The eels are bought. (−9 groschen, +3 eel, Fisherman +2)' }
+    ]
+  },
+  {
+    id: 'l29_stationarius',
+    sender_cs: 'Stationarius', sender_en: 'The Stationarius',
+    seal: 'scholars',
+    title_cs: 'List stationaria o pecii', title_en: 'The Stationarius\'s Letter about the Pecia',
+    text_cs: '„Bratře, po jarním knižním veletrhu mi zbylo pár složek (pecií) z rozpůjčeného exempláře — žáci si je opsali a vrátili. Prodám je lacino tomu, kdo o ně požádá první. Skriptorium jistě ví, k čemu jsou dobré. — Stationarius“',
+    text_en: '"Brother, after the spring book fair I have a few peciae left from a rented-out exemplar — the students copied them and returned them. I shall sell them cheap to whoever asks first. The scriptorium surely knows their worth. — Stationarius"',
+    trigger: function () { return (GameState.researchedTechs || []).includes('tech_writing_basics'); },
+    choices: [
+      { label_cs: '📚 Koupit pecie (−7 grošů)', label_en: '📚 Buy the peciae (−7 groschen)',
+        effect: function () {
+          if (typeof CellariumSystem !== 'undefined' && CellariumSystem.addGrose) CellariumSystem.addGrose(-7);
+          if (typeof PersonaSystem !== 'undefined' && PersonaSystem.addInfluence) PersonaSystem.addInfluence('scholars', 2);
+          if (typeof SaeculumSystem !== 'undefined' && SaeculumSystem.addContactRelation) SaeculumSystem.addContactRelation('stationarius', 3);
+        },
+        notify_cs: 'Pecie koupeny. (−7 grošů, Scholars +2, Stationarius +3)', notify_en: 'The peciae are bought. (−7 groschen, Scholars +2, Stationarius +3)' }
+    ]
+  },
 ];

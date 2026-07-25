@@ -129,6 +129,7 @@ const FireplaceSystem = {
     addFuel: function(itemId) {
         this._ensureState();
         if (!GameState.fire.active) return;
+        if (!this.hasMeteorologica()) return;
 
         const fuelAmount = this.FUEL_VALUES[itemId];
         if (!fuelAmount) return;

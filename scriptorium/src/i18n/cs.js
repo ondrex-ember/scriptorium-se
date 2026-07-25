@@ -11,7 +11,7 @@ const STRINGS_cs = {
         diedOutShort: 'Krb vyhasl', diedOut: '❄️ Oheň v krbu vyhasl.',
         full: 'Krb je už plný!', fuelAdded: 'Přiloženo do ohně.',
         notEnough: 'Nedostatek: {item}.',
-        foculusTab: 'Ohniště', foculusLocked: 'Rozežehni oheň v krbu (nebo prostuduj Meteorologica) pro zpřístupnění Hřejivého krbu.', foculusSubLocked: 'Další rituály Ohniště (čaje, kávoviny, sušení, kadidelnice...) vyžadují výzkum technologie Meteorologica.',
+        foculusTab: 'Ohniště', foculusLocked: 'Prostuduj Meteorologica pro správu paliva v krbu.', foculusSubLocked: 'Další rituály Ohniště (čaje, kávoviny, sušení, kadidelnice...) vyžadují výzkum technologie Meteorologica.',
         statusLabel: 'Stav ohně:',
         burnNow: 'vyhasíná', burnSoon: 'brzy vyhasne',
         burnToday: 'vyhasne dnes {part}', burnTomorrow: 'vyhasne zítra {part}',

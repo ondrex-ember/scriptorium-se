@@ -12,7 +12,7 @@ const STRINGS_en = {
         diedOutShort: 'The hearth has died out', diedOut: '❄️ The fire has died out.',
         full: 'The hearth is full!', fuelAdded: 'Fuel added.',
         notEnough: 'Not enough {item}.',
-        foculusTab: 'Foculus', foculusLocked: 'Kindle the fire in the hearth (or study Meteorologica) to manage the hearth.', foculusSubLocked: 'Additional hearth rituals (teas, coffee substitutes, drying, incense...) require researching Meteorologica technology.',
+        foculusTab: 'Foculus', foculusLocked: "Study Meteorologica to manage the hearth's fuel.", foculusSubLocked: 'Additional hearth rituals (teas, coffee substitutes, drying, incense...) require researching Meteorologica technology.',
         statusLabel: 'Fire status:',
         burnNow: 'dying out', burnSoon: 'burning out soon',
         burnToday: 'burns out today {part}', burnTomorrow: 'burns out tomorrow {part}',
