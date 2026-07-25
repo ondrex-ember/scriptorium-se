@@ -5,8 +5,21 @@ const UI = {
     _dirty: { home: false, inv: false, craft: false, lore: false, garden: false, cellarium: false },
     _hashInv: '', _hashCraft: '', _hashActions: '',
     switchScreen: function (name, btn) {
+        if (name === 'saeculum') {
+            this.navigateToSaeculum();
+            return;
+        }
+        if (name === 'cellarium') {
+            this.navigateToCellarium();
+            return;
+        }
+        const screenEl = document.getElementById('screen-' + name);
+        if (!screenEl) {
+            console.warn('UI.switchScreen: Screen element not found:', name);
+            return;
+        }
         document.querySelectorAll('.screen').forEach(e => e.classList.remove('active'));
-        document.getElementById('screen-' + name).classList.add('active');
+        screenEl.classList.add('active');
         document.querySelectorAll('.nav-btn').forEach(e => e.classList.remove('active'));
         if (btn) btn.classList.add('active');
         this.currentScreen = name;

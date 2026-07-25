@@ -3718,10 +3718,13 @@ const Game = {
         const btnIgnite = document.getElementById('btn-ignite');
         const btnIgniteOverlay = document.getElementById('btn-ignite-overlay');
         if (GameState.flags.fireplaceLit) {
-            fpCard.classList.add('fireplace-active'); navHome.classList.add('nav-fire-active');
-            document.getElementById('fireplace-title').innerText = t('fireplace.lit');
-            document.getElementById('fireplace-desc').innerText = t('fireplace.litDesc');
-            btnIgnite.style.display = 'none';
+            if (fpCard) fpCard.classList.add('fireplace-active');
+            if (navHome) navHome.classList.add('nav-fire-active');
+            const fpTitle = document.getElementById('fireplace-title');
+            if (fpTitle) fpTitle.innerText = t('fireplace.lit');
+            const fpDesc = document.getElementById('fireplace-desc');
+            if (fpDesc) fpDesc.innerText = t('fireplace.litDesc');
+            if (btnIgnite) btnIgnite.style.display = 'none';
             const fpVisualLit = document.getElementById('fireplace-visual');
             if (fpVisualLit) fpVisualLit.src = '/img/hearth_base_red.png';
             // Overlay: zhasnout, krb hoří — overlay nepotřebný
@@ -3729,23 +3732,31 @@ const Game = {
         } else {
             // Hint pro nové hráče: krb nebyl nikdy rozžéhnut
             const neverLit = !(GameState.achievements?.stats?.fireplaceCount);
-            btnIgnite.classList.toggle('btn-ignite--hint', neverLit);
+            if (btnIgnite) btnIgnite.classList.toggle('btn-ignite--hint', neverLit);
             const fpVisualDead = document.getElementById('fireplace-visual');
             if (fpVisualDead) fpVisualDead.src = '/img/hearth_base_dead.png';
             // Overlay: zrcadlí primární kartu, viditelný jen na Pracovna/main tabu
             if (fpCardOverlay) {
-                document.getElementById('fireplace-title-overlay').innerText = document.getElementById('fireplace-title').innerText;
-                document.getElementById('fireplace-desc-overlay').innerText = document.getElementById('fireplace-desc').innerText;
-                document.getElementById('fireplace-visual-overlay').src = '/img/hearth_base_dead.png';
+                const titleMain = document.getElementById('fireplace-title');
+                const titleOv = document.getElementById('fireplace-title-overlay');
+                if (titleMain && titleOv) titleOv.innerText = titleMain.innerText;
+                const descMain = document.getElementById('fireplace-desc');
+                const descOv = document.getElementById('fireplace-desc-overlay');
+                if (descMain && descOv) descOv.innerText = descMain.innerText;
+                const visOv = document.getElementById('fireplace-visual-overlay');
+                if (visOv) visOv.src = '/img/hearth_base_dead.png';
                 if (btnIgniteOverlay) btnIgniteOverlay.classList.toggle('btn-ignite--hint', neverLit);
+                const mainTab = document.getElementById('home-tab-main');
                 const onHomeMain = (UI.currentScreen === 'home') &&
-                    (!document.getElementById('home-tab-main') || document.getElementById('home-tab-main').classList.contains('active'));
+                    (!mainTab || mainTab.classList.contains('active'));
                 fpCardOverlay.style.display = onHomeMain ? 'flex' : 'none';
             }
         }
         const isDark = GameState.flags.forceDark || (!TimeSys.isDaytime() && !GameState.flags.fireplaceLit && !GameState.flags.candleLit && !GameState.flags.torchLit);
-        if (isDark) container.classList.add('mode-frozen');
-        else container.classList.remove('mode-frozen');
+        if (container) {
+            if (isDark) container.classList.add('mode-frozen');
+            else container.classList.remove('mode-frozen');
+        }
         
         const lightCard = document.getElementById('card-light-source');
         const navLore = document.getElementById('nav-lore');
@@ -3755,35 +3766,36 @@ const Game = {
         const btnTorch = document.getElementById('btn-light-torch');
         const lightDesc = document.getElementById('light-desc'); // Přidáno pro popisek
         
-        lightCard.classList.remove('candle-active', 'torch-active');
-        navLore.classList.remove('nav-candle-active', 'nav-torch-active');
-        lightCard.style.opacity = GameState.flags.fireplaceLit ? "1" : "0.5";
+        if (lightCard) lightCard.classList.remove('candle-active', 'torch-active');
+        if (navLore) navLore.classList.remove('nav-candle-active', 'nav-torch-active');
+        if (lightCard) lightCard.style.opacity = GameState.flags.fireplaceLit ? "1" : "0.5";
         
         if (GameState.flags.candleLit) {
-            document.getElementById('light-icon').innerText = "🕯️"; 
-            document.getElementById('light-title').innerText = t('light.candle');
+            const lIcon = document.getElementById('light-icon'); if (lIcon) lIcon.innerText = "🕯️"; 
+            const lTitle = document.getElementById('light-title'); if (lTitle) lTitle.innerText = t('light.candle');
             if (lightDesc) lightDesc.innerText = t('light.candleDesc'); // Aktualizace popisku
-            navLore.classList.add('nav-candle-active'); 
-            btnCandle.style.display = 'none'; btnTorch.style.display = 'inline-block';
-            loreOverlay.style.display = 'none'; loreWrap.classList.remove('lore-darkness');
+            if (navLore) navLore.classList.add('nav-candle-active'); 
+            if (btnCandle) btnCandle.style.display = 'none'; if (btnTorch) btnTorch.style.display = 'inline-block';
+            if (loreOverlay) loreOverlay.style.display = 'none'; if (loreWrap) loreWrap.classList.remove('lore-darkness');
         } else if (GameState.flags.torchLit) {
-            document.getElementById('light-icon').innerText = "🔥"; 
-            document.getElementById('light-title').innerText = t('light.torch');
+            const lIcon = document.getElementById('light-icon'); if (lIcon) lIcon.innerText = "🔥"; 
+            const lTitle = document.getElementById('light-title'); if (lTitle) lTitle.innerText = t('light.torch');
             if (lightDesc) lightDesc.innerText = t('light.torchDesc'); // Aktualizace popisku
-            navLore.classList.add('nav-torch-active'); 
-            btnTorch.style.display = 'none'; btnCandle.style.display = 'inline-block';
-            loreOverlay.style.display = 'none'; loreWrap.classList.remove('lore-darkness');
+            if (navLore) navLore.classList.add('nav-torch-active'); 
+            if (btnTorch) btnTorch.style.display = 'none'; if (btnCandle) btnCandle.style.display = 'inline-block';
+            if (loreOverlay) loreOverlay.style.display = 'none'; if (loreWrap) loreWrap.classList.remove('lore-darkness');
         } else {
-            document.getElementById('light-icon').innerText = "🌑"; 
-            document.getElementById('light-title').innerText = t('light.none');
+            const lIcon = document.getElementById('light-icon'); if (lIcon) lIcon.innerText = "🌑"; 
+            const lTitle = document.getElementById('light-title'); if (lTitle) lTitle.innerText = t('light.none');
             if (lightDesc) lightDesc.innerText = t('light.noneDesc'); // Aktualizace popisku
             const hasC = (GameState.inventory['candle'] || 0) > 0; 
             const hasT = (GameState.inventory['primitive_torch'] || 0) > 0;
-            btnCandle.style.display = (GameState.flags.fireplaceLit && hasC) ? 'inline-block' : 'none';
-            btnTorch.style.display = (GameState.flags.fireplaceLit && hasT) ? 'inline-block' : 'none';
-            loreOverlay.style.display = 'block'; loreWrap.classList.add('lore-darkness');
+            if (btnCandle) btnCandle.style.display = (GameState.flags.fireplaceLit && hasC) ? 'inline-block' : 'none';
+            if (btnTorch) btnTorch.style.display = (GameState.flags.fireplaceLit && hasT) ? 'inline-block' : 'none';
+            if (loreOverlay) loreOverlay.style.display = 'block'; if (loreWrap) loreWrap.classList.add('lore-darkness');
         }
-        btnCandle.disabled = !GameState.flags.fireplaceLit; btnTorch.disabled = !GameState.flags.fireplaceLit;
+        if (btnCandle) btnCandle.disabled = !GameState.flags.fireplaceLit;
+        if (btnTorch) btnTorch.disabled = !GameState.flags.fireplaceLit;
         UI.renderActions(); 
         // Tech backpack filter visibility
         const filterBar = document.getElementById('inv-filter-bar');
