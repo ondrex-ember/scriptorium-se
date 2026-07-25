@@ -3,7 +3,7 @@
 // Při přidávání nového klíče: přidej SEM, pak do ostatních jazyků.
 
 const STRINGS_cs = {
-    nav: { home: 'Pracovna', garden: 'Zahrada', craft: 'Výroba', inv: 'Zásoby', lore: 'Script<br>orium', library: 'Knihovna' },
+    nav: { home: 'Pracovna', garden: 'Zahrada', craft: 'Výroba', inv: 'Zásoby', lore: 'Scriptorium', library: 'Knihovna' },
     screens: { home: 'Pracovna', garden: 'Zahrada', craft: 'Výroba', inv: 'Zásoby', lore: 'Scriptorium', library: 'Knihovna', settings: 'Nastavení', scavenge: 'Sběr', mine: 'Těžba' },
     fireplace: {
         cold: 'Vyhaslý Krb', coldDesc: 'Je tu zima.', kindle: 'ROZEŽEHNOUT',
@@ -11,7 +11,7 @@ const STRINGS_cs = {
         diedOutShort: 'Krb vyhasl', diedOut: '❄️ Oheň v krbu vyhasl.',
         full: 'Krb je už plný!', fuelAdded: 'Přiloženo do ohně.',
         notEnough: 'Nedostatek: {item}.',
-        foculusTab: 'Ohniště', foculusLocked: 'Rozežehni oheň v krbu (nebo prostuduj Meteorologica) pro zpřístupnění Hřejivého krbu.', foculusSubLocked: 'Další rituály Ohniště (čaje, kávoviny, sušení, kadidelnice...) vyžadují výzkum technologie Meteorologica.',
+        foculusTab: 'Ohniště', foculusLocked: 'Prostuduj Meteorologica pro správu paliva v krbu.',
         statusLabel: 'Stav ohně:',
         burnNow: 'vyhasíná', burnSoon: 'brzy vyhasne',
         burnToday: 'vyhasne dnes {part}', burnTomorrow: 'vyhasne zítra {part}',

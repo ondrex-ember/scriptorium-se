@@ -126,165 +126,23 @@
             --shadow: rgba(0, 0, 0, 0.1);
         }
 
-        /* DARK MODE */
-        body.theme-dark {
-            --bg-parchment: #1a1612;
-            --bg-header: rgba(26, 22, 18, 0.95);
-            --ink-primary: #e8dec0;
-            --ink-secondary: #b8aa8e;
-            --accent-wax: #d4695a;
-            --accent-gold: #f0d98f;
-            --leather-dark: #2a231a;
-            --bg-card: rgba(30, 25, 20, 0.7);
-            --border-color: #4a3f32;
-            --shadow: rgba(0, 0, 0, 0.4);
-        }
-
-        /* Modaly – dark theme čitelnost */
-        body.theme-dark #welcome-modal>div,
-        body.theme-dark #fireout-modal>div,
-        body.theme-dark #lang-picker-modal>div {
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 60px rgba(0, 0, 0, 0.95), 0 0 20px rgba(240, 217, 143, 0.15);
-        }
-
-        /* ── TUTORIAL & HELP QUESTION MARK BUTTON ── */
-        .help-question-btn {
-            cursor: pointer;
-            margin-right: 8px;
-            background: rgba(197, 160, 89, 0.18);
-            border: 1px solid var(--accent-gold, #c5a059);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            line-height: 1;
-            animation: helpQuestionPulse 2.5s infinite ease-in-out;
-            transition: all 0.2s;
-            color: #ffd700;
-            user-select: none;
-            padding: 0;
-        }
-        .help-question-btn:hover {
-            background: rgba(197, 160, 89, 0.4);
-            transform: scale(1.18);
-        }
-        @keyframes helpQuestionPulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(197, 160, 89, 0.5)); }
-            50% { transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(197, 160, 89, 0.5)); }
-        }
-
-        .tutorial-guide-bar {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 620px;
-            background: #1e1812;
-            border: 2px solid var(--accent-gold, #c5a059);
-            border-radius: 8px;
-            padding: 12px 16px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(197, 160, 89, 0.3);
-            z-index: 9998;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            color: #f4ecd8;
-        }
-        .tutorial-guide-content { flex: 1; }
-        .tutorial-guide-badge {
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: var(--accent-gold, #c5a059);
-            font-family: 'Cinzel Decorative', serif;
-            margin-bottom: 4px;
-        }
-        .tutorial-guide-desc {
-            font-size: 0.85rem;
-            line-height: 1.35;
-            opacity: 0.95;
-        }
-        .tutorial-guide-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .tutorial-btn-skip {
-            background: rgba(197, 160, 89, 0.2);
-            border: 1px solid var(--accent-gold);
-            color: var(--accent-gold);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .tutorial-btn-skip:hover { background: rgba(197, 160, 89, 0.4); }
-        .tutorial-btn-close {
-            background: none;
-            border: none;
-            color: #888;
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 4px 8px;
-        }
-        .tutorial-btn-close:hover { color: #fff; }
-
-        @keyframes tutorialArrowBounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.12); }
-        }
-        .tutorial-arrow-pulse {
-            position: fixed;
-            z-index: 9999;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: tutorialArrowBounce 1.2s infinite ease-in-out;
-            filter: drop-shadow(0 0 10px #ffd700);
-        }
-        .tutorial-arrow-pulse .arrow-icon {
-            font-size: 2.2rem;
-            line-height: 1;
-        }
-        .tutorial-arrow-pulse .arrow-label {
-            background: #2c241b;
-            color: #ffd700;
-            border: 1px solid #c5a059;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
-        }
-
+        /* SCREEN HEADER ROW WITH RESOURCE TRACKER */
         .screen-header-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 5px;
             flex-wrap: nowrap;
-            gap: 12px;
-            margin-bottom: 12px;
             width: 100%;
-            min-width: 0;
         }
 
         .screen-header-row h2 {
             margin: 0;
-            line-height: 1.1;
             white-space: nowrap;
             flex-shrink: 0;
         }
 
-        /* ═══ PERSISTENT CRAFTING RESOURCE TRACKER BAR ═══ */
         .resource-tracker-bar:empty {
             display: none !important;
         }
@@ -327,21 +185,19 @@
         }
 
         .resource-tracker-bar.is-collapsed {
-            padding: 0;
+            padding: 2px 6px;
             background: transparent;
-            border: none;
+            border-color: transparent;
             box-shadow: none;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 480px) {
             .screen-header-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 6px;
+                flex-wrap: wrap;
+                gap: 5px;
             }
 
             .resource-tracker-bar {
-                order: -1;
                 width: 100%;
                 max-width: 100% !important;
                 margin-bottom: 2px;
@@ -360,9 +216,8 @@
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: 5px;
-            transition: all 0.15s ease;
+            gap: 4px;
+            transition: all 0.2s ease;
             user-select: none;
             line-height: 1;
             flex-shrink: 0;
@@ -379,8 +234,7 @@
         }
 
         .res-tracker-close-btn {
-            padding: 1px;
-            margin-left: 2px;
+            padding: 0;
             border-radius: 50%;
             width: 18px;
             height: 18px;
@@ -417,8 +271,7 @@
             gap: 4px;
             cursor: pointer;
             user-select: none;
-            white-space: nowrap;
-            flex-shrink: 0;
+            transition: opacity 0.2s;
         }
 
         .res-tracker-title:hover {
@@ -465,7 +318,7 @@
         }
 
         .res-pill-icon {
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             line-height: 1;
         }
 
@@ -477,25 +330,47 @@
         }
 
         .res-pill-val {
-            font-weight: bold;
             font-family: 'Cinzel', serif;
             color: var(--ink-primary, #2c241b);
             font-size: 0.78rem;
         }
 
-        .res-subval {
+        .res-pill-limit {
             font-size: 0.68rem;
             color: var(--ink-secondary, #6c5a4b);
             font-weight: normal;
         }
 
-        @media (max-width: 650px) {
-            .res-tracker-title-text {
-                display: none;
-            }
-            .res-pill {
-                padding: 2px 5px;
-            }
+        body.theme-dark .res-pill,
+        body.theme-night .res-pill {
+            background: rgba(35, 28, 20, 0.85);
+            border-color: rgba(197, 160, 89, 0.4);
+            color: #e2d7c5;
+        }
+
+        body.theme-dark .res-pill-val,
+        body.theme-night .res-pill-val {
+            color: #ffd700;
+        }
+        body.theme-dark {
+            --bg-parchment: #1a1612;
+            --bg-header: rgba(26, 22, 18, 0.95);
+            --ink-primary: #e8dec0;
+            --ink-secondary: #b8aa8e;
+            --accent-wax: #d4695a;
+            --accent-gold: #f0d98f;
+            --leather-dark: #2a231a;
+            --bg-card: rgba(30, 25, 20, 0.7);
+            --border-color: #4a3f32;
+            --shadow: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Modaly – dark theme čitelnost */
+        body.theme-dark #welcome-modal>div,
+        body.theme-dark #fireout-modal>div,
+        body.theme-dark #lang-picker-modal>div {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.95), 0 0 20px rgba(240, 217, 143, 0.15);
         }
 
         /* NIGHT MODE - deep blue-black, pro čtení potmě */
@@ -1544,12 +1419,11 @@
 
         /* Mobile-friendly touch targets */
         @media (max-width: 500px) {
-            .craft-btn {
-                min-height: 40px;
-            }
-            .filter-btn, .time-btn {
-                min-width: auto;
-                min-height: 32px;
+
+            .craft-btn,
+            button {
+                min-height: 44px;
+                min-width: 44px;
             }
         }
 
@@ -1913,29 +1787,24 @@
 
         .time-selector {
             display: flex;
-            align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             gap: 5px;
             margin-bottom: 10px;
             padding: 5px;
             background: rgba(0, 0, 0, 0.05);
             border-radius: 4px;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            white-space: nowrap;
         }
 
         .time-btn {
-            flex: 1 0 auto;
+            flex: 1;
             background: transparent;
             border: 1px solid transparent;
             cursor: pointer;
             font-family: 'Cinzel Decorative';
             font-size: 0.75rem;
             color: var(--ink-secondary);
-            padding: 5px 8px;
+            padding: 4px;
             border-radius: 3px;
-            white-space: nowrap;
         }
 
         .time-btn.active {
@@ -2173,20 +2042,9 @@
                 z-index: 50;
             }
 
-            .nav-btn {
-                width: 76px;
-                padding: 4px 2px;
-                font-size: 0.62rem;
-                letter-spacing: -0.2px;
-                text-align: center;
-                word-break: break-word;
-                overflow-wrap: break-word;
-                line-height: 1.15;
-            }
-
             .nav-btn span {
-                font-size: 1.5rem;
-                margin-bottom: 3px;
+                font-size: 1.6rem;
+                margin-bottom: 5px;
             }
 
             /* 3. OBSAH: Odsazený za lištu */
@@ -2552,14 +2410,22 @@
         }
 
         @keyframes canonical-pulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         #canonical-badge .canonical-name {
             font-family: 'Cinzel Decorative', serif;
             font-size: 0.75rem;
             line-height: 1;
+            /* ← FIX line-height! */
             font-weight: 600;
             letter-spacing: 0.5px;
             color: var(--accent-gold);
@@ -2571,339 +2437,12 @@
         #canonical-badge .canonical-buff {
             font-size: 0.7rem;
             line-height: 1;
+            /* ← FIX line-height! */
             opacity: 0.8;
             font-style: italic;
             color: #d4b883;
             white-space: nowrap;
             flex-shrink: 0;
-        }
-
-        /* ═══════════════════════════════════════════════════════════════
-           CIVILIZATION 5 ART NOUVEAU & SECESSIONIST GUI FACELIFT
-           ═══════════════════════════════════════════════════════════════ */
-
-        /* 1. Global Game Canvas Framing */
-        #game-container {
-            border-left: 2px solid rgba(197, 160, 89, 0.5);
-            border-right: 2px solid rgba(197, 160, 89, 0.5);
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.85), inset 0 0 120px rgba(0, 0, 0, 0.25);
-        }
-
-        /* Keep header sticky without messing up z-index/position for left sidebar */
-        header {
-            border-bottom: 2px solid var(--accent-gold) !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
-        }
-
-        /* 2. Art Nouveau Illuminated Section & Screen Headers */
-        .screen-header h2,
-        .section-header,
-        #screen-garden h2,
-        #screen-workspace h2,
-        #screen-inventory h2,
-        #screen-crafting h2,
-        #screen-library h2,
-        .screen-header-row h2 {
-            font-family: 'Cinzel Decorative', serif !important;
-            letter-spacing: 0.8px;
-            position: relative;
-            padding-bottom: 4px;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Art Nouveau Header Divider with Main Line, Sub-line (Podlinka), Terminal Floral Endcaps (Květinky) & Center Blossom */
-        .screen-header h2::after,
-        .section-header::after,
-        .card-title::after,
-        .card h3::after,
-        .card h4::after,
-        .game-card h3::after,
-        #workspace-actions h3::after {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 12px;
-            margin-top: 4px;
-            margin-bottom: 6px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 12' preserveAspectRatio='none'%3E%3Cline x1='22' y1='3' x2='180' y2='3' stroke='%23c5a059' stroke-width='1.2'/%3E%3Cline x1='220' y1='3' x2='378' y2='3' stroke='%23c5a059' stroke-width='1.2'/%3E%3Cline x1='32' y1='7' x2='170' y2='7' stroke='%23c5a059' stroke-width='0.7' stroke-dasharray='3,2' opacity='0.75'/%3E%3Cline x1='230' y1='7' x2='368' y2='7' stroke='%23c5a059' stroke-width='0.7' stroke-dasharray='3,2' opacity='0.75'/%3E%3Ccircle cx='6' cy='5' r='2' fill='%23c5a059'/%3E%3Cpath d='M0,5 C4,1 10,1 14,5 C10,9 4,9 0,5 Z' fill='%23c5a059' opacity='0.85'/%3E%3Cpath d='M14,5 Q18,1 22,5' stroke='%23c5a059' stroke-width='1' fill='none'/%3E%3Ccircle cx='394' cy='5' r='2' fill='%23c5a059'/%3E%3Cpath d='M400,5 C396,1 390,1 386,5 C390,9 396,9 400,5 Z' fill='%23c5a059' opacity='0.85'/%3E%3Cpath d='M386,5 Q382,1 378,5' stroke='%23c5a059' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='5' r='2.5' fill='%23ffd700'/%3E%3Cpath d='M192,5 C196,1 204,1 208,5 C204,9 196,9 192,5 Z' fill='%23c5a059'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 100% 100%;
-        }
-
-        /* 3. Art Nouveau & Secession Cards & Object Panels with Floral Corner Flourishes */
-        .card,
-        .game-card {
-            position: relative;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(245, 236, 215, 0.6) 100%);
-            border: 1px solid rgba(197, 160, 89, 0.6) !important;
-            border-radius: 4px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12), inset 0 0 15px rgba(197, 160, 89, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.5) !important;
-            transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
-            overflow: visible;
-            z-index: 1;
-        }
-
-        body.theme-dark .card,
-        body.theme-night .card,
-        body.theme-dark .game-card,
-        body.theme-night .game-card {
-            background: linear-gradient(135deg, rgba(30, 24, 18, 0.92) 0%, rgba(18, 14, 10, 0.96) 100%);
-            border: 1px solid rgba(197, 160, 89, 0.45) !important;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 180, 240, 0.12), inset 0 0 0 1px rgba(197, 160, 89, 0.15) !important;
-        }
-
-        /* Strategic Card Hover & Lift Animation with Cyan/Gold Glow */
-        .card:hover,
-        .game-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-gold) !important;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 14px rgba(0, 210, 255, 0.25), inset 0 0 12px rgba(255, 215, 0, 0.2) !important;
-        }
-
-        /* Art Nouveau Intricate Floral Corner Flourishes & Scrolling Linework for Panels */
-        .card::before,
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            width: 26px;
-            height: 26px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28' fill='none'%3E%3Cpath d='M2,28 L2,8 C2,4 4,2 8,2 L28,2' stroke='%23c5a059' stroke-width='1.5'/%3E%3Cpath d='M2,14 C6,14 14,6 14,2' stroke='%23c5a059' stroke-width='0.9' opacity='0.75'/%3E%3Cpath d='M2,20 C10,20 20,10 20,2' stroke='%23c5a059' stroke-width='0.7' stroke-dasharray='2,1' opacity='0.6'/%3E%3Cpath d='M6,10 C10,6 14,8 12,12 C8,14 6,10 6,10 Z' fill='%23c5a059' opacity='0.85'/%3E%3Cpath d='M10,6 C6,10 8,14 12,12 C14,8 10,6 10,6 Z' fill='%23c5a059' opacity='0.85'/%3E%3Ccircle cx='4' cy='4' r='1.8' fill='%23ffd700'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .card::after,
-        .game-card::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            right: -2px;
-            width: 26px;
-            height: 26px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28' fill='none'%3E%3Cpath d='M26,28 L26,8 C26,4 24,2 20,2 L0,2' stroke='%23c5a059' stroke-width='1.5'/%3E%3Cpath d='M26,14 C22,14 14,6 14,2' stroke='%23c5a059' stroke-width='0.9' opacity='0.75'/%3E%3Cpath d='M26,20 C18,20 8,10 8,2' stroke='%23c5a059' stroke-width='0.7' stroke-dasharray='2,1' opacity='0.6'/%3E%3Cpath d='M22,10 C18,6 14,8 16,12 C20,14 22,10 22,10 Z' fill='%23c5a059' opacity='0.85'/%3E%3Cpath d='M18,6 C22,10 20,14 16,12 C14,8 18,6 18,6 Z' fill='%23c5a059' opacity='0.85'/%3E%3Ccircle cx='24' cy='4' r='1.8' fill='%23ffd700'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        /* 4. Strategic Illuminated Object Medallions & Icon Frames */
-        .item-icon {
-            border: 2px solid rgba(197, 160, 89, 0.7) !important;
-            border-radius: 6px;
-            background: radial-gradient(circle at center, #f8eed0 0%, #d5bf8a 100%) !important;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.25), 0 0 6px rgba(197, 160, 89, 0.2) !important;
-            transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        body.theme-dark .item-icon,
-        body.theme-night .item-icon {
-            background: radial-gradient(circle at center, #3d3023 0%, #1a130c 100%) !important;
-            border-color: rgba(197, 160, 89, 0.6) !important;
-            color: #f0e6cf;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.6), 0 0 10px rgba(0, 180, 240, 0.2) !important;
-        }
-
-        .card:hover .item-icon {
-            transform: scale(1.08) rotate(-1deg);
-            filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.5));
-            border-color: #ffd700 !important;
-        }
-
-        /* 5. Strategic Action Buttons (Craft, Claim, Instant, etc.) */
-        .craft-btn {
-            background: linear-gradient(180deg, #9b2b1a 0%, #6e1c10 100%) !important;
-            border: 1px solid #c5a059 !important;
-            color: #fff8e7 !important;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-            border-radius: 3px !important;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 3px 6px rgba(0, 0, 0, 0.4) !important;
-            transition: all 0.18s ease-in-out !important;
-            font-family: 'Cinzel Decorative', serif !important;
-            letter-spacing: 0.5px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .craft-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 40%;
-            height: 200%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-            transform: rotate(25deg);
-            transition: all 0.5s ease;
-        }
-
-        .craft-btn:hover:not(:disabled)::after {
-            left: 130%;
-        }
-
-        .craft-btn:hover:not(:disabled) {
-            background: linear-gradient(180deg, #b33220 0%, #852215 100%) !important;
-            border-color: #ffd700 !important;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 12px rgba(138, 51, 36, 0.5), 0 0 8px rgba(255, 215, 0, 0.4) !important;
-            transform: translateY(-1px) scale(1.02);
-            color: #ffffff !important;
-        }
-
-        .craft-btn:active:not(:disabled) {
-            transform: translateY(1px) scale(0.98) !important;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6) !important;
-        }
-
-        .craft-btn.claim {
-            background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%) !important;
-            border-color: #a5d6a7 !important;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 12px rgba(76, 175, 80, 0.6) !important;
-        }
-
-        .craft-btn.instant {
-            background: linear-gradient(180deg, #c5a059 0%, #8f7238 100%) !important;
-            border-color: #ffe082 !important;
-            color: #2c241b !important;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
-        }
-
-        /* 6. Main Content Tabs & Tab Headers Styling */
-        .filter-bar {
-            position: relative;
-            display: flex;
-            gap: 6px;
-            margin-bottom: 15px;
-            overflow-x: auto;
-            padding: 4px 2px 6px 2px;
-            -webkit-overflow-scrolling: touch;
-            border-bottom: none;
-        }
-
-        .filter-btn {
-            position: relative;
-            background: #ffffff !important;
-            color: var(--ink-primary, #2c241b) !important;
-            border: 1px solid var(--ink-secondary, #a89f91) !important;
-            border-radius: 0 !important;
-            padding: 5px 12px !important;
-            font-family: 'Cinzel Decorative', serif !important;
-            font-size: 0.75rem !important;
-            cursor: pointer;
-            white-space: nowrap;
-            box-shadow: none !important;
-            transition: background-color 0.15s, border-color 0.15s, color 0.15s !important;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--ink-primary, #2c241b) !important;
-            background: #fdfbf7 !important;
-            transform: none !important;
-        }
-
-        .filter-btn.active {
-            background: var(--ink-primary, #2c241b) !important;
-            color: var(--bg-parchment, #fcf5e5) !important;
-            border: 1px solid var(--accent-gold, #c5a059) !important;
-            box-shadow: 0 0 8px rgba(197, 160, 89, 0.3) !important;
-        }
-
-        .filter-btn.active::after {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 14px;
-            height: 4px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 4' fill='none'%3E%3Ccircle cx='7' cy='2' r='1.5' fill='%23ffd700'/%3E%3Cpath d='M0,2 L5,2 M9,2 L14,2' stroke='%23c5a059' stroke-width='1'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: center;
-        }
-
-        body.theme-dark .filter-btn,
-        body.theme-night .filter-btn {
-            background: #1c150f !important;
-            color: #d8caad !important;
-            border: 1px solid rgba(197, 160, 89, 0.4) !important;
-        }
-
-        body.theme-dark .filter-btn:hover,
-        body.theme-night .filter-btn:hover {
-            background: #2a2017 !important;
-            border-color: var(--accent-gold, #c5a059) !important;
-        }
-
-        body.theme-dark .filter-btn.active,
-        body.theme-night .filter-btn.active {
-            background: #2c241b !important;
-            color: #ffd700 !important;
-            border: 1px solid #ffd700 !important;
-        }
-
-        /* 7. Bottom Navigation Bar Button Styling */
-        .nav-btn {
-            position: relative;
-            padding: 4px 6px;
-            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-            color: #a89f91;
-        }
-
-        .nav-btn:hover:not(:disabled) {
-            color: #f0e0b8;
-            transform: translateY(-2px);
-            text-shadow: 0 0 8px rgba(197, 160, 89, 0.6);
-        }
-
-        .nav-btn.active {
-            color: #ffd700 !important;
-            text-shadow: 0 0 12px rgba(255, 215, 0, 0.8), 0 0 6px rgba(0, 210, 255, 0.5);
-        }
-
-        /* Active Navigation Tab Indicator Line with Illuminated Glow */
-        .nav-btn.active::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 15%;
-            width: 70%;
-            height: 3px;
-            background: linear-gradient(90deg, #c5a059, #ffd700, #00d2ff, #ffd700, #c5a059);
-            box-shadow: 0 0 10px #ffd700, 0 0 5px #00d2ff;
-            border-radius: 2px;
-        }
-
-        /* 9. Strategic Resource Pills Bar Facelift & Jewel Illumination */
-        body.theme-dark .res-pill,
-        body.theme-night .res-pill {
-            background: rgba(35, 28, 20, 0.85);
-            border-color: rgba(197, 160, 89, 0.4);
-            color: #e2d7c5;
-        }
-
-        body.theme-dark .res-pill-val,
-        body.theme-night .res-pill-val {
-            color: #ffd700;
-        }
-
-        /* 8. Screen Transition Animation */
-        .screen {
-            animation: civScreenEnter 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes civScreenEnter {
-            0% {
-                opacity: 0;
-                transform: scale(0.985) translateY(6px);
-                filter: blur(1px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-                filter: blur(0);
-            }
         }
     </style>
     <link rel="icon"
@@ -3027,21 +2566,6 @@
             <h2 style="margin-bottom: 20px; color: var(--accent-gold); font-family: 'Cinzel Decorative';">📜 SCRIPTORIUM
             </h2>
 
-            <div style="margin-bottom: 20px; padding: 16px; background: rgba(197,160,89,0.12); border: 2px solid var(--accent-gold); border-radius: 8px; text-align: center;">
-                <h3 style="margin: 0 0 8px; color: var(--accent-gold); font-family: 'Cinzel Decorative';">🧭 PRŮVODCE HROU (TUTORIAL)</h3>
-                <p style="font-size: 0.9rem; line-height: 1.5; margin-bottom: 12px; opacity: 0.95;">
-                    Spusť interaktivního průvodce prvním dnem v klášteře. Animované šipky tě provedou sběrem surovin, výrobou nože, lovem tuku, výrobou a rozsvícením svíčky až k prvnímu výzkumu ve Scriptoriu.
-                </p>
-                <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
-                    <button id="btn-toggle-tutorial" class="craft-btn" onclick="TutorialSystem.startTutorialFromModal()" style="font-weight: bold; padding: 8px 16px; font-size: 0.95rem;">
-                        🚀 SPUSTIT TUTORIAL REŽIM
-                    </button>
-                    <button id="btn-reset-tutorial" class="craft-btn" onclick="TutorialSystem.resetTutorial()" style="display:none; padding: 8px 12px; font-size: 0.85rem; opacity: 0.85;">
-                        🔄 RESTARTOVAT
-                    </button>
-                </div>
-            </div>
-
             <div
                 style="margin-bottom: 20px; padding: 12px; background: var(--bg-card); border-left: 3px solid var(--accent-gold);">
                 <strong data-i18n="about.version">Verze:</strong> 7.9 "Ferrum et Herba"<br>
@@ -3139,7 +2663,6 @@
             <!-- Layer 3: UI content wrapper -->
             <div class="header-content">
                 <div class="logo-container">
-                    <button id="tutorial-help-btn" class="help-question-btn" onclick="UI.openAboutModal()" title="Nápověda & Průvodce hrou">❓</button>
                     <svg width="28" height="28" viewBox="0 0 100 100">
                         <g transform="rotate(45 50 50)">
                             <rect x="25" y="10" width="50" height="25" fill="#c5a059" stroke="#2c241b" stroke-width="6"
@@ -3252,6 +2775,8 @@
         </div>
 
         <div id="notification-area"></div>
+
+
 
         <main id="main-content">
             <div id="screen-home" class="screen active">
@@ -3372,12 +2897,6 @@
                                     id="btn-fuel-stick" style="flex:1;">+ Větev</button>
                                 <button class="filter-btn" onclick="FireplaceSystem.addFuel('log')" id="btn-fuel-log"
                                     style="flex:1;">+ Poleno</button>
-                            </div>
-                        </div>
-                        <div id="foculus-tech-locked" style="display:none; margin-top:16px; padding:16px; border:1px dashed rgba(197,160,89,0.4); border-radius:8px; text-align:center; background:rgba(0,0,0,0.15);">
-                            <div style="font-size:1.4rem; margin-bottom:6px;">🔒</div>
-                            <div style="font-style:italic; font-size:0.9rem; color:var(--accent-gold);" data-i18n="fireplace.foculusSubLocked">
-                                Další rituály Ohniště (čaje, kávoviny, sušení, kadidelnice...) vyžadují výzkum technologie Meteorologica.
                             </div>
                         </div>
                         <div id="foculus-tea" style="display:none; margin-top:12px;"></div>
@@ -3648,6 +3167,8 @@
                             data-i18n="library.tabKronika">📖 Kronika</button>
                         <button id="lib-tab-kraj" class="filter-btn" onclick="UI.switchLibraryTab('kraj', this)">🌍
                             Kraj</button>
+                        <button id="lib-tab-studovna" class="filter-btn" onclick="UI.switchLibraryTab('studovna', this)">📖
+                            Studovna</button>
                     </div>
                     <div id="library-books-content" style="margin-top:20px;"></div>
                     <div id="library-games-content" style="margin-top:20px; display:none;"></div>
@@ -3655,6 +3176,7 @@
                     <div id="library-scrinium-content" style="margin-top:20px; display:none;"></div>
                     <div id="library-kronika-content" style="margin-top:20px; display:none;"></div>
                     <div id="library-kraj-content" style="margin-top:20px; display:none;"></div>
+                    <div id="library-studovna-content" style="margin-top:20px; display:none;"></div>
                 </div>
             </div>
 
@@ -3927,7 +3449,7 @@
                 onclick="UI.switchScreen('craft', this)"><span>⚒</span>Výroba</button>
             <button id="nav-inv" class="nav-btn" onclick="UI.switchScreen('inv', this)"><span>🗄️</span>Zásoby</button>
             <button id="nav-lore" class="nav-btn"
-                onclick="UI.switchScreen('lore', this)"><span>✒</span>Script<br>orium</button>
+                onclick="UI.switchScreen('lore', this)"><span>✒</span>Scriptorium</button>
             <button id="nav-library" class="nav-btn"
                 onclick="UI.switchScreen('library', this)"><span>📚</span>Knihovna</button>
         </nav>

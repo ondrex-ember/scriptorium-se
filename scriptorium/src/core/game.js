@@ -537,7 +537,6 @@ const Game = {
         SecretsSystem.init();
         AthanorSystem.init();
         NotificationSystem.init();
-        if (typeof TutorialSystem !== 'undefined') TutorialSystem.init();
         // ChroniconSystem startuje fetch jen pokud je jazyk už definitivně
         // zvolen (vracející se hráč). Pro nového hráče se spustí až po
         // kliknutí v jazykovém pickeru (viz UI.pickLanguage) — jinak by
@@ -736,6 +735,10 @@ const Game = {
                     if (typeof TemplumSystem !== 'undefined' && TemplumSystem.updateTabVisibility) TemplumSystem.updateTabVisibility();
                     // Infirmarium — viditelnost tabu dle tech_infirmarium (levný DOM check)
                     if (typeof InfirmariumSystem !== 'undefined' && InfirmariumSystem.updateTabVisibility) InfirmariumSystem.updateTabVisibility();
+                    // Infirmarium — hospes recovery/discharge (self-guarded 24h)
+                    if (typeof InfirmariumSystem !== 'undefined' && InfirmariumSystem.hospesDailyTick) InfirmariumSystem.hospesDailyTick();
+                    // Ubytovna — odchod hostů po plannedDays (self-guarded 24h, ubytovna-mrd.md §8c-B)
+                    if (typeof ChroniconSystem !== 'undefined' && ChroniconSystem.ubytovnaDailyTick) ChroniconSystem.ubytovnaDailyTick();
                     // Templum — denní chod kostela (self-guarded 24h, gate frater+)
                     if (typeof Game !== 'undefined' && Game.templumDailyTick) Game.templumDailyTick();
                     // Templum — týdenní zpověď (self-guarded, gate frater+)
@@ -3204,6 +3207,8 @@ const Game = {
                     if(Math.random() < 0.15) this.addItem('crayfish', 1);
                     // Orobinec — kořen z mokřadu
                     if(Math.random() < 0.06) this.addItem('cattail_root', 1);
+                    // Proutí — vrbové pruty u mokřadu, běžný stavební materiál (Columbarium)
+                    if(Math.random() < 0.20) this.addItem('wicker', 2);
                 }
                 else if (type === 'resin_harvest') {
                     if(r<0.5) this.addItem('resin', 1);
@@ -3535,6 +3540,8 @@ const Game = {
                 if(Math.random() < 0.15) this.addItem('crayfish', 1);
                 // Orobinec — kořen z mokřadu
                 if(Math.random() < 0.06) this.addItem('cattail_root', 1);
+                // Proutí — vrbové pruty u mokřadu, běžný stavební materiál (Columbarium)
+                if(Math.random() < 0.20) this.addItem('wicker', 2);
             }
             else if (type === 'resin_harvest') {
                 if(r<0.5) this.addItem('resin', 1);
