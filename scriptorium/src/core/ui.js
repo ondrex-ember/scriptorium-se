@@ -130,6 +130,25 @@ const UI = {
             }
         }
     },
+
+    navigateToSaeculum: function(entity) {
+        this.switchScreen('home', document.getElementById('nav-home'));
+        const tabBtn = document.getElementById('home-tab-saeculum');
+        this.switchHomeTab('saeculum', tabBtn);
+        if (entity && typeof SaeculumSystem !== 'undefined') {
+            SaeculumSystem.switchEntity(entity);
+        }
+    },
+
+    navigateToCellarium: function(entity) {
+        this.switchScreen('home', document.getElementById('nav-home'));
+        const tabBtn = document.getElementById('home-tab-cellarium');
+        this.switchHomeTab('cellarium', tabBtn);
+        if (entity && typeof CellariumSystem !== 'undefined') {
+            CellariumSystem.switchEntity(entity);
+        }
+    },
+
     renderAll: function () {
         // Porta — odhalit tlačítko v navigaci, jakmile GameState.flags.porta_active naskočí (Chronicon most)
         const _portaBtn = document.getElementById('lore-tab-porta');
@@ -1247,6 +1266,7 @@ const UI = {
     },
 
     switchLoreTab: function (tab, btn) {
+        if (!btn) btn = document.getElementById('lore-tab-' + tab);
         // Hide all tabs
         document.getElementById('lore-research-content').style.display = 'none';
         document.getElementById('lore-codex-content').style.display = 'none';
@@ -1259,8 +1279,8 @@ const UI = {
         const _lperEl = document.getElementById('lore-persona-content'); if (_lperEl) _lperEl.style.display = 'none';
         const _lportEl = document.getElementById('lore-porta-content'); if (_lportEl) _lportEl.style.display = 'none';
 
-        // Remove active class from all buttons
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        // Remove active class from screen-lore filter buttons
+        document.querySelectorAll('#screen-lore .filter-btn').forEach(b => b.classList.remove('active'));
         if (btn) btn.classList.add('active');
 
         // Show selected tab
@@ -1496,19 +1516,22 @@ const UI = {
         // Dormitorium / Scriptor status card
         const scriptoriumBrother = (GameState.dormitorium && GameState.dormitorium.brothers || [])
             .find(b => b.assignedTab === 'scriptorium');
+        const isDormitoriumBuilt = (typeof Game !== 'undefined' && Game.dormitoriumCapacity)
+            ? Game.dormitoriumCapacity() > 0
+            : false;
 
         if (scriptoriumBrother) {
             const skLvl = (typeof Game !== 'undefined' && Game.dormitoriumBrotherLevel) ? Game.dormitoriumBrotherLevel(scriptoriumBrother, 'scriptorium') : 1;
             const maxFolios = 1 + skLvl;
             const hasSupplies = ink > 0 && (paper > 0 || parchment > 0);
 
-            h += `<div style="padding:12px 16px; background:rgba(43,108,176,0.08); border:1px solid #63b3ed; border-radius:8px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-size:0.85rem;">`;
+            h += `<div style="padding:14px 18px; background:#fbf7ee; border:1px solid #c5a059; border-radius:8px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.88rem; box-shadow:0 2px 8px rgba(0,0,0,0.05); border-left:4px solid #3182ce;">`;
             h += `<div>`;
-            h += `<div style="font-weight:bold; color:#2b6cb0;">📿 ${isEn ? 'Assigned Scriptor' : 'Přiřazený Skriptor'}: ${scriptoriumBrother.name} (${isEn ? 'Level' : 'Úroveň'} ${skLvl}/4)</div>`;
-            h += `<div style="font-size:0.78rem; color:#4a5568; margin-top:2px;">`;
+            h += `<div style="font-weight:bold; color:#2c3e50; font-family:'Cinzel', serif, Georgia; font-size:0.95rem;">📿 ${isEn ? 'Assigned Scriptor' : 'Přiřazený Skriptor'}: <span style="color:#2b6cb0;">${scriptoriumBrother.name}</span> (${isEn ? 'Level' : 'Úroveň'} ${skLvl}/4)</div>`;
+            h += `<div style="font-size:0.8rem; color:#5a4a3a; margin-top:4px;">`;
             if (hasSupplies) {
                 h += isEn 
-                    ? `⚙️ Automatically copies up to <strong>${maxFolios} folios</strong> per day during daily monastery tick.` 
+                    ? `⚙️ Automatically copies up to <strong>${maxFolios} folios</strong> per day during daily monastery tick (and reads in library).` 
                     : `⚙️ Automaticky opisuje až <strong>${maxFolios} folií</strong> za den při denním cyklu kláštera (a čte v knihovně).`;
             } else {
                 h += isEn 
@@ -1516,18 +1539,28 @@ const UI = {
                     : `⚠️ Chybí psací potřeby! Pro automatické opisování je potřeba Inkoust + Papír/Pergamen.`;
             }
             h += `</div></div>`;
-            h += `<button onclick="UI.switchScreen('saeculum')" style="font-size:0.78rem; padding:6px 12px; cursor:pointer; background:#ffffff; border:1px solid #c5a059; border-radius:4px; font-weight:bold; color:#2c3e50;">`;
-            h += `🏰 ${isEn ? 'Dormitorium' : 'Správa mnichů'}`;
+            h += `<button class="craft-btn" onclick="UI.navigateToSaeculum('dormitorium')">`;
+            h += `🏰 ${isEn ? 'Monk Roster' : 'Správa mnichů'}`;
+            h += `</button>`;
+            h += `</div>`;
+        } else if (isDormitoriumBuilt) {
+            h += `<div style="padding:14px 18px; background:#fbf7ee; border:1px dashed #c5a059; border-radius:8px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.88rem; box-shadow:0 2px 8px rgba(0,0,0,0.05); border-left:4px solid #c5a059;">`;
+            h += `<div>`;
+            h += `<div style="font-weight:bold; color:#744210; font-family:'Cinzel', serif, Georgia; font-size:0.95rem;">📿 ${isEn ? 'No Scriptor assigned' : 'V Dormitoriu není přiřazen žádný Skriptor'}</div>`;
+            h += `<div style="font-size:0.8rem; color:#5a4a3a; margin-top:4px;">${isEn ? 'Assign a monk to Scriptorium in Saeculum (Dormitorium) for automatic daily manuscript copying.' : 'Přiřaď bratra na pracoviště Scriptorium v Saeculum (Dormitorium) pro automatické denní opisování.'}</div>`;
+            h += `</div>`;
+            h += `<button class="craft-btn" onclick="UI.navigateToSaeculum('dormitorium')">`;
+            h += `🏰 ${isEn ? 'Assign Monk' : 'Přiřadit bratra'}`;
             h += `</button>`;
             h += `</div>`;
         } else {
-            h += `<div style="padding:12px 16px; background:rgba(0,0,0,0.03); border:1px dashed #c5a059; border-radius:8px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-size:0.85rem; opacity:0.9;">`;
+            h += `<div style="padding:14px 18px; background:#fbf7ee; border:1px dashed #a88a48; border-radius:8px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.88rem; box-shadow:0 2px 8px rgba(0,0,0,0.05); border-left:4px solid #8c5319;">`;
             h += `<div>`;
-            h += `<div style="font-weight:bold; color:#744210;">📿 ${isEn ? 'No Scriptor assigned' : 'V Dormitoriu není přiřazen žádný Skriptor'}</div>`;
-            h += `<div style="font-size:0.78rem; color:#4a5568; margin-top:2px;">${isEn ? 'Assign a monk to Scriptorium in Saeculum for automatic daily manuscript copying.' : 'Přiřaď bratra na pracoviště Scriptorium v Saeculum (Dormitorium) pro automatické denní opisování.'}</div>`;
+            h += `<div style="font-weight:bold; color:#8c5319; font-family:'Cinzel', serif, Georgia; font-size:0.95rem;">🔒 ${isEn ? 'Dormitorium not built' : 'Dormitorium ještě není postaveno'}</div>`;
+            h += `<div style="font-size:0.8rem; color:#5a4a3a; margin-top:4px;">${isEn ? 'To automate manuscript copying, construct the Dormitorium in Cellarium (Buildings) and assign a monk.' : 'Pro automatické opisování rukopisů postav Dormitorium v Cellarium (Budovy) a přiřaď v něm bratra.'}</div>`;
             h += `</div>`;
-            h += `<button onclick="UI.switchScreen('saeculum')" style="font-size:0.78rem; padding:6px 12px; cursor:pointer; background:#ffffff; border:1px solid #c5a059; border-radius:4px; font-weight:bold; color:#2c3e50;">`;
-            h += `🏰 ${isEn ? 'Assign Monk' : 'Přiřadit bratra'}`;
+            h += `<button class="craft-btn" onclick="UI.navigateToCellarium('buildings')">`;
+            h += `🏛️ ${isEn ? 'Build Dormitorium' : 'Postavit Dormitorium'}`;
             h += `</button>`;
             h += `</div>`;
         }
