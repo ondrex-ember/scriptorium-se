@@ -2,7 +2,7 @@
 // Základ: STRINGS_cs. Chybějící klíče → fallback na CS automaticky.
 
 const STRINGS_en = {
-    nav: { home: 'Workshop', garden: 'Garden', craft: 'Craft', inv: 'Penum', lore: 'Scriptorium', library: 'Library' },
+    nav: { home: 'Workshop', garden: 'Garden', craft: 'Craft', inv: 'Penum', lore: 'Script<br>orium', library: 'Library' },
     screens: { home: 'Officina', garden: 'The Garden', craft: 'Crafting', inv: 'Penum', lore: 'Scriptorium', library: 'The Library', settings: 'Settings', scavenge: 'Scavenge', mine: 'Mine' },
     header: { weatherNow: 'Presently in Prague (click to refresh)', weatherTomorrow: 'Morrow\'s forecast', hunger: 'Hunger', streak: 'Daily Streak', research: 'Knowledge Gathered', settings: 'Settings' },
     // ------------------------------

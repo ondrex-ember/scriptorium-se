@@ -290,32 +290,39 @@
         }
 
         .resource-tracker-bar {
-            background: rgba(22, 17, 12, 0.92);
-            border: 1px solid rgba(197, 160, 89, 0.45);
+            background: var(--bg-card, rgba(252, 245, 229, 0.95));
+            border: 1px solid var(--accent-gold, #c5a059);
             border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 2px 8px var(--shadow, rgba(0, 0, 0, 0.12));
             padding: 3px 10px;
             display: flex;
             align-items: center;
+            justify-content: flex-start;
             min-width: 0;
-            max-width: 50%;
+            width: fit-content;
+            max-width: 100%;
+            margin-left: auto;
+            flex: 0 1 auto;
             overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
             scrollbar-width: thin;
-            scrollbar-color: rgba(197, 160, 89, 0.5) rgba(20, 15, 10, 0.3);
-            flex-shrink: 1;
+            scrollbar-color: var(--accent-gold, #c5a059) rgba(0, 0, 0, 0.05);
+            color: var(--ink-primary, #2c241b);
         }
 
         .resource-tracker-bar::-webkit-scrollbar {
-            height: 3px;
+            height: 4px;
+            display: block;
         }
 
         .resource-tracker-bar::-webkit-scrollbar-track {
-            background: rgba(20, 15, 10, 0.3);
+            background: rgba(0, 0, 0, 0.05);
             border-radius: 2px;
         }
 
         .resource-tracker-bar::-webkit-scrollbar-thumb {
-            background: rgba(197, 160, 89, 0.5);
+            background: var(--accent-gold, #c5a059);
             border-radius: 2px;
         }
 
@@ -338,14 +345,15 @@
                 width: 100%;
                 max-width: 100% !important;
                 margin-bottom: 2px;
+                margin-left: 0;
             }
         }
 
         .res-tracker-close-btn,
         .res-tracker-toggle-btn {
-            background: rgba(45, 35, 25, 0.85);
-            border: 1px solid rgba(197, 160, 89, 0.4);
-            color: var(--accent-gold, #c5a059);
+            background: var(--bg-parchment, #fcf5e5);
+            border: 1px solid var(--accent-gold, #c5a059);
+            color: var(--ink-primary, #2c241b);
             border-radius: 12px;
             padding: 3px 9px;
             font-size: 0.74rem;
@@ -359,15 +367,15 @@
             line-height: 1;
             flex-shrink: 0;
             font-family: inherit;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 1px 4px var(--shadow, rgba(0, 0, 0, 0.1));
         }
 
         .res-tracker-close-btn:hover,
         .res-tracker-toggle-btn:hover {
-            background: rgba(80, 60, 40, 0.95);
-            border-color: #ffd700;
-            color: #ffffff;
-            transform: scale(1.04);
+            background: var(--bg-card, rgba(255, 255, 255, 0.8));
+            border-color: var(--accent-gold, #c5a059);
+            color: var(--ink-primary, #2c241b);
+            transform: scale(1.03);
         }
 
         .res-tracker-close-btn {
@@ -377,14 +385,14 @@
             width: 18px;
             height: 18px;
             font-size: 0.65rem;
-            opacity: 0.75;
+            opacity: 0.7;
             box-shadow: none;
         }
 
         .res-tracker-close-btn:hover {
             opacity: 1;
-            color: #ff8888;
-            border-color: #ff8888;
+            color: #d4695a;
+            border-color: #d4695a;
             transform: scale(1.1);
         }
 
@@ -394,13 +402,15 @@
             gap: 8px;
             flex-wrap: nowrap;
             white-space: nowrap;
-            flex-shrink: 0;
+            width: max-content;
+            min-width: min-content;
+            justify-content: flex-start;
         }
 
         .res-tracker-title {
             font-size: 0.75rem;
             font-weight: bold;
-            color: var(--accent-gold, #c5a059);
+            color: var(--ink-primary, #2c241b);
             font-family: 'Cinzel', serif;
             display: flex;
             align-items: center;
@@ -412,7 +422,7 @@
         }
 
         .res-tracker-title:hover {
-            filter: brightness(1.25);
+            opacity: 0.8;
         }
 
         .res-tracker-pills {
@@ -420,6 +430,7 @@
             align-items: center;
             gap: 5px;
             flex-wrap: nowrap;
+            justify-content: flex-start;
             flex-shrink: 0;
         }
 
@@ -427,29 +438,30 @@
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            background: rgba(45, 35, 25, 0.65);
-            border: 1px solid rgba(197, 160, 89, 0.25);
+            background: var(--bg-parchment, #f7f0df);
+            border: 1px solid var(--border-color, rgba(139, 105, 40, 0.35));
             border-radius: 12px;
             padding: 2px 7px;
             font-size: 0.74rem;
-            color: #f4ecd8;
+            color: var(--ink-primary, #2c241b);
             cursor: pointer;
             transition: all 0.15s ease;
             user-select: none;
             white-space: nowrap;
             flex-shrink: 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
         }
 
         .res-pill:hover {
             border-color: var(--accent-gold, #c5a059);
-            background: rgba(65, 50, 35, 0.85);
+            background: var(--bg-card, #ffffff);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
             transform: translateY(-1px);
         }
 
         .res-pill-empty {
-            opacity: 0.5;
-            border-color: rgba(120, 100, 70, 0.2);
-            background: rgba(20, 15, 10, 0.3);
+            opacity: 0.55;
+            box-shadow: none;
         }
 
         .res-pill-icon {
@@ -458,21 +470,22 @@
         }
 
         .res-pill-label {
-            opacity: 0.85;
+            opacity: 0.9;
             font-size: 0.7rem;
             letter-spacing: 0.2px;
+            color: var(--ink-secondary, #5a4d3e);
         }
 
         .res-pill-val {
             font-weight: bold;
             font-family: 'Cinzel', serif;
-            color: #ffd700;
+            color: var(--ink-primary, #2c241b);
             font-size: 0.78rem;
         }
 
         .res-subval {
             font-size: 0.68rem;
-            color: #c0b090;
+            color: var(--ink-secondary, #6c5a4b);
             font-weight: normal;
         }
 
@@ -2160,9 +2173,20 @@
                 z-index: 50;
             }
 
+            .nav-btn {
+                width: 76px;
+                padding: 4px 2px;
+                font-size: 0.62rem;
+                letter-spacing: -0.2px;
+                text-align: center;
+                word-break: break-word;
+                overflow-wrap: break-word;
+                line-height: 1.15;
+            }
+
             .nav-btn span {
-                font-size: 1.6rem;
-                margin-bottom: 5px;
+                font-size: 1.5rem;
+                margin-bottom: 3px;
             }
 
             /* 3. OBSAH: Odsazený za lištu */
@@ -2852,15 +2876,16 @@
         }
 
         /* 9. Strategic Resource Pills Bar Facelift & Jewel Illumination */
-        .res-pill {
-            background: linear-gradient(180deg, rgba(45, 35, 25, 0.9) 0%, rgba(25, 20, 14, 0.95) 100%) !important;
-            border: 1px solid rgba(197, 160, 89, 0.5) !important;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 6px rgba(197, 160, 89, 0.15) !important;
+        body.theme-dark .res-pill,
+        body.theme-night .res-pill {
+            background: rgba(35, 28, 20, 0.85);
+            border-color: rgba(197, 160, 89, 0.4);
+            color: #e2d7c5;
         }
 
-        .res-pill:hover {
-            border-color: #ffd700 !important;
-            box-shadow: 0 0 10px rgba(197, 160, 89, 0.6), 0 0 5px rgba(0, 210, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+        body.theme-dark .res-pill-val,
+        body.theme-night .res-pill-val {
+            color: #ffd700;
         }
 
         /* 8. Screen Transition Animation */
@@ -3902,7 +3927,7 @@
                 onclick="UI.switchScreen('craft', this)"><span>⚒</span>Výroba</button>
             <button id="nav-inv" class="nav-btn" onclick="UI.switchScreen('inv', this)"><span>🗄️</span>Zásoby</button>
             <button id="nav-lore" class="nav-btn"
-                onclick="UI.switchScreen('lore', this)"><span>✒</span>Scriptorium</button>
+                onclick="UI.switchScreen('lore', this)"><span>✒</span>Script<br>orium</button>
             <button id="nav-library" class="nav-btn"
                 onclick="UI.switchScreen('library', this)"><span>📚</span>Knihovna</button>
         </nav>

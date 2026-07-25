@@ -3,7 +3,7 @@
 // Při přidávání nového klíče: přidej SEM, pak do ostatních jazyků.
 
 const STRINGS_cs = {
-    nav: { home: 'Pracovna', garden: 'Zahrada', craft: 'Výroba', inv: 'Zásoby', lore: 'Scriptorium', library: 'Knihovna' },
+    nav: { home: 'Pracovna', garden: 'Zahrada', craft: 'Výroba', inv: 'Zásoby', lore: 'Script<br>orium', library: 'Knihovna' },
     screens: { home: 'Pracovna', garden: 'Zahrada', craft: 'Výroba', inv: 'Zásoby', lore: 'Scriptorium', library: 'Knihovna', settings: 'Nastavení', scavenge: 'Sběr', mine: 'Těžba' },
     fireplace: {
         cold: 'Vyhaslý Krb', coldDesc: 'Je tu zima.', kindle: 'ROZEŽEHNOUT',
