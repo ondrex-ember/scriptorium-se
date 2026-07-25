@@ -1,0 +1,4211 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta name="seznam-wmt" content="j9zZE5yYDnfQfIsCvU42VGZyVu3nE8lR" />
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NZSGNPD8');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Scriptorium">
+    <meta name="description"
+        content="Středověká idle hra o životě v klášterním skriptoriu. Kopíruj rukopisy, pěstuj byliny a odemykej tajemství pergamenu a inkoustu.">
+    <meta name="theme-color" content="#2c241b">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://myscriptorium.cz/">
+    <link rel="alternate" hreflang="cs" href="https://myscriptorium.cz/">
+    <link rel="alternate" hreflang="en" href="https://myscriptorium.cz/?lang=en">
+    <link rel="alternate" hreflang="x-default" href="https://myscriptorium.cz/">
+
+    <!-- ═══════ Open Graph (Facebook, Discord, WhatsApp…) ═══════ -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Scriptorium">
+    <meta property="og:title" content="Scriptorium – Středověká idle hra">
+    <meta property="og:description"
+        content="Kopíruj rukopisy, pěstuj byliny a odemykej tajemství pergamenu a inkoustu. Hra zasazená do klášterního skriptoria 15. století.">
+    <meta property="og:url" content="https://myscriptorium.cz/">
+    <meta property="og:image" content="https://myscriptorium.cz/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Scriptorium – středověká idle hra">
+    <meta property="og:locale" content="cs_CZ">
+
+    <!-- ═══════ Twitter / X Card ═══════════════════════════════ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scriptorium – Středověká idle hra">
+    <meta name="twitter:description"
+        content="Kopíruj rukopisy, pěstuj byliny a odemykej tajemství pergamenu a inkoustu.">
+    <meta name="twitter:image" content="https://myscriptorium.cz/og-image.jpg">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
+    <title>Scriptorium</title>
+    <script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "VideoGame",
+	  "name": "Scriptorium",
+	  "author": { "@type": "Person", "name": "Ondrex Ember" },
+	  "genre": [ "Idle game", "Simulation", "Survival" ],
+	  "gamePlatform": "Web Browser",
+	  "applicationCategory": "Game"
+	}
+	</script>
+
+    <script>
+        window.GA_ID = 'G-25YYWRNX2H';
+
+        // GA načteme až po souhlasu – nikdy dříve
+        function loadGA() {
+            if (window._gaLoaded) return;
+            window._gaLoaded = true;
+            const s = document.createElement('script');
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + window.GA_ID;
+            s.async = true;
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { dataLayer.push(arguments); };
+            gtag('js', new Date());
+            gtag('config', window.GA_ID, {
+                // Anonymizace IP – dobré i pro consent
+                anonymize_ip: true,
+                // Bez cookies dokud uživatel nesouhlasí
+                cookie_flags: 'SameSite=None;Secure'
+            });
+        }
+
+        // Pokud uživatel již souhlas udělil dříve, načteme GA hned
+        if (localStorage.getItem('scriptorium_consent') === 'granted') {
+            loadGA();
+        }
+    </script>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23fcf5e5%22 rx=%2220%22/><path d=%22M10 85 Q 45 100 90 70%22 stroke=%22%232c241b%22 stroke-width=%226%22 fill=%22none%22 stroke-linecap=%22round%22/><g transform=%22rotate(45 50 50)%22><path d=%22M35 -20 L 65 -20 L 65 30 Q 65 65 50 100 Q 35 65 35 30 Z%22 fill=%22%232c241b%22/><circle cx=%2250%22 cy=%2245%22 r=%225%22 fill=%22%23fcf5e5%22/><line x1=%2250%22 y1=%2250%22 x2=%2250%22 y2=%2290%22 stroke=%22%23fcf5e5%22 stroke-width=%222%22/></g></svg>">
+
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23fcf5e5%22/><path d=%22M10 85 Q 45 100 90 70%22 stroke=%22%232c241b%22 stroke-width=%226%22 fill=%22none%22 stroke-linecap=%22round%22/><g transform=%22rotate(45 50 50)%22><path d=%22M35 -20 L 65 -20 L 65 30 Q 65 65 50 100 Q 35 65 35 30 Z%22 fill=%22%232c241b%22/><circle cx=%2250%22 cy=%2245%22 r=%225%22 fill=%22%23fcf5e5%22/><line x1=%2250%22 y1=%2250%22 x2=%2250%22 y2=%2290%22 stroke=%22%23fcf5e5%22 stroke-width=%222%22/></g></svg>">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23fcf5e5%22/><path d=%22M10 85 Q 45 100 90 70%22 stroke=%22%232c241b%22 stroke-width=%226%22 fill=%22none%22 stroke-linecap=%22round%22/><g transform=%22rotate(45 50 50)%22><path d=%22M35 -20 L 65 -20 L 65 30 Q 65 65 50 100 Q 35 65 35 30 Z%22 fill=%22%232c241b%22/><circle cx=%2250%22 cy=%2245%22 r=%225%22 fill=%22%23fcf5e5%22/><line x1=%2250%22 y1=%2250%22 x2=%2250%22 y2=%2290%22 stroke=%22%23fcf5e5%22 stroke-width=%222%22/></g></svg>">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23fcf5e5%22/><path d=%22M15 85 Q 45 100 90 75%22 stroke=%22%232c241b%22 stroke-width=%227%22 fill=%22none%22 stroke-linecap=%22round%22/><g transform=%22rotate(45 50 50)%22><path d=%22M35 10 L 65 10 L 68 35 C 80 40, 85 50, 85 60 C 85 75, 55 95, 50 100 C 45 95, 15 75, 15 60 C 15 50, 20 40, 32 35 Z%22 fill=%22%232c241b%22/><circle cx=%2250%22 cy=%2255%22 r=%226%22 fill=%22%23fcf5e5%22/><line x1=%2250%22 y1=%2260%22 x2=%2250%22 y2=%2295%22 stroke=%22%23fcf5e5%22 stroke-width=%223%22/></g></svg>">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23fcf5e5%22/><g transform=%22rotate(45 50 50)%22><path d=%22M30 5 L 70 5 L 72 35 C 85 40, 90 55, 90 65 C 90 85, 55 98, 50 100 C 45 98, 10 85, 10 65 C 10 55, 15 40, 28 35 Z%22 fill=%22%232c241b%22/><circle cx=%2250%22 cy=%2255%22 r=%227%22 fill=%22%23fcf5e5%22/><line x1=%2250%22 y1=%2260%22 x2=%2250%22 y2=%2295%22 stroke=%22%23fcf5e5%22 stroke-width=%224%22/></g></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=UnifrakturMaguntia&family=IM+Fell+English:ital@0;1&family=Uncial+Antiqua&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* DEFAULT THEME - Light Parchment */
+        :root {
+            --bg-parchment: #fcf5e5;
+            --bg-header: rgba(252, 245, 229, 0.9);
+            --ink-primary: #2c241b;
+            --ink-secondary: #5c4d3c;
+            --accent-wax: #8a3324;
+            --accent-gold: #c5a059;
+            --leather-dark: #3e3226;
+            --bg-card: rgba(255, 255, 255, 0.6);
+            --border-color: var(--ink-primary);
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        /* DARK MODE */
+        body.theme-dark {
+            --bg-parchment: #1a1612;
+            --bg-header: rgba(26, 22, 18, 0.95);
+            --ink-primary: #e8dec0;
+            --ink-secondary: #b8aa8e;
+            --accent-wax: #d4695a;
+            --accent-gold: #f0d98f;
+            --leather-dark: #2a231a;
+            --bg-card: rgba(30, 25, 20, 0.7);
+            --border-color: #4a3f32;
+            --shadow: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Modaly – dark theme čitelnost */
+        body.theme-dark #welcome-modal>div,
+        body.theme-dark #fireout-modal>div,
+        body.theme-dark #lang-picker-modal>div {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.95), 0 0 20px rgba(240, 217, 143, 0.15);
+        }
+
+        /* ── TUTORIAL & HELP QUESTION MARK BUTTON ── */
+        .help-question-btn {
+            cursor: pointer;
+            margin-right: 8px;
+            background: rgba(197, 160, 89, 0.18);
+            border: 1px solid var(--accent-gold, #c5a059);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            line-height: 1;
+            animation: helpQuestionPulse 2.5s infinite ease-in-out;
+            transition: all 0.2s;
+            color: #ffd700;
+            user-select: none;
+            padding: 0;
+        }
+        .help-question-btn:hover {
+            background: rgba(197, 160, 89, 0.4);
+            transform: scale(1.18);
+        }
+        @keyframes helpQuestionPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(197, 160, 89, 0.5)); }
+            50% { transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(197, 160, 89, 0.5)); }
+        }
+
+        .tutorial-guide-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 620px;
+            background: #1e1812;
+            border: 2px solid var(--accent-gold, #c5a059);
+            border-radius: 8px;
+            padding: 12px 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(197, 160, 89, 0.3);
+            z-index: 9998;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            color: #f4ecd8;
+        }
+        .tutorial-guide-content { flex: 1; }
+        .tutorial-guide-badge {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: var(--accent-gold, #c5a059);
+            font-family: 'Cinzel Decorative', serif;
+            margin-bottom: 4px;
+        }
+        .tutorial-guide-desc {
+            font-size: 0.85rem;
+            line-height: 1.35;
+            opacity: 0.95;
+        }
+        .tutorial-guide-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tutorial-btn-skip {
+            background: rgba(197, 160, 89, 0.2);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .tutorial-btn-skip:hover { background: rgba(197, 160, 89, 0.4); }
+        .tutorial-btn-close {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+        .tutorial-btn-close:hover { color: #fff; }
+
+        @keyframes tutorialArrowBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.12); }
+        }
+        .tutorial-arrow-pulse {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: tutorialArrowBounce 1.2s infinite ease-in-out;
+            filter: drop-shadow(0 0 10px #ffd700);
+        }
+        .tutorial-arrow-pulse .arrow-icon {
+            font-size: 2.2rem;
+            line-height: 1;
+        }
+        .tutorial-arrow-pulse .arrow-label {
+            background: #2c241b;
+            color: #ffd700;
+            border: 1px solid #c5a059;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+        }
+
+        .screen-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            gap: 12px;
+            margin-bottom: 12px;
+            width: 100%;
+            min-width: 0;
+        }
+
+        .screen-header-row h2 {
+            margin: 0;
+            line-height: 1.1;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ═══ PERSISTENT CRAFTING RESOURCE TRACKER BAR ═══ */
+        .resource-tracker-bar:empty {
+            display: none !important;
+        }
+
+        .resource-tracker-bar {
+            background: rgba(22, 17, 12, 0.92);
+            border: 1px solid rgba(197, 160, 89, 0.45);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            padding: 3px 10px;
+            display: flex;
+            align-items: center;
+            min-width: 0;
+            max-width: 50%;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(197, 160, 89, 0.5) rgba(20, 15, 10, 0.3);
+            flex-shrink: 1;
+        }
+
+        .resource-tracker-bar::-webkit-scrollbar {
+            height: 3px;
+        }
+
+        .resource-tracker-bar::-webkit-scrollbar-track {
+            background: rgba(20, 15, 10, 0.3);
+            border-radius: 2px;
+        }
+
+        .resource-tracker-bar::-webkit-scrollbar-thumb {
+            background: rgba(197, 160, 89, 0.5);
+            border-radius: 2px;
+        }
+
+        .resource-tracker-bar.is-collapsed {
+            padding: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .screen-header-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .resource-tracker-bar {
+                order: -1;
+                width: 100%;
+                max-width: 100% !important;
+                margin-bottom: 2px;
+            }
+        }
+
+        .res-tracker-close-btn,
+        .res-tracker-toggle-btn {
+            background: rgba(45, 35, 25, 0.85);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            color: var(--accent-gold, #c5a059);
+            border-radius: 12px;
+            padding: 3px 9px;
+            font-size: 0.74rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: all 0.15s ease;
+            user-select: none;
+            line-height: 1;
+            flex-shrink: 0;
+            font-family: inherit;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .res-tracker-close-btn:hover,
+        .res-tracker-toggle-btn:hover {
+            background: rgba(80, 60, 40, 0.95);
+            border-color: #ffd700;
+            color: #ffffff;
+            transform: scale(1.04);
+        }
+
+        .res-tracker-close-btn {
+            padding: 1px;
+            margin-left: 2px;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.65rem;
+            opacity: 0.75;
+            box-shadow: none;
+        }
+
+        .res-tracker-close-btn:hover {
+            opacity: 1;
+            color: #ff8888;
+            border-color: #ff8888;
+            transform: scale(1.1);
+        }
+
+        .res-tracker-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .res-tracker-title {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--accent-gold, #c5a059);
+            font-family: 'Cinzel', serif;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .res-tracker-title:hover {
+            filter: brightness(1.25);
+        }
+
+        .res-tracker-pills {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: nowrap;
+            flex-shrink: 0;
+        }
+
+        .res-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(45, 35, 25, 0.65);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            border-radius: 12px;
+            padding: 2px 7px;
+            font-size: 0.74rem;
+            color: #f4ecd8;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .res-pill:hover {
+            border-color: var(--accent-gold, #c5a059);
+            background: rgba(65, 50, 35, 0.85);
+            transform: translateY(-1px);
+        }
+
+        .res-pill-empty {
+            opacity: 0.5;
+            border-color: rgba(120, 100, 70, 0.2);
+            background: rgba(20, 15, 10, 0.3);
+        }
+
+        .res-pill-icon {
+            font-size: 0.82rem;
+            line-height: 1;
+        }
+
+        .res-pill-label {
+            opacity: 0.85;
+            font-size: 0.7rem;
+            letter-spacing: 0.2px;
+        }
+
+        .res-pill-val {
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            color: #ffd700;
+            font-size: 0.78rem;
+        }
+
+        .res-subval {
+            font-size: 0.68rem;
+            color: #c0b090;
+            font-weight: normal;
+        }
+
+        @media (max-width: 650px) {
+            .res-tracker-title-text {
+                display: none;
+            }
+            .res-pill {
+                padding: 2px 5px;
+            }
+        }
+
+        /* NIGHT MODE - deep blue-black, pro čtení potmě */
+        body.theme-night {
+            --bg-parchment: #0a0e14;
+            --bg-header: rgba(10, 14, 20, 0.95);
+            --ink-primary: #c8d3e0;
+            --ink-secondary: #8a97a8;
+            --accent-wax: #d4695a;
+            --accent-gold: #7fa8c9;
+            --leather-dark: #12161f;
+            --bg-card: rgba(18, 22, 31, 0.75);
+            --border-color: #2a3342;
+            --shadow: rgba(0, 0, 0, 0.6);
+        }
+
+        body.theme-night #welcome-modal>div,
+        body.theme-night #fireout-modal>div,
+        body.theme-night #lang-picker-modal>div {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.95), 0 0 20px rgba(127, 168, 201, 0.15);
+        }
+
+        /* SUNLIGHT MODE - max kontrast pro čtení na přímém slunci */
+        body.theme-sunlight {
+            --bg-parchment: #ffffff;
+            --bg-header: rgba(255, 255, 255, 0.98);
+            --ink-primary: #000000;
+            --ink-secondary: #1a1a1a;
+            --accent-wax: #a01d0f;
+            --accent-gold: #8a6200;
+            --leather-dark: #000000;
+            --bg-card: #f4f4f4;
+            --border-color: #000000;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        /* SPRING THEME */
+        body.theme-spring {
+            --bg-parchment: #f0fdf4;
+            --bg-header: rgba(240, 253, 244, 0.9);
+            --ink-primary: #14532d;
+            --ink-secondary: #166534;
+            --accent-wax: #84cc16;
+            --accent-gold: #facc15;
+            --leather-dark: #365314;
+            --bg-card: rgba(240, 253, 244, 0.7);
+            --border-color: #22c55e;
+            --shadow: rgba(34, 197, 94, 0.1);
+        }
+
+        /* SUMMER THEME */
+        body.theme-summer {
+            --bg-parchment: #fffbeb;
+            --bg-header: rgba(255, 251, 235, 0.9);
+            --ink-primary: #78350f;
+            --ink-secondary: #92400e;
+            --accent-wax: #f59e0b;
+            --accent-gold: #fbbf24;
+            --leather-dark: #451a03;
+            --bg-card: rgba(255, 251, 235, 0.7);
+            --border-color: #f59e0b;
+            --shadow: rgba(245, 158, 11, 0.1);
+        }
+
+        /* AUTUMN THEME */
+        body.theme-autumn {
+            --bg-parchment: #fef3c7;
+            --bg-header: rgba(254, 243, 199, 0.9);
+            --ink-primary: #78350f;
+            --ink-secondary: #92400e;
+            --accent-wax: #dc2626;
+            --accent-gold: #f59e0b;
+            --leather-dark: #451a03;
+            --bg-card: rgba(254, 243, 199, 0.7);
+            --border-color: #ea580c;
+            --shadow: rgba(234, 88, 12, 0.1);
+        }
+
+        /* WINTER THEME */
+        body.theme-winter {
+            --bg-parchment: #f0f9ff;
+            --bg-header: rgba(240, 249, 255, 0.9);
+            --ink-primary: #0c4a6e;
+            --ink-secondary: #075985;
+            --accent-wax: #0284c7;
+            --accent-gold: #06b6d4;
+            --leather-dark: #082f49;
+            --bg-card: rgba(240, 249, 255, 0.7);
+            --border-color: #0ea5e9;
+            --shadow: rgba(14, 165, 233, 0.1);
+        }
+
+        /* Apply theme to body */
+        body {
+            background: var(--bg-parchment);
+            color: var(--ink-primary);
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+        }
+
+        /* Smooth transitions for all themed elements */
+        header,
+        nav,
+        button,
+        input,
+        select,
+        .item-icon,
+        .craft-btn,
+        .nav-btn,
+        .time-btn,
+        .filter-btn {
+            transition: background-color 0.5s, border-color 0.5s, color 0.5s;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            overscroll-behavior: none;
+            /* Disable pull-to-refresh */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0d0a08;
+            font-family: 'Crimson Text', serif;
+            color: var(--ink-primary);
+            height: 100vh;
+            height: 100dvh;
+            /* Dynamic viewport height for mobile */
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            width: 100%;
+            overscroll-behavior: none;
+        }
+
+        #game-container {
+            width: 100%;
+            max-width: 500px;
+            height: 100%;
+            background-color: var(--bg-parchment);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-image: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.05) 90%);
+            transition: filter 1s ease;
+        }
+
+        .mode-frozen {
+            pointer-events: none;
+        }
+
+        .mode-frozen>header,
+        .mode-frozen>#main-content,
+        .mode-frozen>nav,
+        .mode-frozen>#notification-area {
+            filter: brightness(0.4) sepia(0.2) hue-rotate(190deg) blur(1px);
+        }
+
+        .mode-frozen #card-fireplace {
+            filter: none !important;
+            pointer-events: auto !important;
+            opacity: 1 !important;
+        }
+
+        .ui-frozen {
+            pointer-events: auto !important;
+            filter: none !important;
+            z-index: 100;
+            position: relative;
+        }
+
+        .lore-darkness {
+            filter: brightness(0.2) blur(3px) grayscale(0.8);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* FONT SPECIMEN – ukázky historických písem */
+        .font-specimen {
+            margin-top: 18px;
+            border-top: 1px solid var(--accent-gold);
+            padding-top: 14px;
+        }
+
+        .font-specimen-label {
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--ink-secondary);
+            margin-bottom: 8px;
+        }
+
+        .font-specimen-name {
+            font-size: 0.72rem;
+            color: var(--accent-gold);
+            margin-bottom: 6px;
+            font-style: italic;
+        }
+
+        .font-specimen-text {
+            line-height: 1.8;
+            color: var(--ink-primary);
+            padding: 10px 14px;
+            background: rgba(0, 0, 0, 0.04);
+            border-left: 3px solid var(--accent-gold);
+            margin-bottom: 8px;
+        }
+
+        .font-specimen-context {
+            font-size: 0.78rem;
+            color: var(--ink-secondary);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .font-fraktur {
+            font-family: 'UnifrakturMaguntia', serif;
+            font-size: 1.15rem;
+        }
+
+        .font-antiqua {
+            font-family: 'IM Fell English', serif;
+            font-size: 1rem;
+        }
+
+        .font-uncial {
+            font-family: 'Uncial Antiqua', serif;
+            font-size: 1rem;
+        }
+
+        .font-italic {
+            font-family: 'IM Fell English', serif;
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        @keyframes fire-breathe {
+            0% {
+                box-shadow: 0 -5px 40px 10px rgba(255, 60, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 -10px 50px 15px rgba(255, 100, 0, 0.3);
+            }
+
+            100% {
+                box-shadow: 0 -5px 40px 10px rgba(255, 60, 0, 0.2);
+            }
+        }
+
+        .fireplace-active {
+            border: 1px solid rgba(200, 50, 0, 0.5) !important;
+            animation: fire-breathe 4s infinite ease-in-out;
+            background: rgba(255, 150, 100, 0.1) !important;
+        }
+
+        @keyframes candle-flicker {
+            0% {
+                box-shadow: 0 0 15px 2px rgba(255, 200, 0, 0.3);
+                opacity: 0.9;
+            }
+
+            100% {
+                box-shadow: 0 0 18px 4px rgba(255, 220, 50, 0.4);
+                opacity: 1;
+            }
+        }
+
+        .candle-active {
+            animation: candle-flicker 0.1s infinite alternate;
+            border-color: var(--accent-gold) !important;
+            background: rgba(255, 220, 100, 0.2) !important;
+        }
+
+        @keyframes torch-flicker {
+            0% {
+                box-shadow: 0 0 10px 5px rgba(255, 69, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 18px 10px rgba(255, 80, 0, 0.35);
+            }
+
+            100% {
+                box-shadow: 0 0 10px 5px rgba(255, 69, 0, 0.2);
+            }
+        }
+
+        .torch-active {
+            animation: torch-flicker 0.2s infinite cubic-bezier(0.1, 0.7, 1.0, 0.1);
+            border-color: #a04000 !important;
+            background: rgba(255, 100, 50, 0.15) !important;
+        }
+
+        @keyframes nav-pulse-fire {
+            50% {
+                color: #ffbd40;
+                text-shadow: 0 0 15px rgba(255, 140, 0, 0.8);
+            }
+        }
+
+        .nav-fire-active {
+            animation: nav-pulse-fire 3s infinite ease-in-out !important;
+        }
+
+        @keyframes nav-pulse-candle {
+            50% {
+                color: #fffacd;
+                text-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+            }
+        }
+
+        .nav-candle-active {
+            animation: nav-pulse-candle 3s infinite ease-in-out !important;
+        }
+
+        @keyframes nav-torch-glow {
+            0% {
+                color: #ffbd40;
+                text-shadow: 0 0 8px rgba(255, 120, 0, 0.9), 0 0 20px rgba(255, 80, 0, 0.5);
+            }
+
+            50% {
+                color: #ff9d00;
+                text-shadow: 0 0 14px rgba(255, 100, 0, 1), 0 0 30px rgba(255, 60, 0, 0.7);
+            }
+
+            100% {
+                color: #ffbd40;
+                text-shadow: 0 0 8px rgba(255, 120, 0, 0.9), 0 0 20px rgba(255, 80, 0, 0.5);
+            }
+        }
+
+        .nav-torch-active {
+            animation: nav-torch-glow 0.5s infinite alternate !important;
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Cinzel Decorative', cursive;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .text-sm {
+            font-size: 0.9rem;
+            color: var(--ink-secondary);
+            line-height: 1.2;
+        }
+
+        .text-danger {
+            color: var(--accent-wax);
+        }
+
+        /* --- NOVÁ HLAVIČKA --- */
+        header {
+            background-color: #1a1410;
+            position: relative;
+            /* Changed for layering */
+
+            /* Layout */
+            padding: 10px 12px;
+            border-bottom: 2px solid var(--accent-gold);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+
+            /* Flex pro logo vlevo/uprostřed */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+
+            /* Height for background layers */
+            min-height: 128px;
+            overflow: hidden;
+        }
+
+        /* ========== HEADER BACKGROUND LAYERS ========== */
+
+        /* Layer 1: Dynamic seasonal/weather background */
+        .header-bg-layer {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 60%),
+                url('/header/base-universal.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition: opacity 2s ease-in-out;
+            z-index: 1;
+        }
+
+        /* Layer 2: Canonical Hours overlay (Phase 2 - hidden for now) */
+        .header-canonical-overlay {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease-in-out;
+            z-index: 2;
+        }
+
+        /* Canonical hour overlay styles (Phase 2) */
+        .header-canonical-overlay.vigilie {
+            background: linear-gradient(to bottom, rgba(75, 0, 130, 0.4) 0%, rgba(30, 0, 60, 0.2) 100%);
+            opacity: 1;
+        }
+
+        .header-canonical-overlay.laudes {
+            background: linear-gradient(to right, rgba(255, 200, 100, 0.5) 0%, rgba(255, 150, 50, 0.3) 50%, rgba(255, 100, 0, 0.2) 100%);
+            opacity: 1;
+        }
+
+        .header-canonical-overlay.completorium {
+            background: radial-gradient(ellipse at center, rgba(255, 140, 0, 0.3) 0%, rgba(139, 69, 19, 0.2) 100%);
+            opacity: 1;
+        }
+
+        /* Layer 3: UI content wrapper */
+        .header-content {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 0 10px;
+        }
+
+        /* Canonical Hour Badge (Phase 2) */
+        #canonical-badge {
+            display: none;
+            flex-direction: row;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.72);
+            border: 2px solid var(--accent-gold);
+            border-radius: 20px;
+            padding: 5px 10px;
+            backdrop-filter: blur(6px);
+            animation: bell-pulse 2s ease-in-out infinite;
+            position: fixed;
+            bottom: 72px;
+            right: 12px;
+            z-index: 500;
+            cursor: pointer;
+            max-width: 44px;
+            overflow: hidden;
+            transition: max-width 0.35s ease, padding 0.35s ease;
+        }
+
+        #canonical-badge.expanded {
+            max-width: 220px;
+        }
+
+        #canonical-badge .canonical-name,
+        #canonical-badge .canonical-buff {
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        @keyframes bell-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+        }
+
+        .canonical-icon {
+            font-size: 1.2rem;
+            filter: drop-shadow(0 0 3px gold);
+        }
+
+        .canonical-name {
+            font-family: 'Cinzel', serif;
+            font-weight: bold;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+        }
+
+        .canonical-buff {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+
+        /* Logo sekce */
+        /* Logo sekce */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+        }
+
+        /* Status bar kontejner — SKRYTO (migrováno na pills bar na všech šířkách) */
+        .status-bar {
+            display: none !important;
+        }
+
+        /* Status bar (legacy styly ponechány pro případný rollback) */
+        .status-bar-legacy {
+            background: none !important;
+            backdrop-filter: none !important;
+            border: none !important;
+            padding: 2px 0;
+            margin-top: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+        }
+
+        /* Styl pro VŠECHNY ikony a hodnoty v hlavičce */
+        .status-bar span,
+        .status-bar div,
+        #research-count,
+        #streak-number {
+            /* Reset starých stylů */
+            background: none !important;
+            /* ODSTRANĚNÍ BUBLIN */
+            border: none !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            filter: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+
+            /* Nová typografie */
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            /* Čistá bílá */
+            font-family: 'Crimson Text', serif;
+
+            /* Požadovaný stín pro čitelnost */
+            text-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.9),
+                0 0 12px rgba(255, 255, 255, 0.4) !important;
+
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        /* Interakce - zvětšení při najetí */
+        .status-bar span:hover,
+        .status-bar div:hover {
+            transform: scale(1.15);
+        }
+
+        /* Oddělovače */
+        .status-bar .separator {
+            color: var(--accent-gold) !important;
+            /* Zlaté tečky */
+            opacity: 0.6;
+            font-size: 14px !important;
+            text-shadow: none !important;
+            margin: 0 4px !important;
+            cursor: default !important;
+        }
+
+        /* Research kontejner specifika */
+        #research-indicator {
+            display: flex !important;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Responzivita pro malé mobily */
+        @media (max-width: 500px) {
+            header {
+                padding: 6px;
+            }
+
+            .status-bar {
+                gap: 8px;
+            }
+
+            .status-bar span,
+            .status-bar div {
+                font-size: 18px !important;
+            }
+        }
+
+        /* Responzivita pro malé mobily */
+        @media (max-width: 500px) {
+            header {
+                padding: 6px;
+            }
+
+            .status-bar {
+                gap: 8px;
+            }
+
+            .status-bar span,
+            .status-bar div {
+                font-size: 18px !important;
+            }
+        }
+
+        /* Oddělovače mezi ikonami - jemnější */
+        .status-bar span[style*="color:#999"] {
+            background: none !important;
+            padding: 0 !important;
+            filter: none !important;
+        }
+
+
+        /* ═══ FIREPLACE OVERLAY — escapes mode-frozen filter via DOM position ═══ */
+        #card-fireplace-overlay {
+            position: fixed;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 340px;
+            max-width: calc(100vw - 32px);
+            z-index: 500;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+        }
+
+        #card-fireplace-overlay>div {
+            min-width: 0;
+        }
+
+        @media (max-width: 750px) {
+            #card-fireplace-overlay {
+                top: 100px;
+                width: calc(100vw - 16px);
+                max-width: 360px;
+            }
+        }
+
+        @media (max-width: 750px) and (min-width: 401px) {
+            #card-fireplace-overlay {
+                top: 105px;
+            }
+        }
+
+        /* ═══ FLOATING GAIN — "+N" feedback nad recipe card ════════════════ */
+        @keyframes float-up-fade {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-40px) scale(1.15);
+            }
+        }
+
+        .floating-gain {
+            position: absolute;
+            pointer-events: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: var(--accent-gold, #c5a059);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+            animation: float-up-fade 1.2s ease-out forwards;
+            z-index: 600;
+        }
+
+        /* ═══ MOBILE PILLS ═══════════════════════════════════════════════ */
+        /* PILLS BAR — jednotná responsivní hlavička (desktop default: v toku, roztažené) */
+        #pills-bar {
+            display: flex !important;
+            flex: 1 1 auto;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+            padding: 0 4px;
+        }
+
+        .hpill {
+            pointer-events: auto !important;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            border-radius: 16px;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            color: #e8d9b0;
+            cursor: pointer;
+            white-space: nowrap;
+            backdrop-filter: blur(4px);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .hpill:active,
+        .hpill.active {
+            border-color: var(--accent-gold);
+            background: rgba(0, 0, 0, 0.85);
+        }
+
+        .hpill-val {
+            font-size: 0.72rem;
+            opacity: 0.9;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Panel */
+        #pill-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9000;
+        }
+
+        #pill-panel-content {
+            position: absolute;
+            top: var(--pill-panel-top, 70px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 8, 5, 0.88);
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            border-radius: 12px;
+            padding: 12px 16px;
+            min-width: 200px;
+            max-width: 90vw;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            color: #e8d9b0;
+            font-size: 0.82rem;
+            animation: pillPanelIn 0.15s ease;
+        }
+
+        @keyframes pillPanelIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        #pill-panel-body {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        #pill-panel-body .pp-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        #pill-panel-body .pp-label {
+            opacity: 0.6;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #pill-panel-body .pp-val {
+            font-weight: bold;
+        }
+
+        .hpill-static {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(197, 160, 89, 0.45);
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 0.78rem;
+            color: #e8d9b0;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+        }
+
+        @media (max-width: 750px) {
+
+            /* Dlouhé texty v tlačítkách nesmí přetékat (BUILD HENHOUSE...) */
+            .craft-btn {
+                white-space: normal;
+                word-break: break-word;
+                max-width: 100%;
+                line-height: 1.3;
+                font-size: 0.78rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+                padding: 4px 8px;
+            }
+
+            .logo-container {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            #settings-btn {
+                display: block !important;
+            }
+
+            #settings-btn-bar {
+                display: none !important;
+            }
+
+            .status-bar {
+                display: none !important;
+            }
+
+            #pills-bar {
+                position: fixed;
+                top: 55px;
+                left: 0;
+                right: 0;
+                z-index: 9999;
+                display: flex !important;
+                background: transparent;
+                padding: 2px 4px;
+                flex-wrap: wrap;
+                gap: 5px;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            header {
+                height: auto;
+                min-height: 80px;
+                overflow: visible;
+            }
+
+            main#main-content {
+                padding-top: 70px !important;
+            }
+
+            .header-content {
+                overflow: visible;
+            }
+
+            .header-bg-layer,
+            .header-canonical-overlay {
+                pointer-events: none !important;
+            }
+
+            #canonical-badge {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 751px) {
+            #settings-btn {
+                display: block !important;
+            }
+
+            #pills-bar {
+                display: flex !important;
+            }
+        }
+
+        @media (max-width: 400px) {
+            #weather-tomorrow-wrap {
+                display: none !important;
+            }
+
+            #date-display,
+            #date-separator {
+                display: none !important;
+            }
+
+            .status-bar {
+                gap: 7px;
+            }
+
+            .status-bar span,
+            .status-bar div {
+                font-size: 16px !important;
+            }
+        }
+
+        main {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 20px;
+            padding-bottom: calc(90px + env(safe-area-inset-bottom));
+            transition: opacity 0.5s;
+            position: relative;
+            -webkit-overflow-scrolling: touch;
+            /* Smooth scrolling on iOS */
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            border: 1px solid var(--ink-secondary);
+            padding: 10px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 2px 2px 0px rgba(44, 36, 27, 0.1);
+            transition: all 0.3s;
+            min-height: 60px;
+        }
+
+        .item-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            background: #e8dec0;
+            border: 1px solid var(--ink-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            border-radius: 3px;
+        }
+
+        .craft-btn {
+            margin-left: auto;
+            background: var(--accent-wax);
+            color: #fff;
+            border: none;
+            padding: 8px 14px;
+            font-family: 'Cinzel Decorative';
+            cursor: pointer;
+            border-radius: 2px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .craft-btn:disabled {
+            background: #bbb;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .craft-btn.running {
+            background: var(--ink-secondary);
+            animation: pulse 2s infinite;
+        }
+
+        .craft-btn.claim {
+            background: #4caf50;
+            border-color: #2e7d32;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .craft-btn.cancel {
+            background: #8a3324;
+            border-color: #5c180e;
+            font-size: 0.75rem;
+        }
+
+        .craft-btn.instant {
+            background: #c5a059;
+            border-color: #8f7238;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.7;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes bounce {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Mobile-friendly touch targets */
+        @media (max-width: 500px) {
+            .craft-btn {
+                min-height: 40px;
+            }
+            .filter-btn, .time-btn {
+                min-width: auto;
+                min-height: 32px;
+            }
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            color: var(--ink-primary);
+            border: 1px solid var(--ink-secondary);
+            padding: 4px 10px;
+            font-family: 'Cinzel Decorative';
+            font-size: 0.75rem;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .filter-btn.active {
+            background: var(--ink-primary);
+            color: var(--bg-parchment);
+            border-color: var(--accent-gold);
+        }
+
+        /* Doplňkové zalomení pro entity-tab tlačítka v gridu (Cellarium/Saeculum subtaby) —
+           .filter-btn samo má white-space:nowrap pro scrollovací filter-bar, tady potřebujeme opak. */
+        .entity-tab-btn {
+            white-space: normal !important;
+            font-size: 0.68rem !important;
+            line-height: 1.15;
+            word-break: break-word;
+        }
+        @media (max-width: 420px) {
+            .entity-tab-btn { font-size: 0.6rem !important; padding: 4px 4px !important; }
+        }
+
+        nav {
+            height: calc(60px + env(safe-area-inset-bottom));
+            background: var(--leather-dark);
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding-top: 10px;
+            border-top: 2px solid var(--accent-gold);
+            z-index: 100;
+            padding-bottom: max(10px, env(safe-area-inset-bottom));
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #a89f91;
+            font-family: 'Cinzel Decorative';
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn.active {
+            color: var(--accent-gold);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            filter: grayscale(1);
+        }
+
+        /* PWA standalone mode — extra bottom padding pro gesture bar */
+        @media (display-mode: standalone) {
+            main {
+                padding-bottom: calc(110px + env(safe-area-inset-bottom));
+            }
+
+            nav {
+                height: calc(70px + env(safe-area-inset-bottom));
+                padding-bottom: max(16px, env(safe-area-inset-bottom));
+            }
+        }
+
+        #notification-area {
+            position: fixed;
+            /* Změna z absolute na fixed - bude plavat nad stránkou */
+            top: 90px;
+            /* Posunuto níže pod hlavičku */
+            left: 0;
+            width: 100%;
+            text-align: center;
+            pointer-events: none;
+            /* Aby šlo klikat "skrz" notifikaci */
+            z-index: 10001;
+            /* Musí být víc než header (100) a modaly (1000) */
+        }
+
+        .toast {
+            display: inline-block;
+            background: var(--ink-primary);
+            color: var(--bg-parchment);
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-top: 5px;
+            border: 1px solid var(--accent-gold);
+            font-family: 'Cinzel Decorative';
+            animation: fadeOut 2.5s forwards;
+        }
+
+        .toast-accum {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            background: var(--ink-primary);
+            color: var(--bg-parchment);
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-top: 5px;
+            border: 1px solid var(--accent-gold);
+            font-family: 'Cinzel Decorative';
+            max-width: 90vw;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           NotificationSystem — Toast | Panel (chybělo úplně, viz notifications.js)
+           z-index: header=100, panel-tab=500, modal=1000, panel=900, toast-area=10001
+           ═══════════════════════════════════════════════════════════════ */
+        .ns-toast {
+            display: inline-block;
+            background: var(--ink-primary);
+            color: var(--bg-parchment);
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-top: 5px;
+            border: 1px solid var(--accent-gold);
+            font-family: 'Cinzel Decorative';
+            font-size: 0.85rem;
+            pointer-events: auto;
+            transition: opacity 0.4s;
+        }
+        .ns-toast--error { border-color: #c0392b; }
+        .ns-toast--warn { border-color: #e0a030; }
+        .ns-toast--fade { opacity: 0; }
+
+        .ns-toast-accum {
+            display: inline-block;
+            background: var(--ink-primary);
+            color: var(--bg-parchment);
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-top: 5px;
+            border: 1px solid var(--accent-gold);
+            font-size: 0.8rem;
+            pointer-events: auto;
+        }
+        .ns-accum-item { margin-right: 10px; }
+
+        .ns-panel-tab {
+            position: fixed;
+            top: 100px;
+            right: 0;
+            background: var(--ink-primary);
+            color: var(--bg-parchment);
+            border: 1px solid var(--accent-gold);
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            padding: 8px 10px;
+            cursor: pointer;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: -2px 2px 8px rgba(0,0,0,0.3);
+        }
+        .ns-tab-icon { font-size: 1.1rem; }
+        .ns-tab-badge {
+            background: #c0392b;
+            color: #fff;
+            font-size: 0.7rem;
+            border-radius: 10px;
+            padding: 1px 6px;
+            font-weight: bold;
+        }
+
+        .ns-panel {
+            position: fixed;
+            top: 90px;
+            right: 0;
+            width: 320px;
+            max-width: 90vw;
+            max-height: 70vh;
+            background: var(--bg-parchment);
+            border: 3px solid var(--border-color);
+            border-right: none;
+            border-radius: 12px 0 0 12px;
+            box-shadow: -4px 4px 30px rgba(0, 0, 0, 0.5);
+            z-index: 900;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .ns-panel-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--accent-gold);
+            background: rgba(197, 160, 89, 0.08);
+            flex-shrink: 0;
+        }
+        .ns-panel-title {
+            font-family: 'Cinzel Decorative';
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .ns-panel-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            opacity: 0.6;
+            color: var(--ink-primary);
+        }
+        .ns-panel-close:hover { opacity: 1; }
+        .ns-panel-body {
+            overflow-y: auto;
+            padding: 8px;
+            flex: 1;
+        }
+        .ns-panel-empty {
+            padding: 24px 12px;
+            text-align: center;
+            opacity: 0.6;
+            font-style: italic;
+            font-size: 0.85rem;
+        }
+        .ns-panel-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin-bottom: 4px;
+            background: rgba(0, 0, 0, 0.03);
+            font-size: 0.8rem;
+            color: var(--ink-primary);
+        }
+        .ns-panel-item--unread {
+            background: rgba(197, 160, 89, 0.14);
+            border-left: 3px solid var(--accent-gold);
+        }
+        .ns-item-icon { font-size: 1rem; flex-shrink: 0; }
+        .ns-item-body { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .ns-item-msg { line-height: 1.3; }
+        .ns-item-count { opacity: 0.6; font-size: 0.75rem; }
+        .ns-item-meta { opacity: 0.55; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em; }
+        .ns-item-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            opacity: 0.4;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            color: var(--ink-primary);
+        }
+        .ns-item-close:hover { opacity: 1; }
+        .ns-panel-footer {
+            padding: 8px 16px;
+            border-top: 1px solid rgba(197, 160, 89, 0.3);
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .ns-panel-clear {
+            background: none;
+            border: 1px solid var(--accent-gold);
+            color: var(--ink-primary);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        .ns-panel-clear:hover { background: rgba(197, 160, 89, 0.15); }
+
+        @media (max-width: 700px) {
+            .ns-panel {
+                width: 100vw;
+                max-width: 100vw;
+                top: auto;
+                bottom: 0;
+                right: 0;
+                border-radius: 12px 12px 0 0;
+                border: 3px solid var(--border-color);
+                max-height: 60vh;
+            }
+            .ns-panel-tab { top: auto; bottom: 90px; }
+        }
+
+        .garden-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .garden-plot {
+            border: 1px dashed var(--ink-secondary);
+            padding: 10px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            min-height: 140px;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .garden-plot button,
+        .garden-plot .craft-btn {
+            white-space: normal;
+            word-break: break-word;
+            max-width: 100%;
+        }
+
+        .plot-soil {
+            color: #5c4d3c;
+            font-size: 2rem;
+        }
+
+        .time-selector {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 5px;
+            margin-bottom: 10px;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
+        }
+
+        .time-btn {
+            flex: 1 0 auto;
+            background: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-family: 'Cinzel Decorative';
+            font-size: 0.75rem;
+            color: var(--ink-secondary);
+            padding: 5px 8px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .time-btn.active {
+            background: var(--ink-primary);
+            color: #fff;
+            border-color: var(--ink-primary);
+        }
+
+        .mine-time-btn {
+            flex: 1;
+            background: transparent;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-family: 'Cinzel Decorative';
+            font-size: 0.75rem;
+            color: var(--ink-secondary);
+            padding: 4px;
+            border-radius: 3px;
+        }
+
+        .mine-time-btn.active {
+            background: var(--ink-primary);
+            color: #fff;
+            border-color: var(--ink-primary);
+        }
+
+        /* Library specific styles */
+        .book-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+
+        .book-modal-content {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* ===== I-CHING STYLES ===== */
+        .iching-intro {
+            background: rgba(40, 30, 20, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #8b6434;
+            margin-bottom: 20px;
+        }
+
+        .cooldown-text {
+            color: #d4a574;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .btn-mystical {
+            background: linear-gradient(135deg, #2d1b4e 0%, #1a0d30 100%);
+            color: #d4a5ff;
+            border: 3px solid #6b4fa0;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(107, 79, 160, 0.5);
+            transition: all 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .btn-mystical:hover:not(:disabled) {
+            box-shadow: 0 0 40px rgba(107, 79, 160, 0.8);
+            transform: scale(1.05);
+        }
+
+        .btn-mystical:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .hexagram-container {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 30px;
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 3px solid #6b4fa0;
+            border-radius: 15px;
+        }
+
+        .hexagram-art {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            /* Mezera mezi čarami */
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #6b4fa0;
+        }
+
+        .iching-line {
+            font-size: 3.5rem;
+            /* Velké Unicode znaky čar */
+            line-height: 0.5;
+            /* Aby byly blízko sebe */
+            color: #d4a5ff;
+            text-shadow: 0 0 10px rgba(212, 165, 255, 0.5);
+        }
+
+        .iching-line.yang {
+            font-weight: bold;
+        }
+
+        /* Ochrana proti přetékání na mobilech */
+        @media (max-width: 600px) {
+            .hexagram-container {
+                grid-template-columns: 1fr;
+                /* Na mobilu budou bloky pod sebou! */
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .iching-line {
+                font-size: 3rem;
+            }
+        }
+
+        #hexagram-info {
+            color: #f4e8d0;
+        }
+
+        #hex-number {
+            color: #8b6434;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        #hex-name {
+            color: #d4a5ff;
+            font-size: 28px;
+            margin: 10px 0;
+        }
+
+        .chinese-char {
+            font-size: 48px;
+            margin: 15px 0;
+            color: #ffd700;
+        }
+
+        .judgment-text {
+            font-style: italic;
+            color: #c4b49a;
+            font-size: 16px;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .effect-box {
+            background: linear-gradient(135deg, rgba(107, 79, 160, 0.3) 0%, rgba(45, 27, 78, 0.3) 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #6b4fa0;
+            margin-top: 20px;
+        }
+
+        .effect-box h4 {
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .effect-box p {
+            color: #f4e8d0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Coin animation */
+        @keyframes coinFlip {
+
+            0%,
+            100% {
+                transform: rotateY(0deg);
+            }
+
+            50% {
+                transform: rotateY(180deg);
+            }
+        }
+
+        .coin-animating {
+            animation: coinFlip 0.5s ease-in-out 3;
+        }
+
+
+        /* =========================================================
+		   🖥️ DESKTOP UPGRADE (PERFEKTNÍ ZAROVNÁNÍ)
+		   ========================================================= */
+
+        @media (min-width: 768px) {
+            #game-container {
+                max-width: 1000px;
+                /* Širší a pohodlnější stůl */
+            }
+
+            /* 1. HLAVIČKA: Musíme ji odsadit zleva stejně jako hlavní obsah, 
+			   aby byl text "SCRIPTORIUM" perfektně zarovnaný se zbytkem hry! 
+			   Background-image tím zůstane nedotčen. */
+            header {
+                padding-left: 90px !important;
+            }
+
+            /* 2. LIŠTA: Přesně pod hlavičkou až na dno obrazovky */
+            nav {
+                position: absolute;
+                top: 72px;
+                /* Výška hlavičky */
+                left: 0;
+                width: 80px;
+                height: calc(100% - 72px);
+                /* Dopočítá výšku přesně na dno */
+                transform: none;
+                flex-direction: column;
+                justify-content: center;
+                gap: 30px;
+                border-top: none;
+                border-right: 2px solid var(--accent-gold);
+                padding-top: 0;
+                align-items: center;
+                background: var(--leather-dark);
+                /* Plná barva lišty */
+                z-index: 50;
+            }
+
+            .nav-btn span {
+                font-size: 1.6rem;
+                margin-bottom: 5px;
+            }
+
+            /* 3. OBSAH: Odsazený za lištu */
+            main {
+                padding-left: 100px;
+                /* 80px lišta + 20px estetická mezera */
+                padding-bottom: 20px;
+            }
+
+            #notification-area {
+                width: calc(100% - 80px);
+                left: 80px;
+            }
+
+            /* 4. MŘÍŽKA: 2 sloupce karet */
+            #workspace-actions,
+            #crafting-list,
+            #inventory-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            #workspace-actions .card,
+            #crafting-list .card,
+            #inventory-grid .card {
+                margin-bottom: 0;
+                height: 100%;
+                box-sizing: border-box;
+            }
+
+            .garden-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            #lore-content-wrapper {
+                max-width: 650px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Velké PC monitory (od 1200px šířky) */
+        @media (min-width: 1200px) {
+            #game-container {
+                max-width: 1200px;
+            }
+
+            /* 3 sloupce na velkém monitoru */
+            #workspace-actions,
+            #crafting-list,
+            #inventory-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* ============================================
+		   GAMES GRID LAYOUT - Záznamy
+		   ============================================ */
+
+        /* Grid container */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        /* Responsive breakpoints */
+        @media (max-width: 768px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .game-card {
+                padding: 12px 8px;
+            }
+
+            .game-icon {
+                font-size: 1.8rem;
+            }
+
+            .game-title {
+                font-size: 0.85rem;
+            }
+
+            .game-desc {
+                font-size: 0.75rem;
+            }
+
+            .game-card .craft-btn {
+                font-size: 0.75rem;
+                padding: 6px 8px;
+            }
+        }
+
+        /* Game card */
+        .game-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            /* Zaoblené rohy! */
+            padding: 20px 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px var(--shadow);
+            border-color: var(--accent-gold);
+        }
+
+        /* Locked state */
+        .game-card.locked {
+            opacity: 0.6;
+            filter: grayscale(40%);
+        }
+
+        .game-card.locked:hover {
+            transform: none;
+            box-shadow: 0 2px 4px var(--shadow);
+        }
+
+        /* Game icon */
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            display: block;
+            line-height: 1;
+        }
+
+        /* Game title */
+        .game-title {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--ink-primary);
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Game description */
+        .game-desc {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-bottom: 15px;
+            min-height: 40px;
+            line-height: 1.3;
+        }
+
+        /* Lock badge */
+        .game-lock-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2rem;
+            opacity: 0.5;
+        }
+
+        /* Unlock requirement text */
+        .game-unlock-text {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        /* Buttons in cards */
+        .game-card .craft-btn {
+            width: 100%;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+        }
+
+        .game-card .craft-btn:first-of-type {
+            margin-top: 10px;
+        }
+
+        /* Game containers (když se hra spustí) */
+        .game-card [id$="-game-card"] {
+            display: none;
+            /* Skryté dokud hra neběží */
+        }
+
+        .game-card.active [id$="-game-card"] {
+            display: block;
+            margin-top: 15px;
+        }
+
+        /* Dark mode adjustments */
+        body.theme-dark .game-card {
+            background: rgba(30, 25, 20, 0.8);
+            border-color: #4a3f32;
+        }
+
+        body.theme-dark .game-card:hover {
+            background: rgba(40, 35, 30, 0.9);
+            border-color: var(--accent-gold);
+        }
+
+        /* ============================================
+           GAME MODAL SYSTEM - Standalone Windows
+           ============================================ */
+
+        .game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(3px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .game-modal-content {
+            background: var(--bg-parchment);
+            border: 3px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .game-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-wax);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .game-modal-close:hover {
+            background: #c74236;
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        body.theme-dark .game-modal-content {
+            background: rgba(30, 25, 20, 0.95);
+            border-color: #4a3f32;
+        }
+
+        /* ═══════════════════════════════════════════════════════
+        CANONICAL HOURS BADGE - COMPACT VERSION
+        ═══════════════════════════════════════════════════════ */
+        #canonical-badge {
+            position: absolute;
+            top: auto;
+            /* ← PŘIDEJ! Vypne auto top */
+            bottom: 4px;
+            /* ← Už tam je */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+
+
+            /* VÝŠKA - FIX! */
+            height: 24px;
+            /* ← EXPLICITNÍ VÝŠKA! */
+            max-height: 24px;
+            min-height: 24px;
+
+            display: none;
+            flex-direction: row;
+            /* ← Horizontální! */
+            align-items: center;
+            gap: 6px;
+
+            padding: 4px 12px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            border-radius: 16px;
+
+            font-family: 'Crimson Text', serif;
+            color: var(--bg-parchment);
+
+            cursor: help;
+            transition: all 0.3s ease;
+            opacity: 0.85;
+
+            /* Prevence stretche */
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        #canonical-badge:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateX(-50%) scale(1.03);
+            box-shadow: 0 2px 8px rgba(197, 160, 89, 0.3);
+            opacity: 1;
+        }
+
+        #canonical-badge .canonical-icon {
+            font-size: 1rem;
+            line-height: 1;
+            /* ← FIX line-height! */
+            animation: canonical-pulse 3s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes canonical-pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        #canonical-badge .canonical-name {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.75rem;
+            line-height: 1;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--accent-gold);
+            text-shadow: 0 0 4px rgba(197, 160, 89, 0.3);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        #canonical-badge .canonical-buff {
+            font-size: 0.7rem;
+            line-height: 1;
+            opacity: 0.8;
+            font-style: italic;
+            color: #d4b883;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           CIVILIZATION 5 ART NOUVEAU & SECESSIONIST GUI FACELIFT
+           ═══════════════════════════════════════════════════════════════ */
+
+        /* 1. Global Game Canvas Framing */
+        #game-container {
+            border-left: 2px solid rgba(197, 160, 89, 0.5);
+            border-right: 2px solid rgba(197, 160, 89, 0.5);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.85), inset 0 0 120px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Keep header sticky without messing up z-index/position for left sidebar */
+        header {
+            border-bottom: 2px solid var(--accent-gold) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        /* 2. Art Nouveau Illuminated Section & Screen Headers */
+        .screen-header h2,
+        .section-header,
+        #screen-garden h2,
+        #screen-workspace h2,
+        #screen-inventory h2,
+        #screen-crafting h2,
+        #screen-library h2,
+        .screen-header-row h2 {
+            font-family: 'Cinzel Decorative', serif !important;
+            letter-spacing: 0.8px;
+            position: relative;
+            padding-bottom: 4px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Art Nouveau Header Divider with Main Line, Sub-line (Podlinka), Terminal Floral Endcaps (Květinky) & Center Blossom */
+        .screen-header h2::after,
+        .section-header::after,
+        .card-title::after,
+        .card h3::after,
+        .card h4::after,
+        .game-card h3::after,
+        #workspace-actions h3::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 12px;
+            margin-top: 4px;
+            margin-bottom: 6px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 12' preserveAspectRatio='none'%3E%3Cline x1='22' y1='3' x2='180' y2='3' stroke='%23c5a059' stroke-width='1.2'/%3E%3Cline x1='220' y1='3' x2='378' y2='3' stroke='%23c5a059' stroke-width='1.2'/%3E%3Cline x1='32' y1='7' x2='170' y2='7' stroke='%23c5a059' stroke-width='0.7' stroke-dasharray='3,2' opacity='0.75'/%3E%3Cline x1='230' y1='7' x2='368' y2='7' stroke='%23c5a059' stroke-width='0.7' stroke-dasharray='3,2' opacity='0.75'/%3E%3Ccircle cx='6' cy='5' r='2' fill='%23c5a059'/%3E%3Cpath d='M0,5 C4,1 10,1 14,5 C10,9 4,9 0,5 Z' fill='%23c5a059' opacity='0.85'/%3E%3Cpath d='M14,5 Q18,1 22,5' stroke='%23c5a059' stroke-width='1' fill='none'/%3E%3Ccircle cx='394' cy='5' r='2' fill='%23c5a059'/%3E%3Cpath d='M400,5 C396,1 390,1 386,5 C390,9 396,9 400,5 Z' fill='%23c5a059' opacity='0.85'/%3E%3Cpath d='M386,5 Q382,1 378,5' stroke='%23c5a059' stroke-width='1' fill='none'/%3E%3Ccircle cx='200' cy='5' r='2.5' fill='%23ffd700'/%3E%3Cpath d='M192,5 C196,1 204,1 208,5 C204,9 196,9 192,5 Z' fill='%23c5a059'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% 100%;
+        }
+
+        /* 3. Art Nouveau & Secession Cards & Object Panels with Floral Corner Flourishes */
+        .card,
+        .game-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(245, 236, 215, 0.6) 100%);
+            border: 1px solid rgba(197, 160, 89, 0.6) !important;
+            border-radius: 4px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12), inset 0 0 15px rgba(197, 160, 89, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.5) !important;
+            transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: visible;
+            z-index: 1;
+        }
+
+        body.theme-dark .card,
+        body.theme-night .card,
+        body.theme-dark .game-card,
+        body.theme-night .game-card {
+            background: linear-gradient(135deg, rgba(30, 24, 18, 0.92) 0%, rgba(18, 14, 10, 0.96) 100%);
+            border: 1px solid rgba(197, 160, 89, 0.45) !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(0, 180, 240, 0.12), inset 0 0 0 1px rgba(197, 160, 89, 0.15) !important;
+        }
+
+        /* Strategic Card Hover & Lift Animation with Cyan/Gold Glow */
+        .card:hover,
+        .game-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-gold) !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 14px rgba(0, 210, 255, 0.25), inset 0 0 12px rgba(255, 215, 0, 0.2) !important;
+        }
+
+        /* Art Nouveau Intricate Floral Corner Flourishes & Scrolling Linework for Panels */
+        .card::before,
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            width: 26px;
+            height: 26px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28' fill='none'%3E%3Cpath d='M2,28 L2,8 C2,4 4,2 8,2 L28,2' stroke='%23c5a059' stroke-width='1.5'/%3E%3Cpath d='M2,14 C6,14 14,6 14,2' stroke='%23c5a059' stroke-width='0.9' opacity='0.75'/%3E%3Cpath d='M2,20 C10,20 20,10 20,2' stroke='%23c5a059' stroke-width='0.7' stroke-dasharray='2,1' opacity='0.6'/%3E%3Cpath d='M6,10 C10,6 14,8 12,12 C8,14 6,10 6,10 Z' fill='%23c5a059' opacity='0.85'/%3E%3Cpath d='M10,6 C6,10 8,14 12,12 C14,8 10,6 10,6 Z' fill='%23c5a059' opacity='0.85'/%3E%3Ccircle cx='4' cy='4' r='1.8' fill='%23ffd700'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .card::after,
+        .game-card::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 26px;
+            height: 26px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28' fill='none'%3E%3Cpath d='M26,28 L26,8 C26,4 24,2 20,2 L0,2' stroke='%23c5a059' stroke-width='1.5'/%3E%3Cpath d='M26,14 C22,14 14,6 14,2' stroke='%23c5a059' stroke-width='0.9' opacity='0.75'/%3E%3Cpath d='M26,20 C18,20 8,10 8,2' stroke='%23c5a059' stroke-width='0.7' stroke-dasharray='2,1' opacity='0.6'/%3E%3Cpath d='M22,10 C18,6 14,8 16,12 C20,14 22,10 22,10 Z' fill='%23c5a059' opacity='0.85'/%3E%3Cpath d='M18,6 C22,10 20,14 16,12 C14,8 18,6 18,6 Z' fill='%23c5a059' opacity='0.85'/%3E%3Ccircle cx='24' cy='4' r='1.8' fill='%23ffd700'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        /* 4. Strategic Illuminated Object Medallions & Icon Frames */
+        .item-icon {
+            border: 2px solid rgba(197, 160, 89, 0.7) !important;
+            border-radius: 6px;
+            background: radial-gradient(circle at center, #f8eed0 0%, #d5bf8a 100%) !important;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.25), 0 0 6px rgba(197, 160, 89, 0.2) !important;
+            transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        body.theme-dark .item-icon,
+        body.theme-night .item-icon {
+            background: radial-gradient(circle at center, #3d3023 0%, #1a130c 100%) !important;
+            border-color: rgba(197, 160, 89, 0.6) !important;
+            color: #f0e6cf;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.6), 0 0 10px rgba(0, 180, 240, 0.2) !important;
+        }
+
+        .card:hover .item-icon {
+            transform: scale(1.08) rotate(-1deg);
+            filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.5));
+            border-color: #ffd700 !important;
+        }
+
+        /* 5. Strategic Action Buttons (Craft, Claim, Instant, etc.) */
+        .craft-btn {
+            background: linear-gradient(180deg, #9b2b1a 0%, #6e1c10 100%) !important;
+            border: 1px solid #c5a059 !important;
+            color: #fff8e7 !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+            border-radius: 3px !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 3px 6px rgba(0, 0, 0, 0.4) !important;
+            transition: all 0.18s ease-in-out !important;
+            font-family: 'Cinzel Decorative', serif !important;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .craft-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transform: rotate(25deg);
+            transition: all 0.5s ease;
+        }
+
+        .craft-btn:hover:not(:disabled)::after {
+            left: 130%;
+        }
+
+        .craft-btn:hover:not(:disabled) {
+            background: linear-gradient(180deg, #b33220 0%, #852215 100%) !important;
+            border-color: #ffd700 !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 4px 12px rgba(138, 51, 36, 0.5), 0 0 8px rgba(255, 215, 0, 0.4) !important;
+            transform: translateY(-1px) scale(1.02);
+            color: #ffffff !important;
+        }
+
+        .craft-btn:active:not(:disabled) {
+            transform: translateY(1px) scale(0.98) !important;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6) !important;
+        }
+
+        .craft-btn.claim {
+            background: linear-gradient(180deg, #2e7d32 0%, #1b5e20 100%) !important;
+            border-color: #a5d6a7 !important;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 12px rgba(76, 175, 80, 0.6) !important;
+        }
+
+        .craft-btn.instant {
+            background: linear-gradient(180deg, #c5a059 0%, #8f7238 100%) !important;
+            border-color: #ffe082 !important;
+            color: #2c241b !important;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        /* 6. Main Content Tabs & Tab Headers Styling */
+        .filter-bar {
+            position: relative;
+            display: flex;
+            gap: 6px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            padding: 4px 2px 6px 2px;
+            -webkit-overflow-scrolling: touch;
+            border-bottom: none;
+        }
+
+        .filter-btn {
+            position: relative;
+            background: #ffffff !important;
+            color: var(--ink-primary, #2c241b) !important;
+            border: 1px solid var(--ink-secondary, #a89f91) !important;
+            border-radius: 0 !important;
+            padding: 5px 12px !important;
+            font-family: 'Cinzel Decorative', serif !important;
+            font-size: 0.75rem !important;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: none !important;
+            transition: background-color 0.15s, border-color 0.15s, color 0.15s !important;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--ink-primary, #2c241b) !important;
+            background: #fdfbf7 !important;
+            transform: none !important;
+        }
+
+        .filter-btn.active {
+            background: var(--ink-primary, #2c241b) !important;
+            color: var(--bg-parchment, #fcf5e5) !important;
+            border: 1px solid var(--accent-gold, #c5a059) !important;
+            box-shadow: 0 0 8px rgba(197, 160, 89, 0.3) !important;
+        }
+
+        .filter-btn.active::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 4px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 4' fill='none'%3E%3Ccircle cx='7' cy='2' r='1.5' fill='%23ffd700'/%3E%3Cpath d='M0,2 L5,2 M9,2 L14,2' stroke='%23c5a059' stroke-width='1'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        body.theme-dark .filter-btn,
+        body.theme-night .filter-btn {
+            background: #1c150f !important;
+            color: #d8caad !important;
+            border: 1px solid rgba(197, 160, 89, 0.4) !important;
+        }
+
+        body.theme-dark .filter-btn:hover,
+        body.theme-night .filter-btn:hover {
+            background: #2a2017 !important;
+            border-color: var(--accent-gold, #c5a059) !important;
+        }
+
+        body.theme-dark .filter-btn.active,
+        body.theme-night .filter-btn.active {
+            background: #2c241b !important;
+            color: #ffd700 !important;
+            border: 1px solid #ffd700 !important;
+        }
+
+        /* 7. Bottom Navigation Bar Button Styling */
+        .nav-btn {
+            position: relative;
+            padding: 4px 6px;
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            color: #a89f91;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            color: #f0e0b8;
+            transform: translateY(-2px);
+            text-shadow: 0 0 8px rgba(197, 160, 89, 0.6);
+        }
+
+        .nav-btn.active {
+            color: #ffd700 !important;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.8), 0 0 6px rgba(0, 210, 255, 0.5);
+        }
+
+        /* Active Navigation Tab Indicator Line with Illuminated Glow */
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 15%;
+            width: 70%;
+            height: 3px;
+            background: linear-gradient(90deg, #c5a059, #ffd700, #00d2ff, #ffd700, #c5a059);
+            box-shadow: 0 0 10px #ffd700, 0 0 5px #00d2ff;
+            border-radius: 2px;
+        }
+
+        /* 9. Strategic Resource Pills Bar Facelift & Jewel Illumination */
+        .res-pill {
+            background: linear-gradient(180deg, rgba(45, 35, 25, 0.9) 0%, rgba(25, 20, 14, 0.95) 100%) !important;
+            border: 1px solid rgba(197, 160, 89, 0.5) !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 0 6px rgba(197, 160, 89, 0.15) !important;
+        }
+
+        .res-pill:hover {
+            border-color: #ffd700 !important;
+            box-shadow: 0 0 10px rgba(197, 160, 89, 0.6), 0 0 5px rgba(0, 210, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+        }
+
+        /* 8. Screen Transition Animation */
+        .screen {
+            animation: civScreenEnter 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes civScreenEnter {
+            0% {
+                opacity: 0;
+                transform: scale(0.985) translateY(6px);
+                filter: blur(1px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: blur(0);
+            }
+        }
+    </style>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23fcf5e5%22 rx=%2220%22/><path d=%22M10 85 Q 45 100 90 70%22 stroke=%22%232c241b%22 stroke-width=%226%22 fill=%22none%22 stroke-linecap=%22round%22/><g transform=%22rotate(45 50 50)%22><path d=%22M35 -20 L 65 -20 L 65 30 Q 65 65 50 100 Q 35 65 35 30 Z%22 fill=%22%232c241b%22/><circle cx=%2250%22 cy=%2245%22 r=%225%22 fill=%22%23fcf5e5%22/><line x1=%2250%22 y1=%2250%22 x2=%2250%22 y2=%2290%22 stroke=%22%23fcf5e5%22 stroke-width=%222%22/></g></svg>">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23fcf5e5%22/><path d=%22M10 85 Q 45 100 90 70%22 stroke=%22%232c241b%22 stroke-width=%226%22 fill=%22none%22 stroke-linecap=%22round%22/><g transform=%22rotate(45 50 50)%22><path d=%22M35 -20 L 65 -20 L 65 30 Q 65 65 50 100 Q 35 65 35 30 Z%22 fill=%22%232c241b%22/><circle cx=%2250%22 cy=%2245%22 r=%225%22 fill=%22%23fcf5e5%22/><line x1=%2250%22 y1=%2250%22 x2=%2250%22 y2=%2290%22 stroke=%22%23fcf5e5%22 stroke-width=%222%22/></g></svg>">
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZSGNPD8" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Hidden container for NotebookSystem (used temporarily during render) -->
+    <div id="notebook-content" style="display:none;"></div>
+
+    <!-- VÝBĚR JAZYKA – zobrazí se jako první, před consent bannerem -->
+    <div id="lang-picker-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:2100; justify-content:center; align-items:center;">
+        <div
+            style="background:var(--bg-parchment); border:2px solid var(--accent-gold); padding:36px 30px; max-width:380px; width:92%; box-shadow: 0 0 100px rgba(0,0,0,0.95), 0 0 30px rgba(197,160,89,0.2); animation: fadeIn 0.7s; position:relative; z-index:2101; text-align:center;">
+            <div style="font-size:2.8rem; margin-bottom:8px; opacity:0.75;">🪶</div>
+            <h2 id="lang-picker-heading"
+                style="color:var(--accent-gold); margin:0 0 4px; font-size:1rem; letter-spacing:3px; text-transform:uppercase;">
+                Scriptorium</h2>
+            <div id="lang-picker-sub"
+                style="font-size:0.68rem; color:var(--ink-secondary); margin-bottom:22px; font-style:italic; letter-spacing:1px;">
+                Léta Páně 1465 · Město Olomouc</div>
+            <div id="lang-picker-prompt"
+                style="font-size:0.82rem; color:var(--ink-primary); margin-bottom:20px; font-family:'Crimson Text', serif; opacity:0.85;">
+                Vyber jazyk / Choose thy tongue</div>
+            <div style="display:flex; gap:12px; justify-content:center;">
+                <button onclick="UI.pickLanguage('cs')"
+                    style="flex:1; padding:13px 8px; background:transparent; color:var(--ink-primary); border:1px solid var(--accent-gold); font-family:'Cinzel Decorative'; font-size:0.72rem; cursor:pointer; border-radius:2px; letter-spacing:1px; transition: background 0.2s;">🇨🇿
+                    Česky</button>
+                <button onclick="UI.pickLanguage('en')"
+                    style="flex:1; padding:13px 8px; background:transparent; color:var(--ink-primary); border:1px solid var(--ink-secondary); font-family:'Cinzel Decorative'; font-size:0.72rem; cursor:pointer; border-radius:2px; letter-spacing:1px; opacity:0.85; transition: background 0.2s;">🏴󠁧󠁢󠁥󠁮󠁧󠁿
+                    English</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- UVÍTACÍ MODAL – první návštěva -->
+    <div id="welcome-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); z-index:1001; justify-content:center; align-items:center;">
+        <div
+            style="background:var(--bg-parchment); border:2px solid var(--accent-gold); padding:30px; max-width:420px; width:92%; box-shadow: 0 0 80px rgba(0,0,0,0.9); animation: fadeIn 0.6s; position:relative; z-index:1002; opacity:1;">
+            <div style="text-align:center; margin-bottom:18px;">
+                <div style="font-size:2.5rem; margin-bottom:6px; opacity:0.7;">🪵</div>
+                <h2
+                    style="color:var(--accent-gold); margin:0; font-size:1rem; letter-spacing:3px; text-transform:uppercase;">
+                    Scriptorium</h2>
+                <div
+                    style="font-size:0.7rem; color:var(--ink-secondary); margin-top:5px; font-style:italic; letter-spacing:1px;">
+                    Léta Páně 1465 · Město Olomouc</div>
+            </div>
+            <div id="welcome-text"
+                style="font-style:italic; line-height:1.9; color:var(--ink-primary); font-size:0.9rem; border-left:2px solid var(--accent-gold); padding-left:14px; margin-bottom:22px;">
+            </div>
+            <button id="welcome-btn" onclick="UI.closeWelcomeModal()"
+                style="width:100%; padding:12px; background:transparent; color:var(--ink-primary); border:1px solid var(--ink-secondary); font-family:'Cinzel Decorative'; font-size:0.8rem; cursor:pointer; border-radius:2px; letter-spacing:2px; opacity:0.8;"
+                data-i18n="welcome.btn">Vstoupit →</button>
+            <div style="text-align:center; margin-top:12px;">
+                <a href="/about.html" target="_blank"
+                    style="font-size:0.75rem; color:var(--ink-secondary); text-decoration:none; opacity:0.6; font-style:italic;"
+                    data-i18n="welcome.aboutLink">O hře &amp; Credits →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- VYHASLÝ KRB MODAL – vracející se hráč po 3+ dnech -->
+    <div id="fireout-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); z-index:1001; justify-content:center; align-items:center;">
+        <div
+            style="background:var(--bg-parchment); border:2px solid #555; padding:30px; max-width:400px; width:92%; box-shadow: 0 0 80px rgba(0,0,0,0.9); animation: fadeIn 0.5s; position:relative; z-index:1002; opacity:1;">
+            <div style="text-align:center; margin-bottom:16px;">
+                <div style="font-size:2.5rem; margin-bottom:6px; opacity:0.4;">🪵</div>
+                <h2 id="fireout-heading"
+                    style="color:var(--ink-secondary); margin:0; font-size:0.95rem; letter-spacing:2px; text-transform:uppercase;"
+                    data-i18n="fireout.heading"></h2>
+            </div>
+            <div id="fireout-text"
+                style="font-style:italic; line-height:1.9; color:var(--ink-primary); font-size:0.88rem; background:rgba(0,0,0,0.04); padding:14px; border-left:2px solid #777; margin-bottom:16px;">
+            </div>
+            <div id="fireout-days"
+                style="text-align:center; font-size:0.75rem; color:var(--ink-secondary); margin-bottom:18px; opacity:0.7;">
+            </div>
+            <button id="fireout-btn" onclick="UI.closeFireoutModal()"
+                style="width:100%; padding:11px; background:transparent; color:var(--ink-primary); border:1px solid var(--ink-secondary); font-family:'Cinzel Decorative'; font-size:0.78rem; cursor:pointer; border-radius:2px; letter-spacing:2px; opacity:0.7;">Hledat
+                oheň →</button>
+        </div>
+    </div>
+
+    <!-- DENNÍ ODMĚNA MODAL – mimo game-container aby nebyl ovlivněn mode-frozen -->
+    <div id="daily-reward-modal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1001; justify-content:center; align-items:center;">
+        <div
+            style="background:var(--bg-parchment); border:3px solid var(--accent-gold); padding:30px; max-width:400px; width:90%; box-shadow: 0 0 40px rgba(197,160,89,0.6); animation: fadeIn 0.3s;">
+            <div style="text-align:center; margin-bottom:20px;">
+                <div style="font-size:4rem; animation: bounce 1s ease-in-out infinite;">🎁</div>
+                <h2 id="daily-reward-title" style="color:var(--accent-gold); margin:10px 0;">Denní Odměna!</h2>
+            </div>
+            <div id="daily-reward-content" style="text-align:center; margin-bottom:20px;"></div>
+            <div id="daily-fact"
+                style="background:rgba(0,0,0,0.05); padding:15px; border-left:3px solid var(--accent-gold); font-style:italic; margin:20px 0; line-height:1.6;">
+            </div>
+            <button id="daily-reward-btn" onclick="UI.closeDailyRewardModal()"
+                style="width:100%; padding:12px; background:var(--accent-gold); color:var(--ink-primary); border:none; font-family:'Cinzel Decorative'; font-size:1rem; cursor:pointer; border-radius:3px;">Děkuji!
+                ✨</button>
+        </div>
+    </div>
+
+    <div id="about-modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1001; overflow-y: auto; padding: 20px 0;">
+        <div
+            style="max-width: 500px; margin: 20px auto; background: var(--bg-parchment); border: 2px solid var(--accent-gold); padding: 20px; position: relative; border-radius: 4px;">
+            <button onclick="UI.closeAboutModal()"
+                style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--ink-primary); width: 40px; height: 40px;">✕</button>
+
+            <h2 style="margin-bottom: 20px; color: var(--accent-gold); font-family: 'Cinzel Decorative';">📜 SCRIPTORIUM
+            </h2>
+
+            <div style="margin-bottom: 20px; padding: 16px; background: rgba(197,160,89,0.12); border: 2px solid var(--accent-gold); border-radius: 8px; text-align: center;">
+                <h3 style="margin: 0 0 8px; color: var(--accent-gold); font-family: 'Cinzel Decorative';">🧭 PRŮVODCE HROU (TUTORIAL)</h3>
+                <p style="font-size: 0.9rem; line-height: 1.5; margin-bottom: 12px; opacity: 0.95;">
+                    Spusť interaktivního průvodce prvním dnem v klášteře. Animované šipky tě provedou sběrem surovin, výrobou nože, lovem tuku, výrobou a rozsvícením svíčky až k prvnímu výzkumu ve Scriptoriu.
+                </p>
+                <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
+                    <button id="btn-toggle-tutorial" class="craft-btn" onclick="TutorialSystem.startTutorialFromModal()" style="font-weight: bold; padding: 8px 16px; font-size: 0.95rem;">
+                        🚀 SPUSTIT TUTORIAL REŽIM
+                    </button>
+                    <button id="btn-reset-tutorial" class="craft-btn" onclick="TutorialSystem.resetTutorial()" style="display:none; padding: 8px 12px; font-size: 0.85rem; opacity: 0.85;">
+                        🔄 RESTARTOVAT
+                    </button>
+                </div>
+            </div>
+
+            <div
+                style="margin-bottom: 20px; padding: 12px; background: var(--bg-card); border-left: 3px solid var(--accent-gold);">
+                <strong data-i18n="about.version">Verze:</strong> 7.9 "Ferrum et Herba"<br>
+                <strong data-i18n="about.date">Datum:</strong> <span data-i18n="about.dateVal">10. června
+                    2026</span><br>
+                <strong data-i18n="about.author">Autor:</strong> Ondrex Ember
+            </div>
+
+            <h3 style="margin: 20px 0 10px; color: var(--accent-gold); font-family: 'Cinzel Decorative';"
+                data-i18n="about.aboutTitle">O hře</h3>
+            <p style="line-height: 1.6;" data-i18n="about.aboutText">Středověká idle hra o kopírování rukopisů, výrobě
+                papíru a studiu v klášterním skriptoriu. Kombinuje survival mechaniky (oheň, světlo, hlad) s craftingem,
+                zahradničením a postupným odemykáním technologií. Historicky podložená hra zasazená do roku 1465 v
+                Olomouci.</p>
+
+            <h3 style="margin: 20px 0 10px; color: var(--accent-gold); font-family: 'Cinzel Decorative';">📓 Release
+                Notes</h3>
+
+            <div
+                style="border-left: 3px solid var(--accent-gold); padding: 10px; background: rgba(197,160,89,0.12); margin: 10px 0;">
+                <strong>v7.9 "Ferrum et Herba" (10.06.2026)</strong>
+                <ul style="font-size: 0.9rem; margin: 5px 0; line-height: 1.6;">
+                    <li>🔨 <span data-i18n="about.r791">Nástroje — kamenné a železné s opotřebením, degradací a
+                            opravou</span></li>
+                    <li>⚒️ <span data-i18n="about.r792">Fabrica — výroba železných ingotů, nástrojů a oprav ze
+                            surovin</span></li>
+                    <li>🌾 <span data-i18n="about.r793">Sklady — Almarium / Cella / Horreum, narůstající kapacita
+                            inventáře</span></li>
+                    <li>🐑 <span data-i18n="about.r794">Dvůr — Ovile (vlna, mléko, kůže, jehňata) a Piscina (kaprový
+                            rybník)</span></li>
+                    <li>🔔 <span data-i18n="about.r795">Zprávy z kláštera — toast / panel / modal systém
+                            notifikací</span></li>
+                    <li>📜 <span data-i18n="about.r796">Tidings — 26 historických dopisů v pěti hlasech</span></li>
+                    <li>📱 <span data-i18n="about.r797">Mobile pills — informační lišta v hlavičce pro mobilní
+                            zařízení</span></li>
+                    <li>📅 <span data-i18n="about.r798">Calendarium — lunární kalendář s křesťanskými svátky, Anno
+                            Domini 1465</span></li>
+                    <li>🔧 <span data-i18n="about.r799">Opravy: study() crash, hudba defaultně vypnuta, repair tlačítka,
+                            duplicity</span></li>
+                </ul>
+            </div>
+
+            <div
+                style="border-left: 3px solid var(--accent-gold); padding: 10px; background: rgba(197,160,89,0.12); margin: 10px 0;">
+                <strong>v7.8 "Lux Et Umbra" (20.04.2026)</strong>
+                <ul style="font-size: 0.9rem; margin: 5px 0; line-height: 1.6;">
+                    <li>🌅 <span data-i18n="about.r779">Dynamické pozadí — header mění obraz podle sezóny, denní doby a
+                            počasí</span></li>
+                    <li>⚗️ <span data-i18n="about.r780">Athanor 2.0 — CombinationEngine, brewing timer, fáze
+                            Nigredo/Albedo/Rubedo, discovery log</span></li>
+                    <li>🍺 <span data-i18n="about.r781">Cellarium — Hospoda s pivem a vínem (efekty: Lupulin, In vino
+                            veritas)</span></li>
+                    <li>🏛️ <span data-i18n="about.r778">Dvůr (Curia) — Studna přesunuta do záložky Dvůr, struktura
+                            připravena</span></li>
+                    <li>📄 <span data-i18n="about.r775">about.html — hero sekce s obrázkem, GTM, JSON-LD VideoGame
+                            schema</span></li>
+                    <li>🔧 <span data-i18n="about.r776">Opravy: PWA padding, zahrada tab active state, Rithmomachia
+                            piece modal</span></li>
+                </ul>
+            </div>
+
+            <div
+                style="border-left: 3px solid var(--accent-gold); padding: 10px; background: rgba(197,160,89,0.12); margin: 10px 0;">
+                <strong>v7.7 "Verbum Omnibus" (06.04.2026)</strong>
+                <ul style="font-size: 0.9rem; margin: 5px 0; line-height: 1.6;">
+                    <li>🌐 <span data-i18n="about.r771">i18n Phase 1 dokončena — kompletní překlad UI do EN</span></li>
+                    <li>📖 <span data-i18n="about.r772">61 historických knih v knihovně</span></li>
+                    <li>🔽 <span data-i18n="about.r773">Collapsible tech cards — preview lore textu</span></li>
+                    <li>💧 <span data-i18n="about.r774">Well system, Games & Records, Divination — lokalizovány</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div style="margin: 16px 0; text-align: center;">
+                <a href="/about.html" target="_blank"
+                    style="font-family:'Cinzel Decorative'; font-size:0.75rem; letter-spacing:0.08em; color:var(--ink-primary); background:var(--accent-gold); padding:10px 24px; text-decoration:none; border-radius:2px; display:inline-block;"
+                    data-i18n="about.fullChangelog">📜 Celý changelog & Credits →</a>
+            </div>
+
+            <div
+                style="margin-top: 20px; padding: 15px; background: rgba(197, 160, 89, 0.1); border: 1px solid var(--accent-gold); border-radius: 4px; text-align: center;">
+                <strong><i>🎮 Ludite et, super omnia, nolite pugnare</i></strong>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-container">
+        <header>
+            <!-- Layer 1: Dynamic background -->
+            <div class="header-bg-layer"></div>
+
+            <!-- Layer 2: Canonical overlay (Phase 2) -->
+            <div class="header-canonical-overlay"></div>
+
+            <!-- Layer 3: UI content wrapper -->
+            <div class="header-content">
+                <div class="logo-container">
+                    <button id="tutorial-help-btn" class="help-question-btn" onclick="UI.openAboutModal()" title="Nápověda & Průvodce hrou">❓</button>
+                    <svg width="28" height="28" viewBox="0 0 100 100">
+                        <g transform="rotate(45 50 50)">
+                            <rect x="25" y="10" width="50" height="25" fill="#c5a059" stroke="#2c241b" stroke-width="6"
+                                rx="2" />
+                            <path d="M25 35 L 75 35 L 80 55 L 50 95 L 20 55 Z" fill="#d0d0d0" stroke="#2c241b"
+                                stroke-width="6" stroke-linejoin="round" />
+                            <circle cx="50" cy="60" r="6" fill="#2c241b" />
+                            <line x1="50" y1="60" x2="50" y2="90" stroke="#2c241b" stroke-width="4"
+                                stroke-linecap="round" />
+                        </g>
+                    </svg>
+                    <span
+                        style="font-size:1.4rem; letter-spacing:2px; font-family:'Cinzel Decorative'; font-weight:700; color:#d4b883; text-shadow: 2px 2px 4px #000;">
+                        SCRIPTORIUM
+                    </span>
+                    <span id="sound-toggle-btn" onclick="Game.toggleSound()" style="cursor:pointer; user-select:none;"
+                        title="Zvuk ON/OFF">🔊</span>
+                    <span id="settings-btn" onclick="UI.switchScreen('settings')"
+                        data-i18n-title="header.settings">⚙️</span>
+                </div>
+
+                <div class="status-bar">
+                    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 1px;">
+                        <span id="weather-today" data-i18n-title="header.weatherNow"
+                            onclick="WeatherSystem.fetchWeather()" style="line-height:1.1;">⏳</span>
+                        <span id="weather-tomorrow-wrap" style="display:inline-flex; align-items:center; gap:2px;">
+                            <span id="weather-tomorrow" data-i18n-title="header.weatherTomorrow"
+                                onclick="WeatherSystem.fetchWeather()"
+                                style="opacity: 0.8; font-size: 0.78em !important; line-height:1.1;">⏳</span>
+                        </span>
+                    </div>
+                    <span id="lunar-display" title="Lunární fáze" style="font-size:0.85rem; cursor:default;">🌕</span>
+                    <span class="separator">•</span>
+                    <div id="vigor-mini"></div>
+                    <span class="separator">•</span>
+                    <span id="streak-display" style="display:none;" data-i18n-title="header.streak">
+                        🔥 <span id="streak-number">0</span>
+                    </span>
+                    <div id="research-indicator" data-i18n-title="header.research">
+                        <span>📜</span>
+                        <span id="research-count">0</span>
+                    </div>
+                    <span class="separator">•</span>
+                    <span id="date-display"
+                        style="text-transform:uppercase; font-size:0.72rem; letter-spacing:-0.3px; font-family:'Cinzel'; opacity:0.85;"></span>
+                    <span id="date-separator" class="separator" style="font-size:0.72rem;">·</span>
+                    <span id="time-display"
+                        style="text-transform:uppercase; font-size:0.72rem; letter-spacing:-0.3px;">...</span>
+                    <span class="separator">•</span>
+                    <span id="settings-btn-bar" onclick="UI.switchScreen('settings')"
+                        data-i18n-title="header.settings">⚙️</span>
+                </div>
+
+                <!-- PILLS BAR — jednotná responsivní hlavička (desktop: v toku; ≤750: fixed) -->
+                <div id="pills-bar" style="display:none;">
+                    <div class="hpill" id="pill-weather" onclick="pillToggle('weather')">
+                        <span id="pill-weather-icon">🌤️</span>
+                        <span class="hpill-val" id="pill-weather-val">–</span>
+                    </div>
+                    <div class="hpill" id="pill-vigor" onclick="pillToggle('vigor')">
+                        <span id="pill-vigor-icon">⚡</span>
+                        <span class="hpill-val" id="pill-vigor-val">–</span>
+                        <span id="pill-titivillus-warn" style="display:none; margin-left:2px;">👿</span>
+                    </div>
+                    <div class="hpill" id="pill-time" onclick="pillToggle('time')">
+                        <span id="pill-time-icon">🌙</span>
+                        <span class="hpill-val" id="pill-time-val">–</span>
+                    </div>
+                    <div class="hpill" id="pill-progress" onclick="pillToggle('progress')">
+                        <span>📜</span>
+                        <span class="hpill-val" id="pill-progress-val">–</span>
+                    </div>
+                    <div class="hpill" id="cat-pill" onclick="pillToggle('cat')" style="display:none;">
+                        <span id="cat-pill-label">🐈</span>
+                        <span class="hpill-val"
+                            style="display:block; width:30px; height:4px; background:rgba(0,0,0,0.15); border-radius:2px; padding:0; overflow:hidden;">
+                            <span id="cat-pill-warmth-bar"
+                                style="display:block; height:100%; width:50%; background:#ffbd40; border-radius:2px; transition:width 0.5s;"></span>
+                        </span>
+                    </div>
+                    <div class="hpill" id="pill-notif" onclick="NotificationSystem.togglePanel()">
+                        <span>🔔</span>
+                        <span class="hpill-val" id="pill-notif-count"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PILL DETAIL PANEL -->
+            <div id="pill-panel" onclick="pillClose()">
+                <div id="pill-panel-content" onclick="event.stopPropagation()">
+                    <div id="pill-panel-body"></div>
+                </div>
+            </div>
+            <!-- Canonical Hour Badge (Phase 2 - hidden) -->
+            <div id="canonical-badge" style="display:none;" onclick="this.classList.toggle('expanded')">
+                <span class="canonical-icon">🔔</span>
+                <span class="canonical-name">Laudes</span>
+                <span class="canonical-buff">+25% crafting</span>
+            </div>
+        </header>
+
+        <div id="card-fireplace-overlay" class="card ui-frozen" style="display:none;">
+            <img id="fireplace-visual-overlay" src="/img/hearth_base_dead.png" alt=""
+                style="width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid var(--ink-secondary, #6b5d4f);flex-shrink:0;">
+            <div><strong id="fireplace-title-overlay">Vyhaslý Krb</strong>
+                <div id="fireplace-desc-overlay" class="text-sm">Je tu zima.</div>
+            </div>
+            <button id="btn-ignite-overlay" class="craft-btn" onclick="Game.igniteFireplace()"
+                data-i18n="fireplace.kindle">ROZEŽEHNOUT</button>
+        </div>
+
+        <div id="notification-area"></div>
+
+        <main id="main-content">
+            <div id="screen-home" class="screen active">
+                <div class="screen-header-row">
+                    <h2 data-i18n="nav.home"></h2>
+                    <div class="resource-tracker-bar"></div>
+                </div>
+
+                <div class="filter-bar" style="margin-top:10px; margin-bottom:15px; flex-wrap: wrap; gap: 5px;">
+                    <button id="home-tab-main" class="filter-btn active" onclick="UI.switchHomeTab('main', this)">🏰
+                        <span data-i18n="screens.home"></span></button>
+                    <button id="home-tab-cellarium" class="filter-btn" onclick="UI.switchHomeTab('cellarium', this)">🏛️
+                        Cellarium</button>
+                    <button id="home-tab-saeculum" class="filter-btn" onclick="UI.switchHomeTab('saeculum', this)">🏘️
+                        Saeculum</button>
+                    <button id="home-tab-athanor" class="filter-btn" onclick="UI.switchHomeTab('athanor', this)">🔬
+                        Athanor</button>
+                    <button id="home-tab-foculus" class="filter-btn" onclick="UI.switchHomeTab('foculus', this)">🔥
+                        <span data-i18n="fireplace.foculusTab"></span></button>
+                    <button id="home-tab-templum" class="filter-btn" style="display:none;" onclick="UI.switchHomeTab('templum', this)">🕍
+                        Templum</button>
+                    <button id="home-tab-infirmarium" class="filter-btn" style="display:none;" onclick="UI.switchHomeTab('infirmarium', this)">🩺
+                        Infirmarium</button>
+                </div>
+
+                <div id="home-main-content">
+
+                    <div id="card-fireplace" class="card ui-frozen">
+                        <img id="fireplace-visual" src="/img/hearth_base_dead.png" alt=""
+                            style="width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid var(--ink-secondary, #6b5d4f);flex-shrink:0;">
+                        <div><strong id="fireplace-title">Vyhaslý Krb</strong>
+                            <div id="fireplace-desc" class="text-sm">Je tu zima.</div>
+                        </div>
+                        <button id="btn-ignite" class="craft-btn" onclick="Game.igniteFireplace()"
+                            data-i18n="fireplace.kindle">ROZEŽEHNOUT</button>
+                    </div>
+
+                    <div id="card-light-source" class="card" style="opacity: 0.5;">
+                        <div class="item-icon" id="light-icon">🌑</div>
+                        <div><strong id="light-title">Není světlo</strong>
+                            <div id="light-desc" class="text-sm">Tma halí knihy.</div>
+                        </div>
+                        <button id="btn-light-torch" class="craft-btn" onclick="Game.lightSource('torch')" disabled
+                            style="display:none; margin-left:5px;">ZAPÁLIT LOUČ</button>
+                        <button id="btn-light-candle" class="craft-btn" onclick="Game.lightSource('candle')" disabled
+                            style="display:none;">ZAPÁLIT SVÍČKU</button>
+                    </div>
+
+                    <!-- Level 2: SCAVENGE | MINE -->
+                    <div class="filter-bar" style="margin-top:15px; margin-bottom:10px; flex-wrap:wrap; gap:5px;">
+                        <button id="home-sub-scavenge" class="filter-btn active"
+                            onclick="UI.switchHomeSubTab('scavenge', this)">🗡️ <span
+                                data-i18n="screens.scavenge"></span></button>
+                        <button id="home-sub-mine" class="filter-btn" onclick="UI.switchHomeSubTab('mine', this)">⛏️
+                            <span data-i18n="screens.mine"></span></button>
+                    </div>
+
+                    <!-- SCAVENGE content -->
+                    <div id="home-scavenge-content">
+                        <div class="time-selector">
+                            <button class="time-btn active" onclick="Game.setDuration(0, this)"
+                                data-i18n="actions.instantly">Ihned</button>
+                            <button class="time-btn" onclick="Game.setDuration(1, this)">1 min</button>
+                            <button class="time-btn" onclick="Game.setDuration(5, this)">5 min</button>
+                            <button class="time-btn" onclick="Game.setDuration(10, this)">10 min</button>
+                            <button class="time-btn" onclick="Game.setDuration(15, this)">15 min</button>
+                            <button class="time-btn" onclick="Game.setDuration(20, this)">20 min</button>
+                            <button class="time-btn" onclick="Game.setDuration(30, this)">30 min</button>
+                        </div>
+                        <hr style="border:0; border-top:1px solid var(--ink-secondary); margin:20px 0; opacity:0.3;">
+                        <div id="workspace-actions"></div>
+                    </div><!-- end home-scavenge-content -->
+
+                    <!-- MINE content -->
+                    <div id="home-mine-content" style="display:none;">
+                        <div id="mine-yield-info"></div>
+                        <div id="fodina-petition-panel"></div>
+                        <div id="mine-actions"></div>
+                    </div>
+
+                </div><!-- end home-main-content -->
+
+                <div id="home-cellarium-content" style="display:none;"></div>
+                <div id="home-saeculum-content" style="display:none;"></div>
+                <div id="home-templum-content" style="display:none;"></div>
+                <div id="home-infirmarium-content" style="display:none;"></div>
+                <div id="home-athanor-content" style="display:none;"></div>
+                <div id="home-foculus-content" style="display:none;">
+                    <div id="foculus-locked"
+                        style="text-align:center; padding:30px; opacity:0.6; border:1px dashed rgba(197,160,89,0.3); border-radius:8px;">
+                        <div style="font-size:2rem; margin-bottom:10px;">🔒</div>
+                        <div style="font-style:italic; font-size:0.9rem;" data-i18n="fireplace.foculusLocked"></div>
+                    </div>
+                    <div id="foculus-unlocked" style="display:none; position:relative;">
+                        <div style="position:relative; width:300px; max-width:100%; margin:0 auto 14px;">
+                            <div id="fireplace-visual-foculus"
+                                style="display:block; width:300px; height:320px; max-width:100%; background-image:url('/img/hearth_base_dead.png'); background-size:100% 100%; background-repeat:no-repeat; border-radius:8px; border:1px solid var(--ink-secondary, #6b5d4f); image-rendering:pixelated;">
+                            </div>
+                            <div id="cat-lane-top" style="position:absolute; bottom:0; left:0; right:0; height:100px;">
+                            </div>
+                        </div>
+                        <div id="fireplace-fuel-panel"
+                            style="display:none; padding:12px; border:1px solid var(--ink-secondary); border-radius:8px;">
+                            <div
+                                style="display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:8px;">
+                                <strong id="fireplace-status-text" style="color:var(--ink-secondary);"></strong>
+                                <span id="fireplace-time-left" style="font-weight:bold; color:var(--accent-gold);">0h
+                                    0m</span>
+                            </div>
+                            <div
+                                style="height:8px; background:rgba(0,0,0,0.2); border-radius:4px; overflow:hidden; margin-bottom:14px; border:1px solid rgba(197,160,89,0.3);">
+                                <div id="fireplace-fuel-bar"
+                                    style="height:100%; width:0%; background:#ffbd40; transition:width 0.5s, background-color 0.5s;">
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:8px;">
+                                <button class="filter-btn" onclick="FireplaceSystem.addFuel('stick')"
+                                    id="btn-fuel-stick" style="flex:1;">+ Větev</button>
+                                <button class="filter-btn" onclick="FireplaceSystem.addFuel('log')" id="btn-fuel-log"
+                                    style="flex:1;">+ Poleno</button>
+                            </div>
+                        </div>
+                        <div id="foculus-tech-locked" style="display:none; margin-top:16px; padding:16px; border:1px dashed rgba(197,160,89,0.4); border-radius:8px; text-align:center; background:rgba(0,0,0,0.15);">
+                            <div style="font-size:1.4rem; margin-bottom:6px;">🔒</div>
+                            <div style="font-style:italic; font-size:0.9rem; color:var(--accent-gold);" data-i18n="fireplace.foculusSubLocked">
+                                Další rituály Ohniště (čaje, kávoviny, sušení, kadidelnice...) vyžadují výzkum technologie Meteorologica.
+                            </div>
+                        </div>
+                        <div id="foculus-tea" style="display:none; margin-top:12px;"></div>
+                        <div id="foculus-incense" style="display:none; margin-top:12px;"></div>
+                        <div id="foculus-dashboard" style="display:none; margin-top:12px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="screen-garden" class="screen" style="position:relative; max-width:100%; overflow-x:hidden;">
+                <div class="screen-header-row">
+                    <h2 data-i18n="garden.title">Zahrada</h2>
+                    <div class="resource-tracker-bar"></div>
+                </div>
+                <div class="filter-bar" style="margin-top:10px; margin-bottom:15px; flex-wrap: wrap; gap: 5px;">
+                    <button id="garden-tab-btn-dvur" class="filter-btn active"
+                        onclick="UI.switchGardenTab('dvur', this)" data-i18n="garden.tabDvur">🐄 Dvůr</button>
+                    <button id="garden-tab-btn-zahony" class="filter-btn" onclick="UI.switchGardenTab('zahony', this)"
+                        data-i18n="garden.tabZahony">🌱 Záhony</button>
+                    <button id="garden-tab-btn-sad" class="filter-btn" onclick="UI.switchGardenTab('sad', this)"
+                        data-i18n="garden.tabSad">🌳 Sad</button>
+                    <button id="garden-tab-btn-apiarium" class="filter-btn"
+                        onclick="UI.switchGardenTab('apiarium', this)" data-i18n="garden.tabApiarium">🐝
+                        Apiarium</button>
+                    <button id="garden-tab-btn-piscina" class="filter-btn" onclick="UI.switchGardenTab('piscina', this)"
+                        data-i18n="garden.tabPiscina">🐟 Piscina</button>
+                    <button id="garden-tab-btn-pole" class="filter-btn" onclick="UI.switchGardenTab('pole', this)"
+                        data-i18n="garden.tabPole">🌾 Pole</button>
+                    <button id="garden-tab-btn-vinohrad" class="filter-btn"
+                        onclick="UI.switchGardenTab('vinohrad', this)" data-i18n="garden.tabVinohrad">🍇
+                        Vinohrad</button>
+                </div>
+
+                <div id="garden-tab-zahony" style="display:none;">
+                    <p id="text-garden-desc" class="text-sm" style="margin-bottom:15px;" data-i18n="garden.desc">Pěstuj
+                        vzácné rostliny. Půda vyžaduje péči.</p>
+                    <div id="garden-container"></div>
+                </div>
+
+                <div id="garden-tab-sad" style="display:none;">
+                    <div id="orchard-container"></div>
+                </div>
+
+                <div id="garden-tab-apiarium" style="display:none;">
+                    <div id="apiary-container"></div>
+                </div>
+
+                <div id="garden-tab-dvur">
+                    <p class="text-sm" style="margin-bottom:15px;" data-i18n="garden.dvorDesc">Hospodářský dvůr
+                        kláštera. Brzy zde bude možné chovat zvířata.</p>
+                    <div id="farmyard-container"></div>
+
+                    <div id="well-management"
+                        style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <h3 data-i18n="wellUI.title">🚰 Správa Studny</h3>
+
+                        <div id="well-not-built" style="display: none;">
+                            <p data-i18n="wellUI.notBuiltCellarium">Studnu postavíš v Cellarium → Budovy (sekce Dvůr).
+                            </p>
+                        </div>
+
+                        <div id="well-built" style="display: none;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                                <div>
+                                    <strong data-i18n="wellUI.level">Úroveň:</strong> <span
+                                        id="well-level-text">Základní</span>
+                                </div>
+                                <div>
+                                    <strong data-i18n="wellUI.condition">Stav:</strong> <span id="well-condition-text">✓
+                                        Čistá</span>
+                                </div>
+                            </div>
+
+                            <!-- Purity bar -->
+                            <div style="margin-bottom: 12px;">
+                                <div
+                                    style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px;">
+                                    <strong data-i18n="wellUI.purity">Kvalita vody:</strong>
+                                    <span id="well-purity-text">100 %</span>
+                                </div>
+                                <div
+                                    style="height:10px; background:rgba(0,0,0,0.25); border-radius:5px; overflow:hidden;">
+                                    <div id="well-purity-bar"
+                                        style="height:100%; width:100%; background:#4ade80; transition:width .3s;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Water level bar -->
+                            <div style="margin-bottom: 12px;">
+                                <div
+                                    style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px;">
+                                    <strong data-i18n="wellUI.waterLevel">Hladina:</strong>
+                                    <span id="well-waterlevel-text">100 %</span>
+                                </div>
+                                <div
+                                    style="height:10px; background:rgba(0,0,0,0.25); border-radius:5px; overflow:hidden;">
+                                    <div id="well-waterlevel-bar"
+                                        style="height:100%; width:100%; background:#5a8dc7; transition:width .3s;">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Frozen indicator (hidden unless frozen) -->
+                            <div id="well-frozen"
+                                style="display:none; margin-bottom:12px; padding:6px 10px; background:rgba(90,141,199,0.15); border-left:3px solid #5a8dc7; border-radius:4px; font-size:0.85rem; color:#5a8dc7;">
+                                ❄️ <span data-i18n="wellUI.frozen">Zamrzlá</span>
+                            </div>
+
+                            <!-- Water consumers -->
+                            <div id="well-consumers" style="margin-bottom:8px; font-size:0.82rem; opacity:0.85;"></div>
+
+                            <!-- Extra report info (výnos, grace, počítadla, předpověď) -->
+                            <div id="well-extra"
+                                style="margin-bottom:15px; font-size:0.82rem; opacity:0.85; line-height:1.7;"></div>
+
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button onclick="WellSystem.cleanWell()" id="btn-clean-well" class="craft-btn"
+                                    style="background: #5a8dc7; display: none;" data-i18n="wellUI.clean">
+                                    ✨ Vyčistit (prášek)
+                                </button>
+                                <button onclick="WellSystem.repairWell()" id="btn-repair-well" class="craft-btn"
+                                    style="background: #c75a5a; display: none;" data-i18n="wellUI.repair">
+                                    🔧 Opravit (sada)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="garden-tab-piscina" style="display:none;">
+                    <div id="piscina-container"></div>
+                </div>
+                <div id="garden-tab-pole" style="display:none;">
+                    <div id="field-container"></div>
+                </div>
+                <div id="garden-tab-vinohrad" style="display:none;">
+                    <div id="vinohrad-container"></div>
+                </div>
+            </div>
+
+            <div id="screen-craft" class="screen">
+                <div class="screen-header-row">
+                    <h2>Dílna</h2>
+                    <div class="resource-tracker-bar"></div>
+                </div>
+                <div class="filter-bar"
+                    style="margin-top:10px; margin-bottom:15px; display: flex; flex-wrap: wrap; gap: 5px;">
+                    <button id="craft-filter-all" class="filter-btn active" onclick="UI.filterCrafting('all', this)"
+                        data-i18n="craftFilter.all">Vše</button>
+                    <button id="craft-filter-stone" class="filter-btn" onclick="UI.filterCrafting('stone', this)"
+                        data-i18n="craftFilter.stone">🪨 Kamenné</button>
+                    <button id="craft-filter-iron" class="filter-btn" onclick="UI.filterCrafting('iron', this)"
+                        data-i18n="craftFilter.iron">⚒️ Železné</button>
+                    <button id="craft-filter-craft" class="filter-btn" onclick="UI.filterCrafting('craft', this)"
+                        data-i18n="craftFilter.craft">🪵 Řemeslo</button>
+                    <button id="craft-filter-fire" class="filter-btn" onclick="UI.filterCrafting('fire', this)"
+                        data-i18n="craftFilter.fire">🕯️ Oheň</button>
+                    <button id="craft-filter-parchment" class="filter-btn"
+                        onclick="UI.filterCrafting('parchment', this)" data-i18n="craftFilter.parchment">📜
+                        Pergamen</button>
+                    <button id="craft-filter-codex" class="filter-btn" onclick="UI.filterCrafting('codex', this)"
+                        data-i18n="craftFilter.codex">📖 Kodex</button>
+                    <button id="craft-filter-food" class="filter-btn" onclick="UI.filterCrafting('food', this)"
+                        data-i18n="craftFilter.food">🍖 Jídlo</button>
+                    <button id="craft-filter-alchemy" class="filter-btn" onclick="UI.filterCrafting('alchemy', this)"
+                        data-i18n="craftFilter.alchemy">⚗️ Alchymie</button>
+                    <button id="craft-filter-lore" class="filter-btn" onclick="UI.filterCrafting('lore', this)"
+                        data-i18n="craftFilter.lore">🎲 Vědění</button>
+                </div>
+                <div id="crafting-list"></div>
+            </div>
+
+            <div id="screen-inv" class="screen">
+                <div class="screen-header-row">
+                    <h2>Zásoby</h2>
+                    <div class="resource-tracker-bar"></div>
+                </div>
+                <div id="inv-filter-bar" class="filter-bar"
+                    style="margin-top:10px; margin-bottom:15px; display:none; flex-wrap: wrap; gap: 5px;">
+                    <button id="inv-filter-all" class="filter-btn active" onclick="UI.filterInventory('all', this)"
+                        data-i18n="invFilter.all">Vše</button>
+                    <button id="inv-filter-mat" class="filter-btn" onclick="UI.filterInventory('mat', this)"
+                        data-i18n="invFilter.mat">🌾 Suroviny</button>
+                    <button id="inv-filter-tool" class="filter-btn" onclick="UI.filterInventory('tool', this)"
+                        data-i18n="invFilter.tool">🔨 Nástroje</button>
+                    <button id="inv-filter-lore" class="filter-btn" onclick="UI.filterInventory('lore', this)"
+                        data-i18n="invFilter.lore">📜 Písemnosti</button>
+                    <button id="inv-filter-animal" class="filter-btn" onclick="UI.filterInventory('animal', this)"
+                        data-i18n="invFilter.animal">🐄 Zvířata</button>
+                    <button id="inv-filter-food" class="filter-btn" style="display:none;"
+                        onclick="UI.filterInventory('food', this)" data-i18n="invFilter.food">🍖 Jídlo</button>
+                    <button id="inv-filter-alchemy" class="filter-btn" style="display:none;"
+                        onclick="UI.filterInventory('alchemy', this)" data-i18n="invFilter.alchemy">⚗️ Alchymie</button>
+                    <button id="inv-filter-stone" class="filter-btn" style="display:none;"
+                        onclick="UI.filterInventory('stone', this)" data-i18n="invFilter.stone">🪨 Kamenné</button>
+                    <button id="inv-filter-iron" class="filter-btn" style="display:none;"
+                        onclick="UI.filterInventory('iron', this)" data-i18n="invFilter.iron">⚒️ Železné</button>
+                    <button id="inv-filter-fire" class="filter-btn" style="display:none;"
+                        onclick="UI.filterInventory('fire', this)" data-i18n="invFilter.fire">🔥 Oheň</button>
+                    <button id="inv-filter-other" class="filter-btn" style="display:none;"
+                        onclick="UI.filterInventory('other', this)" data-i18n="invFilter.other">🗝️ Ostatní</button>
+                </div>
+                <div id="inventory-grid" style="margin-top:15px;"></div>
+            </div>
+
+            <div id="screen-lore" class="screen">
+                <div class="screen-header-row">
+                    <h2>Scriptorium</h2>
+                    <div class="resource-tracker-bar"></div>
+                </div>
+                <div id="lore-overlay" style="display:none;">
+                    <div class="lore-overlay-msg">
+                        <div style="font-size:3rem;">🌑</div>
+                        <h3 data-i18n="lore.darkTitle">Je tu tma</h3>
+                        <p data-i18n="lore.darkDesc">Zapálit Louč nebo Svíčku v pracovně.</p>
+                    </div>
+                </div>
+                <div id="lore-content-wrapper">
+                    <div class="filter-bar"
+                        style="margin-top:10px; margin-bottom:15px; display: flex; flex-wrap: wrap; gap: 5px;">
+                        <button id="lore-tab-research" class="filter-btn active"
+                            onclick="UI.switchLoreTab('research', this)" data-i18n="lore.tabResearch">Research</button>
+                        <button id="lore-tab-codex" class="filter-btn" onclick="UI.switchLoreTab('codex', this)"
+                            data-i18n="lore.tabCodex">Codex</button>
+                        <button id="lore-tab-notebooks" class="filter-btn" onclick="UI.switchLoreTab('notebooks', this)"
+                            data-i18n="lore.tabNotebooks">📓 Zápisníky</button>
+                        <button id="lore-tab-achievements" class="filter-btn"
+                            onclick="UI.switchLoreTab('achievements', this)"
+                            data-i18n="lore.tabAchievements">Achievementy</button>
+                        <button id="lore-tab-iching" class="filter-btn" onclick="UI.switchLoreTab('iching', this)"
+                            data-i18n="library.tabIching">☯️ Věštění</button>
+                        <button id="lore-tab-calendarium" class="filter-btn"
+                            onclick="UI.switchLoreTab('calendarium', this)">📅 Calendarium</button>
+                        <button id="lore-tab-persona" class="filter-btn" onclick="UI.switchLoreTab('persona', this)">🧑
+                            Persona</button>
+                        <button id="lore-tab-porta" class="filter-btn" onclick="UI.switchLoreTab('porta', this)" style="display:none;">🕊️ Porta</button>
+                        <button id="lore-tab-commitments" class="filter-btn" onclick="UI.switchLoreTab('commitments', this)" style="display:none;">📋 Zakázky</button>
+                    </div>
+                    <div id="lore-research-content" style="margin-top:20px;"></div>
+                    <div id="lore-codex-content" style="margin-top:20px; display:none;"></div>
+                    <div id="lore-notebooks-content" style="margin-top:20px; display:none;"></div>
+                    <div id="lore-achievements-content" style="margin-top:20px; display:none;"></div>
+                    <div id="lore-iching-content" style="margin-top:20px; display:none;"></div>
+                    <div id="lore-calendarium-content" style="margin-top:20px; display:none;"></div>
+                    <div id="lore-persona-content" style="margin-top:20px; display:none;"></div>
+                    <div id="lore-porta-content" style="margin-top:20px; display:none;"></div>
+                    <div id="lore-commitments-content" style="margin-top:20px; display:none;"></div>
+                </div>
+            </div>
+
+
+            <div id="screen-library" class="screen">
+                <div class="screen-header-row">
+                    <h2>Knihovna</h2>
+                    <div class="resource-tracker-bar"></div>
+                </div>
+                <div id="library-content-wrapper">
+                    <div class="filter-bar" style="margin-top:10px; margin-bottom:15px; flex-wrap: wrap; gap: 5px;">
+                        <button id="lib-tab-books" class="filter-btn active"
+                            onclick="UI.switchLibraryTab('books', this)">📚 Knihy</button>
+                        <button id="lib-tab-games" class="filter-btn" onclick="UI.switchLibraryTab('games', this)">🎲
+                            Aula Ludi</button>
+                        <button id="lib-tab-news" class="filter-btn" onclick="UI.switchLibraryTab('news', this)">📜
+                            Zprávy</button>
+                        <button id="lib-tab-scrinium" class="filter-btn"
+                            onclick="UI.switchLibraryTab('scrinium', this)">📕 Scrinium</button>
+                        <button id="lib-tab-kronika" class="filter-btn" onclick="UI.switchLibraryTab('kronika', this)"
+                            data-i18n="library.tabKronika">📖 Kronika</button>
+                        <button id="lib-tab-kraj" class="filter-btn" onclick="UI.switchLibraryTab('kraj', this)">🌍
+                            Kraj</button>
+                    </div>
+                    <div id="library-books-content" style="margin-top:20px;"></div>
+                    <div id="library-games-content" style="margin-top:20px; display:none;"></div>
+                    <div id="library-news-content" style="margin-top:20px; display:none;"></div>
+                    <div id="library-scrinium-content" style="margin-top:20px; display:none;"></div>
+                    <div id="library-kronika-content" style="margin-top:20px; display:none;"></div>
+                    <div id="library-kraj-content" style="margin-top:20px; display:none;"></div>
+                </div>
+            </div>
+
+            <div id="screen-settings" class="screen">
+                <div class="screen-header-row">
+                    <h2 data-i18n="header.settings">Nastavení</h2>
+                    <div class="resource-tracker-bar"></div>
+                </div>
+
+                <div class="card" style="flex-direction: column; align-items: flex-start;">
+                    <strong data-i18n="settingsUI.volume">Hlasitost</strong>
+                    <input type="range" id="volume-slider" min="0" max="100" value="17"
+                        oninput="Game.setVolume(this.value)">
+                </div>
+
+                <div class="card" style="flex-direction: column; align-items: flex-start;">
+                    <strong data-i18n="settingsUI.fireVolume">🔥 Hlasitost krbu</strong>
+                    <input type="range" id="fire-volume-slider" min="0" max="100" value="50"
+                        oninput="Game.setFireVolume(this.value)">
+                    <div style="margin-top: 6px; font-size: 0.85rem; color: var(--ink-secondary);"
+                        data-i18n="settingsUI.fireVolumeDesc">
+                        Ovládá pouze zvuk hořícího krbu
+                    </div>
+                </div>
+
+                <div class="card" style="flex-direction: column; align-items: flex-start;">
+                    <strong data-i18n="settingsUI.musicTitle">🎵 Hudba</strong>
+                    <label style="display:flex; align-items:center; gap:10px; margin-top:8px; cursor:pointer;">
+                        <input type="checkbox" id="music-enabled-checkbox" checked
+                            onchange="Game.setMusicEnabled(this.checked)"
+                            style="width:16px; height:16px; cursor:pointer;">
+                        <span data-i18n="settingsUI.musicEnabled">Zapnout generativní hudbu</span>
+                    </label>
+                    <input type="range" id="music-volume-slider" min="0" max="100" value="50"
+                        oninput="Game.setMusicVolume(this.value)" style="margin-top:10px;">
+                    <div style="margin-top: 6px; font-size: 0.85rem; color: var(--ink-secondary);"
+                        data-i18n="settingsUI.musicVolumeDesc">
+                        Procedurálně generovaná středověká melodie
+                    </div>
+                    <div id="music-track-selector"
+                        style="margin-top:12px; padding-top:12px; border-top:1px solid var(--border-color); display:none; width:100%;">
+                        <strong data-i18n="settingsUI.musicTrack">Skladba</strong>
+                        <div style="margin-top:8px; display:flex; flex-direction:column; gap:8px;">
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="radio" name="musicTier" value="1" onchange="Game.setMusicTier(1)"
+                                    style="cursor:pointer;">
+                                <span data-i18n="settingsUI.musicTier1">🏛️ Sacral Cathedral</span>
+                            </label>
+                            <label id="music-tier2-option"
+                                style="display:none; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="radio" name="musicTier" value="2" onchange="Game.setMusicTier(2)"
+                                    style="cursor:pointer;">
+                                <span data-i18n="settingsUI.musicTier2">🏰 Abyssal Keep</span>
+                            </label>
+                            <label id="music-tier3-option"
+                                style="display:none; align-items:center; gap:8px; cursor:pointer;">
+                                <input type="radio" name="musicTier" value="3" onchange="Game.setMusicTier(3)"
+                                    style="cursor:pointer;">
+                                <span data-i18n="settingsUI.musicTier3">🎻 Ars Nova</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="flex-direction: column; align-items: flex-start;">
+                    <strong id="lang-selector-label">🗺️ Jazyk / Language</strong>
+                    <select id="lang-selector" onchange="Game.setLanguage(this.value)"
+                        style="width:100%; padding:8px; margin-top:8px; font-family:'Crimson Text'; font-size:1rem; background:var(--bg-card); border:1px solid var(--border-color); color:var(--ink-primary); border-radius:3px;">
+                        <option value="cs">🇨🇿 Česky</option>
+                        <option value="en">🏴󠁧󠁢󠁥󠁮󠁧󠁿 English (Olde)</option>
+                    </select>
+                </div>
+
+                <div class="card" style="flex-direction: column; align-items: flex-start;">
+                    <strong data-i18n="settingsUI.theme">🎨 Téma</strong>
+                    <select id="theme-selector" onchange="Game.setTheme(this.value)"
+                        style="width:100%; padding:8px; margin-top:8px; font-family:'Crimson Text'; font-size:1rem; background:var(--bg-card); border:1px solid var(--border-color); color:var(--ink-primary); border-radius:3px;">
+                        <option value="default" data-i18n="settingsUI.themeClassic">Klasické Pergamen</option>
+                        <option value="dark" data-i18n="settingsUI.themeDark">Temný Mód 🌙</option>
+                        <option value="night" data-i18n="settingsUI.themeNight">Noční Mód 🌑</option>
+                        <option value="sunlight" data-i18n="settingsUI.themeSunlight">Sluneční Mód ☀️</option>
+                        <option value="spring" data-i18n="settingsUI.themeSpring">Jaro 🌸</option>
+                        <option value="summer" data-i18n="settingsUI.themeSummer">Léto ☀️</option>
+                        <option value="autumn" data-i18n="settingsUI.themeAutumn">Podzim 🍂</option>
+                        <option value="winter" data-i18n="settingsUI.themeWinter">Zima ❄️</option>
+                        <option value="auto" data-i18n="settingsUI.themeAuto">Automaticky (počasí) 🌦️</option>
+                    </select>
+                    <div class="text-sm" style="margin-top:8px; color:var(--ink-secondary);"
+                        data-i18n="settingsUI.themeAutoDesc">
+                        Automatické téma se přizpůsobí aktuálnímu počasí v Praze.
+                    </div>
+                </div>
+
+                <!-- ═══════════════════════════════════════════════════════════ -->
+                <!-- HOUR CHIME SETTINGS -->
+                <!-- ═══════════════════════════════════════════════════════════ -->
+
+                <div class="card" style="flex-direction: column; align-items: flex-start;">
+                    <strong>🔔 <span data-i18n="settingsUI.hourChime.title">Zvuk hodinového zvonu</span></strong>
+
+                    <!-- BASIC TOGGLE (vždy viditelné) -->
+                    <div id="basic-chime-section" style="margin-top: 8px;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="hour-chime-basic" checked style="margin-right: 8px;">
+                            <span data-i18n="settingsUI.hourChime.basicEnabled">Zapnuto (základní zvuk)</span>
+                        </label>
+                    </div>
+
+                    <!-- CANONICAL SETTINGS (zobrazí se po unlock tech_canonical_hours) -->
+                    <div id="canonical-chime-section"
+                        style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-color);">
+                        <div style="margin-bottom: 8px;">
+                            <strong data-i18n="settingsUI.hourChime.mode">Mód:</strong>
+                        </div>
+
+                        <div style="margin-left: 12px; margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="chimeMode" value="auto" checked style="margin-right: 8px;">
+                                <span data-i18n="settingsUI.hourChime.modeAuto">Podle kanonických hodin</span>
+                            </label>
+                        </div>
+
+                        <div style="margin-left: 12px; margin-bottom: 8px;">
+                            <label style="display: flex; align-items: center; cursor: pointer;">
+                                <input type="radio" name="chimeMode" value="custom" style="margin-right: 8px;">
+                                <span data-i18n="settingsUI.hourChime.modeCustom">Vlastní výběr</span>
+                            </label>
+                        </div>
+
+                        <div style="margin-top: 12px;">
+                            <label style="display: flex; align-items: center;">
+                                <span data-i18n="settingsUI.hourChime.sound" style="margin-right: 8px;">Zvuk:</span>
+                                <select id="chime-sound"
+                                    style="flex: 1; padding: 6px 8px; font-family: 'Crimson Text'; font-size: 1rem; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--ink-primary); border-radius: 3px;">
+                                    <option value="cink" data-i18n="settingsUI.hourChime.cink">Cink (základní)</option>
+                                    <option value="sanctus" data-i18n="settingsUI.hourChime.sanctus">Sanctus (vysoký)
+                                    </option>
+                                    <option value="avemaria" selected data-i18n="settingsUI.hourChime.avemaria">Ave
+                                        Maria (střední)</option>
+                                    <option value="compline" data-i18n="settingsUI.hourChime.compline">Compline
+                                        (hluboký)</option>
+                                    <option value="deathknell" data-i18n="settingsUI.hourChime.deathknell">Death Knell
+                                        (temný)</option>
+                                    <option value="off" data-i18n="settingsUI.hourChime.off">Vypnuto</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="flex-direction: column; align-items: flex-start;">
+                    <strong>🌙 <span data-i18n="settingsUI.hourChime.quietTitle">Noční klid</span></strong>
+
+                    <div style="margin-top: 8px;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="quiet-hours-enabled" style="margin-right: 8px;">
+                            <span data-i18n="settingsUI.hourChime.quietEnabled">Zapnuto</span>
+                        </label>
+                    </div>
+
+                    <div style="margin-top: 12px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <label style="display: flex; align-items: center;">
+                            <span data-i18n="settingsUI.hourChime.quietFrom" style="margin-right: 8px;">Od:</span>
+                            <select id="quiet-hours-start"
+                                style="padding: 4px 8px; font-family: 'Crimson Text'; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--ink-primary); border-radius: 3px;">
+                                <option value="19">19:00</option>
+                                <option value="20">20:00</option>
+                                <option value="21">21:00</option>
+                                <option value="22" selected>22:00</option>
+                                <option value="23">23:00</option>
+                                <option value="0">00:00</option>
+                                <option value="1">01:00</option>
+                            </select>
+                        </label>
+
+                        <label style="display: flex; align-items: center;">
+                            <span data-i18n="settingsUI.hourChime.quietTo" style="margin-right: 8px;">Do:</span>
+                            <select id="quiet-hours-end"
+                                style="padding: 4px 8px; font-family: 'Crimson Text'; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--ink-primary); border-radius: 3px;">
+                                <option value="4">04:00</option>
+                                <option value="5">05:00</option>
+                                <option value="6" selected>06:00</option>
+                                <option value="7">07:00</option>
+                                <option value="8">08:00</option>
+                                <option value="9">09:00</option>
+                                <option value="10">10:00</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div style="margin-top: 8px; font-size: 0.85rem; color: var(--ink-secondary);">
+                        <span data-i18n="settingsUI.hourChime.quietNote">Zvuky budou ztlumeny v této době</span>
+                    </div>
+                </div>
+
+                <!-- ═══════════════════════════════════════════════════════════ -->
+                <!-- END HOUR CHIME SETTINGS -->
+                <!-- ═══════════════════════════════════════════════════════════ -->
+
+                <div class="card" style="border-color: #8a3324;">
+                    <div class="item-icon" style="background: #8a3324; color: white;">⚠</div>
+                    <div><strong data-i18n="settingsUI.reset">Reset</strong>
+                        <div class="text-sm" data-i18n="settingsUI.resetDesc">Smaže postup (v6.4).</div>
+                    </div>
+                    <button class="craft-btn" onclick="Game.resetSave()" data-i18n="settingsUI.resetBtn">Smazat</button>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.1); border-radius: 8px;">
+                    <h3 data-i18n="settingsUI.backup">💾 Záloha Save</h3>
+                    <div id="save-last-info" style="font-size: 12px; color: #aaa; margin-bottom: 10px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.07);">
+                        💾 <span data-i18n="settingsUI.lastSaveLabel">Poslední uložení:</span> <span id="save-last-time">—</span>
+                    </div>
+                    <p style="font-size: 13px; color: #888; margin-bottom: 10px;" data-i18n="settingsUI.backupDesc">
+                        Exportuj save jako zálohu nebo přenes na jiné zařízení.
+                    </p>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="Game.exportSave()" class="craft-btn" style="background: #4a7c59;"
+                            data-i18n="settingsUI.downloadSave">📥 Stáhnout Save</button>
+                        <button onclick="Game.triggerImport()" class="craft-btn" style="background: #7c594a;"
+                            data-i18n="settingsUI.uploadSave">📤 Nahrát Save</button>
+                        <button onclick="Game.resetSave()" class="craft-btn" style="background: #c75a5a;"
+                            data-i18n="settingsUI.resetGame">🗑️ Resetovat Hru</button>
+                    </div>
+                    <p style="font-size: 11px; color: #666; margin-top: 10px;" data-i18n="settingsUI.backupWarning">
+                        ⚠️ Před velkými změnami doporučujeme stáhnout zálohu!
+                    </p>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="item-icon">ℹ️</div>
+                    <div style="flex: 1;">
+                        <strong data-i18n="settingsUI.about">O hře</strong>
+                        <div class="text-sm" data-i18n="settingsUI.aboutDesc">Verze, changelog a credits</div>
+                    </div>
+                    <button class="craft-btn" onclick="UI.openAboutModal()"
+                        data-i18n="settingsUI.showBtn">Zobrazit</button>
+                </div>
+
+                <div
+                    style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--ink-secondary); text-align: center; font-size: 0.8rem; opacity: 0.7;">
+                    <div style="margin-bottom: 8px;">
+                        <a href="https://www.ember-pa.cz" target="_blank"
+                            style="color: var(--accent-gold); text-decoration: none; margin: 0 8px;">🔥 Ember PA</a> |
+                        <a href="https://fajrum.cz" target="_blank"
+                            style="color: var(--accent-gold); text-decoration: none; margin: 0 8px;">🍷 Fajrum</a> |
+                        <a href="https://newsandradio.cz" target="_blank"
+                            style="color: var(--accent-gold); text-decoration: none; margin: 0 8px;">📰 Jouza News&Radio
+                            📻</a> |
+                        <a href="https://oracoolio.com" target="_blank"
+                            style="color: var(--accent-gold); text-decoration: none; margin: 0 8px;">🔮 Oracoolio</a> |
+                        <a href="https://occultix.app" target="_blank"
+                            style="color: var(--accent-gold); text-decoration: none; margin: 0 8px;">⛧ Occultix</a> |
+                        <a href="https://fractout.com" target="_blank"
+                            style="color: var(--accent-gold); text-decoration: none; margin: 0 8px;">👾 Fractout</a>
+                    </div>
+                    <div style="margin-top: 8px; font-style: italic;" data-i18n="settingsUI.footerMadeIn">
+                        Vyvíjeno s ❤️ v Novém Boru by Ondrex
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <nav>
+            <button id="nav-home" class="nav-btn active" onclick="UI.switchScreen('home', this)"><span>🏰</span><span
+                    data-i18n="nav.home"></span></button>
+            <button id="nav-garden" class="nav-btn"
+                onclick="UI.switchScreen('garden', this)"><span>🌱</span>Zahrada</button>
+            <button id="nav-craft" class="nav-btn"
+                onclick="UI.switchScreen('craft', this)"><span>⚒</span>Výroba</button>
+            <button id="nav-inv" class="nav-btn" onclick="UI.switchScreen('inv', this)"><span>🗄️</span>Zásoby</button>
+            <button id="nav-lore" class="nav-btn"
+                onclick="UI.switchScreen('lore', this)"><span>✒</span>Scriptorium</button>
+            <button id="nav-library" class="nav-btn"
+                onclick="UI.switchScreen('library', this)"><span>📚</span>Knihovna</button>
+        </nav>
+    </div>
+
+    <!-- ABOUT MODAL -->
+
+
+
+    <script>
+        /* BUILD:JS_MAIN */
+    </script>
+
+    <!-- ═══════════════════════════════════════════════
+     CONSENT BANNER – stylově odpovídá hře
+     Zobrazí se pouze pokud souhlas nebyl ještě udělen.
+     ═══════════════════════════════════════════════ -->
+    <div id="consent-banner"
+        style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:2000; padding:14px 20px; background:var(--ink-primary); color:var(--bg-parchment); border-top:2px solid var(--accent-gold); font-family:'Crimson Text', serif; font-size:0.88rem; line-height:1.6;">
+        <div style="max-width:500px; margin:0 auto; display:flex; flex-direction:column; gap:10px;">
+            <div>
+                <span id="consent-text" data-i18n="consent.text">📜 <strong>Scriptorium používá Google
+                        Analytics</strong> pro měření herního postupu (které technologie se odemykají, jak dlouho se
+                    hraje apod.). Žádné osobní údaje nejsou sdíleny.</span>
+                <a href="#" id="consent-more" onclick="ConsentManager.showPolicy(); return false;"
+                    style="color:var(--accent-gold); margin-left:6px;" data-i18n="consent.moreInfo">Více info</a>
+            </div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button id="consent-btn-grant" onclick="ConsentManager.grant()"
+                    style="padding:7px 18px; background:var(--accent-gold); color:var(--ink-primary); border:none; font-family:'Cinzel Decorative'; font-size:0.75rem; cursor:pointer; border-radius:2px; letter-spacing:1px;"
+                    data-i18n="consent.grant">Souhlasím</button>
+                <button id="consent-btn-deny" onclick="ConsentManager.deny()"
+                    style="padding:7px 18px; background:transparent; color:var(--bg-parchment); border:1px solid var(--bg-parchment); font-family:'Cinzel Decorative'; font-size:0.75rem; cursor:pointer; border-radius:2px; letter-spacing:1px; opacity:0.7;"
+                    data-i18n="consent.deny">Odmítám</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- PWA Install Banner -->
+    <div id="pwa-install-banner"
+        style="display:none; position:fixed; top:0; left:0; right:0; z-index:3000; padding:10px 16px; background:var(--ink-primary); color:var(--bg-parchment); border-bottom:2px solid var(--accent-gold); font-family:'Crimson Text', serif; font-size:0.9rem; align-items:center; gap:12px; box-shadow:0 2px 8px rgba(0,0,0,0.4);">
+        <img src="/icon-192.png" style="width:36px; height:36px; border-radius:8px; flex-shrink:0;" alt="Scriptorium">
+        <div style="flex:1; min-width:0;">
+            <div style="font-weight:bold; font-family:'Cinzel', serif; font-size:0.85rem; color:var(--accent-gold);">
+                Scriptorium</div>
+            <div style="font-size:0.78rem; opacity:0.85;">Funguje offline, jako nativni app</div>
+        </div>
+        <button id="pwa-install-btn"
+            style="padding:7px 14px; background:var(--accent-gold); color:var(--ink-primary); border:none; border-radius:4px; font-family:'Cinzel', serif; font-size:0.78rem; font-weight:bold; cursor:pointer; white-space:nowrap; flex-shrink:0;">Nainstalovat</button>
+        <button onclick="ScriptoriumPWA.dismiss()"
+            style="background:none; border:none; color:var(--bg-parchment); font-size:1.3rem; cursor:pointer; padding:0 4px; opacity:0.7; flex-shrink:0; line-height:1;">&#215;</button>
+    </div>
+
+    <script>
+        const ScriptoriumPWA = {
+            deferredPrompt: null,
+            init: function () {
+                if (localStorage.getItem('pwa_dismissed')) return;
+
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    this.deferredPrompt = e;
+                    const banner = document.getElementById('pwa-install-banner');
+                    if (banner) banner.style.display = 'flex';
+                });
+
+                window.addEventListener('appinstalled', () => {
+                    this.hide();
+                    localStorage.setItem('pwa_dismissed', '1');
+                });
+
+                const btn = document.getElementById('pwa-install-btn');
+                if (btn) btn.addEventListener('click', () => { this.install(); });
+            },
+            install: function () {
+                if (!this.deferredPrompt) return;
+                this.deferredPrompt.prompt();
+                this.deferredPrompt.userChoice.then((result) => {
+                    if (result.outcome === 'accepted') {
+                        localStorage.setItem('pwa_dismissed', '1');
+                    }
+                    this.deferredPrompt = null;
+                    this.hide();
+                });
+            },
+            dismiss: function () {
+                localStorage.setItem('pwa_dismissed', '1');
+                this.hide();
+            },
+            hide: function () {
+                const banner = document.getElementById('pwa-install-banner');
+                if (banner) banner.style.display = 'none';
+            }
+        };
+        ScriptoriumPWA.init();
+    </script>
+
+    <script>
+        // ═══ MOBILE PILLS ══════════════════════════════════════════════════
+        (function () {
+
+            var _activePill = null;
+
+            // Sync hodnot do pills (základní info)
+            function syncPills() {
+                // Počasí
+                var wEl = document.getElementById('weather-today');
+                var wVal = document.getElementById('pill-weather-val');
+                if (wEl && wVal) {
+                    var txt = wEl.textContent.trim();
+                    wVal.textContent = txt ? txt.split(' ').slice(0, 2).join(' ') : '–';
+                }
+
+                // Vigor — VigorSystem.renderPill() spravuje pill sám
+                if (typeof VigorSystem !== 'undefined') VigorSystem.renderPill();
+
+                // Čas + kanonická hodina + lunární ikona
+                var tEl = document.getElementById('time-display');
+                var tVal = document.getElementById('pill-time-val');
+                var tIcon = document.getElementById('pill-time-icon');
+                var canName = document.querySelector('#canonical-badge .canonical-name');
+                var ldEl = document.getElementById('lunar-display');
+                // Lunární ikona — první emoji z lunar-display
+                if (tIcon && ldEl) {
+                    var ldText = ldEl.textContent.trim();
+                    var lunarIcon = ldText ? ldText.split(' ')[0] : '🌙';
+                    tIcon.textContent = lunarIcon;
+                }
+                // Collapsed: čas + ikona kanonické hodiny (jen pokud má tech)
+                if (tVal) {
+                    var timeText = tEl ? tEl.textContent.trim() : '–';
+                    var hasCanonical = typeof GameState !== 'undefined' && GameState.researchedTechs && GameState.researchedTechs.includes('tech_canonical_hours');
+                    var canIconEl = document.querySelector('#canonical-badge .canonical-icon');
+                    var canIconText = (hasCanonical && canIconEl) ? ' ' + canIconEl.textContent.trim() : '';
+                    tVal.textContent = timeText + canIconText;
+                }
+
+                // Zápisky
+                var rVal = document.getElementById('pill-progress-val');
+                if (rVal) rVal.textContent = (typeof GameState !== 'undefined') ? (GameState.inventory && GameState.inventory['research'] || 0) : '0';
+
+                // Notifikace
+                var nCount = document.getElementById('pill-notif-count');
+                if (nCount && typeof GameState !== 'undefined' && GameState.notifications) {
+                    var unread = GameState.notifications.filter(function (n) { return !n.read; }).length;
+                    nCount.textContent = unread > 0 ? unread : '';
+                }
+
+                // Cat pill
+                if (typeof ScriptoriumCat !== 'undefined' && ScriptoriumCat.syncCatPill) {
+                    ScriptoriumCat.syncCatPill();
+                }
+            }
+
+            // Otevřít/zavřít detail panel
+            window.pillToggle = function (id) {
+                syncPills();
+                var panel = document.getElementById('pill-panel');
+                var body = document.getElementById('pill-panel-body');
+                var pill = document.getElementById('pill-' + id);
+
+                // Zavřít pokud stejná pill
+                if (_activePill === id) {
+                    pillClose();
+                    return;
+                }
+                _activePill = id;
+
+                // Pozice panelu pod pills barem
+                var bar = document.getElementById('pills-bar');
+                var top = bar ? (bar.getBoundingClientRect().bottom + 6) : 70;
+                document.getElementById('pill-panel-content').style.top = top + 'px';
+
+                // Obsah panelu
+                var html = '';
+                if (id === 'weather') {
+                    var wc = (typeof WeatherSystem !== 'undefined') ? WeatherSystem.cache : null;
+                    if (wc) {
+                        var days = ['Ne', 'Po', 'Út', 'St', 'Čt', 'Pá', 'So'];
+                        var months = ['led', 'úno', 'bře', 'dub', 'kvě', 'čvn', 'čvc', 'srp', 'zář', 'říj', 'lis', 'pro'];
+                        var curTemp = Math.round(wc.current.temperature_2m);
+                        var curWind = wc.current.wind_speed_10m ? Math.round(wc.current.wind_speed_10m) + ' km/h' : '';
+                        var curEmoji = WeatherSystem.getWeatherEmoji(wc.current.weather_code);
+                        html += '<div class="pp-row" style="border-bottom:1px solid rgba(197,160,89,0.2);padding-bottom:6px;margin-bottom:6px;">';
+                        html += '<span class="pp-label">Nyní</span><span class="pp-val">' + curEmoji + ' ' + curTemp + '°C' + (curWind ? ' · 💨 ' + curWind : '') + '</span></div>';
+                        var wTodayIdx = (typeof WeatherSystem !== 'undefined' && WeatherSystem.getDailyIndex) ? WeatherSystem.getDailyIndex(0) : 0;
+                        for (var di = 0; di < Math.min(7, wc.daily.weather_code.length - wTodayIdx); di++) {
+                            var d = new Date(); d.setDate(d.getDate() + di);
+                            var dayLabel = di === 0 ? 'Dnes' : di === 1 ? 'Zítra' : days[d.getDay()] + ' ' + d.getDate() + '. ' + months[d.getMonth()];
+                            var wi = wTodayIdx + di;
+                            var dEmoji = WeatherSystem.getWeatherEmoji(wc.daily.weather_code[wi]);
+                            var dMax = Math.round(wc.daily.temperature_2m_max[wi]);
+                            var dMin = Math.round(wc.daily.temperature_2m_min[wi]);
+                            var dRain = wc.daily.precipitation_sum && wc.daily.precipitation_sum[wi] > 0.1 ? ' 💧' + wc.daily.precipitation_sum[wi].toFixed(1) + 'mm' : '';
+                            var dWind = wc.daily.wind_speed_10m_max && wc.daily.wind_speed_10m_max[wi] > 15 ? ' 💨' + Math.round(wc.daily.wind_speed_10m_max[wi]) : '';
+                            html += '<div class="pp-row"><span class="pp-label">' + dayLabel + '</span><span class="pp-val">' + dEmoji + ' ' + dMax + '°/' + dMin + '°' + dRain + dWind + '</span></div>';
+                        }
+                    } else {
+                        var w1 = document.getElementById('weather-today');
+                        var w2 = document.getElementById('weather-tomorrow');
+                        html = '<div class="pp-row"><span class="pp-label">Dnes</span><span class="pp-val">' + (w1 ? w1.textContent : '–') + '</span></div>';
+                        if (w2 && w2.textContent) html += '<div class="pp-row"><span class="pp-label">Zítra</span><span class="pp-val">' + w2.textContent + '</span></div>';
+                    }
+                } else if (id === 'vigor') {
+                    if (typeof VigorSystem !== 'undefined') VigorSystem.renderPill();
+                } else if (id === 'time') {
+                    var td = document.getElementById('time-display');
+                    var dd = document.getElementById('date-display');
+                    var ld = document.getElementById('lunar-display');
+                    var canN = document.querySelector('#canonical-badge .canonical-name');
+                    var canB = document.querySelector('#canonical-badge .canonical-buff');
+                    // Čas bez ikony kanonické hodiny (aby se neduplikovala)
+                    var timeText = td ? td.textContent.trim() : '–';
+                    var lunarText = ld ? ld.textContent.trim() : '–';
+                    html = '<div class="pp-row"><span class="pp-label">🕐 Čas</span><span class="pp-val">' + timeText + '</span></div>';
+                    html += '<div class="pp-row"><span class="pp-label">📅 Datum</span><span class="pp-val">' + (dd ? dd.textContent : '–') + '</span></div>';
+                    html += '<div class="pp-row"><span class="pp-label">🌙 Luna</span><span class="pp-val">' + lunarText + '</span></div>';
+                    if (canN && canN.textContent.trim()) {
+                        html += '<div class="pp-row" style="margin-top:6px; border-top:1px solid rgba(197,160,89,0.2); padding-top:6px;"><span class="pp-label">⛪ Hora</span><span class="pp-val">' + canN.textContent + '</span></div>';
+                        if (canB && canB.textContent.trim()) html += '<div class="pp-row"><span class="pp-label">✨ Bonus</span><span class="pp-val" style="color:var(--accent-gold);">' + canB.textContent + '</span></div>';
+                    }
+                } else if (id === 'progress') {
+                    var res = document.getElementById('research-count');
+                    var grose = (typeof CellariumSystem !== 'undefined') ? CellariumSystem.getGrose() : ((typeof GameState !== 'undefined' && GameState.treasury) ? GameState.treasury.grose || 0 : 0);
+                    var techCount = (typeof GameState !== 'undefined' && GameState.researchedTechs) ? GameState.researchedTechs.length : 0;
+                    var techTotal = (typeof TechTree !== 'undefined') ? TechTree.length : '?';
+                    var rank = (typeof GameState !== 'undefined' && GameState.rank) ? GameState.rank.secular : '–';
+                    var lastKronika = '';
+                    if (typeof GameState !== 'undefined' && GameState.kronika && GameState.kronika.length > 0) {
+                        var lk = GameState.kronika[GameState.kronika.length - 1];
+                        lastKronika = lk.cs || lk.text || '';
+                        if (lastKronika.length > 35) lastKronika = lastKronika.substring(0, 35) + '…';
+                    }
+                    html = '<div class="pp-row"><span class="pp-label">📜 Zápisky</span><span class="pp-val">' + (res ? res.textContent : '0') + '</span></div>';
+                    html += '<div class="pp-row"><span class="pp-label">🪙 Groše</span><span class="pp-val">' + grose + '</span></div>';
+                    html += '<div class="pp-row"><span class="pp-label">🎓 Rank</span><span class="pp-val">' + rank + '</span></div>';
+                    html += '<div class="pp-row"><span class="pp-label">⚗️ Techy</span><span class="pp-val">' + techCount + ' / ' + techTotal + '</span></div>';
+                    if (lastKronika) html += '<div class="pp-row" style="margin-top:6px;border-top:1px solid rgba(197,160,89,0.2);padding-top:6px;"><span class="pp-label" style="font-size:0.7rem;opacity:0.6;">Poslední Kronika:</span></div><div class="pp-row"><span class="pp-val" style="font-size:0.78rem;opacity:0.8;">' + lastKronika + '</span></div>';
+                }
+
+                if (id === 'cat') {
+                    // Cat pill — obsah generuje ScriptoriumCat.renderCatPillDetail()
+                    body.innerHTML = '';
+                    if (typeof ScriptoriumCat !== 'undefined' && ScriptoriumCat.renderCatPillDetail) {
+                        ScriptoriumCat.renderCatPillDetail();
+                    }
+                } else {
+                    body.innerHTML = html;
+                }
+                panel.style.display = 'block';
+
+                // Aktivní stav na pill
+                document.querySelectorAll('.hpill').forEach(function (p) { p.classList.remove('active'); });
+                if (pill) pill.classList.add('active');
+
+                // Vigor: VigorSystem renderuje detail panel sám (detekuje activePill)
+                if (id === 'vigor' && typeof VigorSystem !== 'undefined') VigorSystem.renderPill();
+            };
+
+            window.pillClose = function () {
+                _activePill = null;
+                var panel = document.getElementById('pill-panel');
+                if (panel) panel.style.display = 'none';
+                document.querySelectorAll('.hpill').forEach(function (p) { p.classList.remove('active'); });
+            };
+
+            // Zavřít panel při scrollu nebo kliku mimo
+            document.addEventListener('scroll', function () { if (_activePill) pillClose(); }, true);
+
+            // Event listeners na pills (spolehlivější než onclick atributy)
+            function setupPillListeners() {
+                var pills = [
+                    { id: 'pill-weather', fn: function () { pillToggle('weather'); } },
+                    { id: 'pill-vigor', fn: function () { pillToggle('vigor'); } },
+                    { id: 'pill-time', fn: function () { pillToggle('time'); } },
+                    { id: 'pill-progress', fn: function () { pillToggle('progress'); } },
+                    { id: 'pill-notif', fn: function () { if (typeof NotificationSystem !== 'undefined') NotificationSystem.togglePanel(); } }
+                ];
+                pills.forEach(function (p) {
+                    var el = document.getElementById(p.id);
+                    if (el) {
+                        el.removeAttribute('onclick');
+                        el.addEventListener('click', p.fn);
+                        el.addEventListener('touchend', function (e) { e.preventDefault(); p.fn(); });
+                    }
+                });
+            }
+            document.addEventListener('DOMContentLoaded', setupPillListeners);
+
+            // Sync
+            window.syncPills = syncPills;
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(syncPills, 1000);
+            });
+            setInterval(syncPills, 5000);
+
+        })();
+    </script>
+
+    <script>
+        /* BUILD:JS_BOOTSTRAP */
+    </script>
+</body>
+
+</html>

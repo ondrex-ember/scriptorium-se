@@ -1,0 +1,6 @@
+{
+  "name": "Scriptorium",
+  "description": "An interactive medieval monastic scriptorium experience set in 1465, featuring book copying, manuscript illumination, monastic daily life, and historical mini-games.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
