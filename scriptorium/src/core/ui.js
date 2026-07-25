@@ -1268,9 +1268,9 @@ const UI = {
             document.getElementById('lore-research-content').style.display = 'block';
             UI.renderScriptorium();
         } else if (tab === 'tasks') {
-            if (_ltasksEl) { _ltasksEl.style.display = 'block'; if (typeof MonasticTasksSystem !== 'undefined') MonasticTasksSystem.render(); }
+            if (_ltasksEl) { _ltasksEl.style.display = 'block'; if (typeof MonasticTasksSystem !== 'undefined') MonasticTasksSystem.render(); else UI.renderMonasticTasks(); }
         } else if (tab === 'manuscripts') {
-            if (_lmsEl) { _lmsEl.style.display = 'block'; if (typeof ManuscriptCopySystem !== 'undefined') ManuscriptCopySystem.renderPage(); }
+            if (_lmsEl) { _lmsEl.style.display = 'block'; if (typeof ManuscriptCopySystem !== 'undefined') ManuscriptCopySystem.renderPage(); else UI.renderManuscriptCopying(); }
         } else if (tab === 'codex') {
             document.getElementById('lore-codex-content').style.display = 'block';
             UI.renderCodex();
@@ -1331,6 +1331,366 @@ const UI = {
             const el = document.getElementById('library-studovna-content');
             if (el) { el.style.display = 'block'; if (typeof StudovnaSystem !== 'undefined') StudovnaSystem.render(); }
         }
+    },
+
+    renderMonasticTasks: function () {
+        const el = document.getElementById('lore-tasks-content');
+        if (!el) return;
+        const lang = (GameState.settings && GameState.settings.language) || 'cs';
+        const isEn = lang === 'en';
+
+        if (!GameState.tasksState) {
+            GameState.tasksState = {
+                completedToday: {},
+                lastResetDay: GameState.stats ? GameState.stats.day : 1
+            };
+        }
+
+        const currentDay = GameState.stats ? GameState.stats.day : 1;
+        if (GameState.tasksState.lastResetDay !== currentDay) {
+            GameState.tasksState.completedToday = {};
+            GameState.tasksState.lastResetDay = currentDay;
+        }
+
+        const tasksList = [
+            { id: 'task_prayer', icon: '⛪', title: isEn ? 'Morning Office & Prayer' : 'Ranní officium a modlitba', desc: isEn ? 'Recite Psalms for spiritual strength (+10 Vigor)' : 'Recitace žalmů pro duchovní sílu (+10 Vigor)' },
+            { id: 'task_scriptorium', icon: '✒️', title: isEn ? 'Scriptorium Copying Duty' : 'Služba v skriptoriu', desc: isEn ? 'Write scripture lines (+5 Research)' : 'Napsat 5 řádků písemností (+5 Výzkum)' },
+            { id: 'task_garden', icon: '🪴', title: isEn ? 'Herb Garden Tending' : 'Péče o klášterní zahrádku', desc: isEn ? 'Water herbs (+1 Herbs)' : 'Zalít bylinky a plevat plevel (+1 Byliny)' },
+            { id: 'task_library', icon: '📖', title: isEn ? 'Library Cataloging' : 'Katalogizace knihovny', desc: isEn ? 'Inspect scroll condition (+3 Research)' : 'Prohlédnout stav svitků (+3 Výzkum)' }
+        ];
+
+        let h = `<div style="padding:20px; background:#fbf7ee; border:1px solid #c5a059; border-radius:8px; position:relative; box-shadow:0 4px 12px rgba(0,0,0,0.06);">`;
+        // Corner ornaments
+        h += `<div style="position:absolute; top:4px; left:4px; width:10px; height:10px; border-top:2px solid #c5a059; border-left:2px solid #c5a059;"></div>`;
+        h += `<div style="position:absolute; top:4px; right:4px; width:10px; height:10px; border-top:2px solid #c5a059; border-right:2px solid #c5a059;"></div>`;
+        h += `<div style="position:absolute; bottom:4px; left:4px; width:10px; height:10px; border-bottom:2px solid #c5a059; border-left:2px solid #c5a059;"></div>`;
+        h += `<div style="position:absolute; bottom:4px; right:4px; width:10px; height:10px; border-bottom:2px solid #c5a059; border-right:2px solid #c5a059;"></div>`;
+
+        h += `<div style="font-size:0.75rem; font-weight:bold; letter-spacing:1.5px; color:#2b6cb0; text-transform:uppercase; margin-bottom:6px;">📜 ${isEn ? 'DAILY SCHEDULE (HORARIUM MONASTICUM)' : 'DENNÍ ŘÁD (HORARIUM MONASTICUM)'}</div>`;
+        h += `<div style="font-size:0.85rem; color:#4a5568; margin-bottom:16px;">${isEn ? 'Rule of Saint Benedict: Ora et labora. Fulfill daily duties for spiritual and practical benefit of the monastery.' : 'Řehole svatého Benedikta: Ora et labora. Plň každodenní povinnosti pro duchovní i praktický užitek kláštera.'}</div>`;
+
+        // Canonical Hours Grid matching Screenshot 2
+        const canonicalGrid = [
+            { id: 'vigilie', name: 'Vigilie', time: '02:00', icon: '🌙' },
+            { id: 'laudes', name: 'Laudes', time: '06:00', icon: '🌅' },
+            { id: 'prima', name: 'Prima', time: '09:00', icon: '☀️' },
+            { id: 'sexta', name: 'Sexta', time: '12:00', icon: '☀️' },
+            { id: 'nona', name: 'Nona', time: '15:00', icon: '🌤️' },
+            { id: 'vesperae', name: 'Vesperae', time: '18:00', icon: '🏙️' }
+        ];
+
+        h += `<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap:8px; margin-bottom:12px;">`;
+        canonicalGrid.forEach(ch => {
+            h += `<div style="padding:10px 6px; background:rgba(255,255,255,0.7); border:1px solid rgba(197,160,89,0.4); border-radius:6px; text-align:center;">
+                <div style="font-size:1.3rem; margin-bottom:2px;">${ch.icon}</div>
+                <div style="font-weight:bold; font-size:0.8rem; color:#2c3e50;">${ch.name}</div>
+                <div style="font-size:0.68rem; opacity:0.65;">${ch.time}</div>
+            </div>`;
+        });
+        h += `</div>`;
+
+        h += `<div style="display:flex; justify-content:center; margin-bottom:20px;">`;
+        h += `<div style="padding:8px 24px; background:rgba(255,255,255,0.7); border:1px solid rgba(197,160,89,0.4); border-radius:6px; text-align:center; min-width:140px;">
+            <div style="font-size:1.3rem; margin-bottom:2px;">🕯️</div>
+            <div style="font-weight:bold; font-size:0.8rem; color:#2c3e50;">Completorium</div>
+            <div style="font-size:0.68rem; opacity:0.65;">21:00</div>
+        </div>`;
+        h += `</div>`;
+
+        // Decorative divider
+        h += `<div style="position:relative; height:1px; background:#90cdf4; margin:16px 0 20px 0;">`;
+        h += `<div style="position:absolute; top:-3px; left:50%; transform:translateX(-50%) rotate(45deg); width:7px; height:7px; background:#90cdf4;"></div>`;
+        h += `</div>`;
+
+        h += `<div style="font-size:0.9rem; font-weight:bold; color:#2c3e50; margin-bottom:12px;">📋 ${isEn ? 'Daily Duties' : 'Denní povinnosti k vyplnění'}</div>`;
+        h += `<div style="display:flex; flex-direction:column; gap:10px;">`;
+        tasksList.forEach(t => {
+            const isDone = !!GameState.tasksState.completedToday[t.id];
+            h += `<div style="display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:${isDone ? 'rgba(76,175,80,0.08)' : 'rgba(255,255,255,0.6)'}; border:1px solid ${isDone ? 'rgba(76,175,80,0.35)' : 'rgba(197,160,89,0.35)'}; border-radius:8px;">
+                <div style="display:flex; align-items:center; gap:14px;">
+                    <div style="font-size:1.6rem;">${t.icon}</div>
+                    <div>
+                        <div style="font-weight:bold; font-size:0.92rem; color:#2c3e50;">${t.title} ${isDone ? '<span style="color:#27ae60;">✔</span>' : ''}</div>
+                        <div style="font-size:0.78rem; opacity:0.75; color:#555;">${t.desc}</div>
+                    </div>
+                </div>
+                <div>
+                    <button class="medieval-btn" style="padding:6px 14px; font-size:0.8rem; border-radius:4px; font-weight:bold; cursor:${isDone ? 'default' : 'pointer'}; background:${isDone ? '#e2e8f0' : 'linear-gradient(180deg, #8b4513 0%, #5a2a0a 100%)'}; color:${isDone ? '#718096' : '#fff'}; border:1px solid ${isDone ? '#cbd5e0' : '#d4af37'};" ${isDone ? 'disabled' : `onclick="UI.completeMonasticTask('${t.id}')"`}>
+                        ${isDone ? (isEn ? 'Completed' : 'Splněno') : (isEn ? 'Fulfill' : 'Splnit')}
+                    </button>
+                </div>
+            </div>`;
+        });
+        h += `</div></div>`;
+        el.innerHTML = h;
+    },
+
+    completeMonasticTask: function (taskId) {
+        if (!GameState.tasksState) GameState.tasksState = { completedToday: {}, lastResetDay: 1 };
+        if (GameState.tasksState.completedToday[taskId]) return;
+        GameState.tasksState.completedToday[taskId] = true;
+
+        if (taskId === 'task_prayer') {
+            if (typeof VigorSystem !== 'undefined' && VigorSystem.addFatigue) VigorSystem.addFatigue(-10);
+            UI.notify('⛪ Modlitba dokončena (+10 Vigor)');
+        } else if (taskId === 'task_scriptorium') {
+            GameState.inventory['research'] = (GameState.inventory['research'] || 0) + 5;
+            UI.notify('✒️ Služba v skriptoriu (+5 Výzkum)');
+        } else if (taskId === 'task_garden') {
+            GameState.inventory['herbs'] = (GameState.inventory['herbs'] || 0) + 1;
+            UI.notify('🪴 Bylinky sesbírány (+1 Byliny)');
+        } else if (taskId === 'task_library') {
+            GameState.inventory['research'] = (GameState.inventory['research'] || 0) + 3;
+            UI.notify('📖 Katalogizace dokončena (+3 Výzkum)');
+        }
+        UI.renderMonasticTasks();
+        if (typeof Game !== 'undefined' && Game.save) Game.save();
+    },
+
+    renderManuscriptCopying: function () {
+        const el = document.getElementById('lore-manuscripts-content');
+        if (!el) return;
+        const lang = (GameState.settings && GameState.settings.language) || 'cs';
+        const isEn = lang === 'en';
+
+        const MANUSCRIPTS_DB = [
+            { id: 'anselm', name: 'Žaltář sv. Anselma', name_en: 'Psalter of St. Anselm', folios: 10 },
+            { id: 'benedict', name: 'Řehole sv. Benedikta', name_en: 'Rule of St. Benedict', folios: 20 },
+            { id: 'chronica', name: 'Kronika kláštera Kladruby', name_en: 'Chronicle of Kladruby Monastery', folios: 35 },
+            { id: 'herbar', name: 'Herbář a Lékařství', name_en: 'Herbal & Medicine Codex', folios: 50 },
+            { id: 'homiliar', name: 'Homiliář a Kázání', name_en: 'Homiliary & Sermons', folios: 75 },
+            { id: 'gigas', name: 'Codex Gigas', name_en: 'Codex Gigas', folios: 120 }
+        ];
+
+        if (!GameState.manuscriptsState) {
+            GameState.manuscriptsState = {
+                activeId: 'anselm',
+                progress: 0,
+                auto: false,
+                copies: { anselm: 0, benedict: 0, chronica: 0, herbar: 0, homiliar: 0, gigas: 0 }
+            };
+        }
+
+        const ms = GameState.manuscriptsState;
+        if (!ms.copies) ms.copies = {};
+
+        const activeManuscript = MANUSCRIPTS_DB.find(m => m.id === ms.activeId) || MANUSCRIPTS_DB[0];
+        const manuscriptName = isEn ? activeManuscript.name_en : activeManuscript.name;
+        const totalFolios = activeManuscript.folios;
+        const currentProgress = ms.progress || 0;
+        const pct = Math.min(100, Math.round((currentProgress / totalFolios) * 100));
+        const copiesCount = ms.copies[activeManuscript.id] || 0;
+
+        const paper = GameState.inventory['paper'] || 0;
+        const parchment = GameState.inventory['parchment'] || 0;
+        const ink = GameState.inventory['ink'] || 0;
+        const quill = GameState.inventory['quill'] || 0;
+
+        let h = `<div style="padding:16px; background:rgba(0,0,0,0.03); border-radius:8px; margin-bottom:16px; display:flex; flex-wrap:wrap; gap:16px; font-size:0.85rem; border:1px solid rgba(197,160,89,0.3);">`;
+        h += `<div>📜 ${isEn ? 'Paper' : 'Papír'}: <strong>${paper}</strong></div>`;
+        h += `<div>📜 ${isEn ? 'Parchment' : 'Pergamen'}: <strong>${parchment}</strong></div>`;
+        h += `<div>🖋️ ${isEn ? 'Ink' : 'Inkoust'}: <strong>${ink}</strong></div>`;
+        h += `<div>🪶 ${isEn ? 'Quills' : 'Brky'}: <strong>${quill}</strong></div>`;
+        h += `</div>`;
+
+        // Dormitorium / Scriptor status card
+        const scriptoriumBrother = (GameState.dormitorium && GameState.dormitorium.brothers || [])
+            .find(b => b.assignedTab === 'scriptorium');
+
+        if (scriptoriumBrother) {
+            const skLvl = (typeof Game !== 'undefined' && Game.dormitoriumBrotherLevel) ? Game.dormitoriumBrotherLevel(scriptoriumBrother, 'scriptorium') : 1;
+            const maxFolios = 1 + skLvl;
+            const hasSupplies = ink > 0 && (paper > 0 || parchment > 0);
+
+            h += `<div style="padding:12px 16px; background:rgba(43,108,176,0.08); border:1px solid #63b3ed; border-radius:8px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-size:0.85rem;">`;
+            h += `<div>`;
+            h += `<div style="font-weight:bold; color:#2b6cb0;">📿 ${isEn ? 'Assigned Scriptor' : 'Přiřazený Skriptor'}: ${scriptoriumBrother.name} (${isEn ? 'Level' : 'Úroveň'} ${skLvl}/4)</div>`;
+            h += `<div style="font-size:0.78rem; color:#4a5568; margin-top:2px;">`;
+            if (hasSupplies) {
+                h += isEn 
+                    ? `⚙️ Automatically copies up to <strong>${maxFolios} folios</strong> per day during daily monastery tick.` 
+                    : `⚙️ Automaticky opisuje až <strong>${maxFolios} folií</strong> za den při denním cyklu kláštera (a čte v knihovně).`;
+            } else {
+                h += isEn 
+                    ? `⚠️ Missing supplies! Ink and Paper/Parchment required for automated copying.` 
+                    : `⚠️ Chybí psací potřeby! Pro automatické opisování je potřeba Inkoust + Papír/Pergamen.`;
+            }
+            h += `</div></div>`;
+            h += `<button onclick="UI.switchScreen('saeculum')" style="font-size:0.78rem; padding:6px 12px; cursor:pointer; background:#ffffff; border:1px solid #c5a059; border-radius:4px; font-weight:bold; color:#2c3e50;">`;
+            h += `🏰 ${isEn ? 'Dormitorium' : 'Správa mnichů'}`;
+            h += `</button>`;
+            h += `</div>`;
+        } else {
+            h += `<div style="padding:12px 16px; background:rgba(0,0,0,0.03); border:1px dashed #c5a059; border-radius:8px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; font-size:0.85rem; opacity:0.9;">`;
+            h += `<div>`;
+            h += `<div style="font-weight:bold; color:#744210;">📿 ${isEn ? 'No Scriptor assigned' : 'V Dormitoriu není přiřazen žádný Skriptor'}</div>`;
+            h += `<div style="font-size:0.78rem; color:#4a5568; margin-top:2px;">${isEn ? 'Assign a monk to Scriptorium in Saeculum for automatic daily manuscript copying.' : 'Přiřaď bratra na pracoviště Scriptorium v Saeculum (Dormitorium) pro automatické denní opisování.'}</div>`;
+            h += `</div>`;
+            h += `<button onclick="UI.switchScreen('saeculum')" style="font-size:0.78rem; padding:6px 12px; cursor:pointer; background:#ffffff; border:1px solid #c5a059; border-radius:4px; font-weight:bold; color:#2c3e50;">`;
+            h += `🏰 ${isEn ? 'Assign Monk' : 'Přiřadit bratra'}`;
+            h += `</button>`;
+            h += `</div>`;
+        }
+
+        // Golden illuminated parchment container matching Screenshot 3
+        h += `<div style="padding:20px; background:#fbf7ee; border:1px solid #c5a059; border-radius:8px; position:relative; box-shadow:0 4px 12px rgba(0,0,0,0.06); margin-bottom:20px;">`;
+        // 4 Corner flourishes
+        h += `<div style="position:absolute; top:4px; left:4px; width:10px; height:10px; border-top:2px solid #c5a059; border-left:2px solid #c5a059;"></div>`;
+        h += `<div style="position:absolute; top:4px; right:4px; width:10px; height:10px; border-top:2px solid #c5a059; border-right:2px solid #c5a059;"></div>`;
+        h += `<div style="position:absolute; bottom:4px; left:4px; width:10px; height:10px; border-bottom:2px solid #c5a059; border-left:2px solid #c5a059;"></div>`;
+        h += `<div style="position:absolute; bottom:4px; right:4px; width:10px; height:10px; border-bottom:2px solid #c5a059; border-right:2px solid #c5a059;"></div>`;
+
+        // Subheader
+        h += `<div style="font-size:0.75rem; font-weight:bold; letter-spacing:1.5px; color:#2b6cb0; text-transform:uppercase; margin-bottom:8px;">✒️ ${isEn ? 'ACTIVE MANUSCRIPT COPYING' : 'AKTIVNÍ OPISOVÁNÍ RUKOPISU'}</div>`;
+
+        // Title row
+        h += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">`;
+        h += `<div style="font-size:1.15rem; font-weight:bold; color:#2c3e50; font-family:'Cinzel', serif, Georgia;">📖 ${manuscriptName} <span style="font-weight:normal; font-size:0.85rem; opacity:0.75;">(${copiesCount}x ${isEn ? 'copied' : 'opsáno'})</span></div>`;
+        h += `<div style="font-size:0.95rem; font-weight:bold; color:#3182ce;">${currentProgress} / ${totalFolios} ${isEn ? 'folios' : 'folií'} (${pct}%)</div>`;
+        h += `</div>`;
+
+        // Decorative line divider
+        h += `<div style="position:relative; height:1px; background:#90cdf4; margin:10px 0 16px 0;">`;
+        h += `<div style="position:absolute; top:-3px; left:50%; transform:translateX(-50%) rotate(45deg); width:7px; height:7px; background:#90cdf4;"></div>`;
+        h += `</div>`;
+
+        // Folios squares grid
+        h += `<div style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin:16px 0 20px 0;">`;
+        for (let i = 0; i < totalFolios; i++) {
+            if (i < currentProgress) {
+                h += `<div style="width:16px; height:16px; background:#3182ce; border:1px solid #2b6cb0; border-radius:3px; box-shadow:inset 0 1px 2px rgba(255,255,255,0.3);" title="Folium ${i+1}"></div>`;
+            } else {
+                h += `<div style="width:16px; height:16px; background:rgba(144, 205, 244, 0.25); border:1px solid #7bc5d8; border-radius:3px;" title="Folium ${i+1}"></div>`;
+            }
+        }
+        h += `</div>`;
+
+        // Buttons row matching Screenshot 3
+        h += `<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">`;
+        h += `<div style="display:flex; gap:10px; flex-wrap:wrap;">`;
+        h += `<button onclick="UI.copyFolium(1)" style="background:linear-gradient(180deg, #8b4513 0%, #5a2a0a 100%); color:#ffffff; border:1px solid #d4af37; padding:8px 16px; border-radius:4px; font-weight:bold; font-family:'Cinzel', serif, Georgia; font-size:0.85rem; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.25); display:flex; align-items:center; gap:6px;">
+            ✒️ ${isEn ? 'COPY 1 FOLIUM (1 ✒️)' : 'OPSAT 1 FOLIUM (1 ✒️)'}
+        </button>`;
+        h += `<button onclick="UI.copyFolium(5)" style="background:linear-gradient(180deg, #8b4513 0%, #5a2a0a 100%); color:#ffffff; border:1px solid #d4af37; padding:8px 16px; border-radius:4px; font-weight:bold; font-family:'Cinzel', serif, Georgia; font-size:0.85rem; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.25); display:flex; align-items:center; gap:6px;">
+            📜 ${isEn ? 'COPY 5 FOLIOS' : 'OPSAT 5 FOLÍÍ'}
+        </button>`;
+        h += `</div>`;
+
+        const isAuto = !!ms.auto;
+        h += `<button onclick="UI.toggleManuscriptAutomation()" style="background:linear-gradient(180deg, #2b6cb0 0%, #1a4971 100%); color:#ffffff; border:1px solid #63b3ed; padding:8px 16px; border-radius:4px; font-weight:bold; font-family:'Cinzel', serif, Georgia; font-size:0.85rem; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.25); display:flex; align-items:center; gap:6px;">
+            ⚡ ${isEn ? 'AUTOMATION' : 'AUTOMATIKA'}: ${isAuto ? (isEn ? 'ON' : 'ZAP') : (isEn ? 'OFF' : 'VYP')}
+        </button>`;
+        h += `</div>`;
+
+        h += `</div>`;
+
+        // Manuscript selection list
+        h += `<div style="font-size:0.92rem; font-weight:bold; color:#2c3e50; margin-bottom:10px;">📜 ${isEn ? 'Available Manuscripts for Copying' : 'Knižní kodexy k opisování'}</div>`;
+        h += `<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px;">`;
+        MANUSCRIPTS_DB.forEach(m => {
+            const isSel = m.id === activeManuscript.id;
+            const name = isEn ? m.name_en : m.name;
+            const cop = ms.copies[m.id] || 0;
+            h += `<div onclick="UI.selectManuscript('${m.id}')" style="padding:10px 14px; background:${isSel ? 'rgba(197,160,89,0.18)' : 'rgba(255,255,255,0.6)'}; border:1px solid ${isSel ? '#c5a059' : 'rgba(197,160,89,0.3)'}; border-radius:6px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <div style="font-weight:bold; font-size:0.88rem; color:#2c3e50;">📖 ${name}</div>
+                    <div style="font-size:0.75rem; opacity:0.7;">${m.folios} ${isEn ? 'folios' : 'folií'} | ${cop}x ${isEn ? 'copied' : 'opsáno'}</div>
+                </div>
+                ${isSel ? '<span style="font-size:0.8rem; font-weight:bold; color:#8b4513;">▶ AKTIVNÍ</span>' : ''}
+            </div>`;
+        });
+        h += `</div>`;
+
+        el.innerHTML = h;
+    },
+
+    selectManuscript: function (id) {
+        if (!GameState.manuscriptsState) GameState.manuscriptsState = { activeId: 'anselm', progress: 0, auto: false, copies: {} };
+        if (GameState.manuscriptsState.activeId === id) return;
+        GameState.manuscriptsState.activeId = id;
+        GameState.manuscriptsState.progress = 0;
+        UI.renderManuscriptCopying();
+        if (typeof Game !== 'undefined' && Game.save) Game.save();
+    },
+
+    copyFolium: function (count = 1) {
+        if (!GameState.manuscriptsState) {
+            GameState.manuscriptsState = { activeId: 'anselm', progress: 0, auto: false, copies: {} };
+        }
+        const ms = GameState.manuscriptsState;
+        const MANUSCRIPTS_DB = {
+            anselm: 10, benedict: 20, chronica: 35, herbar: 50, homiliar: 75, gigas: 120
+        };
+        const maxFolios = MANUSCRIPTS_DB[ms.activeId] || 10;
+
+        let copiesDone = 0;
+        for (let c = 0; c < count; c++) {
+            const paper = GameState.inventory['paper'] || 0;
+            const parchment = GameState.inventory['parchment'] || 0;
+            const ink = GameState.inventory['ink'] || 0;
+
+            if (ink <= 0 || (paper <= 0 && parchment <= 0)) {
+                if (copiesDone === 0) {
+                    UI.notify('⚠️ Chybí psací potřeby (Inkoust + Papír/Pergamen)!');
+                }
+                break;
+            }
+
+            GameState.inventory['ink'] = ink - 1;
+            if (parchment > 0) {
+                GameState.inventory['parchment'] = parchment - 1;
+            } else {
+                GameState.inventory['paper'] = paper - 1;
+            }
+
+            ms.progress = (ms.progress || 0) + 1;
+            GameState.inventory['research'] = (GameState.inventory['research'] || 0) + 3;
+            copiesDone++;
+
+            if (ms.progress >= maxFolios) {
+                ms.progress = 0;
+                ms.copies[ms.activeId] = (ms.copies[ms.activeId] || 0) + 1;
+                GameState.inventory['research'] += 20;
+                GameState.inventory['parchment'] = (GameState.inventory['parchment'] || 0) + 2;
+                UI.notify(`📜 Kodex dokončen! Získáváš +20 Zápisků a 2 Pergamene.`);
+                break;
+            }
+        }
+
+        if (copiesDone > 0) {
+            UI.notify(`✒️ Opsáno ${copiesDone} folium (+${copiesDone * 3} Zápisky)`);
+        }
+
+        UI.renderManuscriptCopying();
+        if (typeof Game !== 'undefined' && Game.save) Game.save();
+        return copiesDone > 0;
+    },
+
+    toggleManuscriptAutomation: function () {
+        if (!GameState.manuscriptsState) {
+            GameState.manuscriptsState = { activeId: 'anselm', progress: 0, auto: false, copies: {} };
+        }
+        GameState.manuscriptsState.auto = !GameState.manuscriptsState.auto;
+
+        if (window._msAutoTimer) {
+            clearInterval(window._msAutoTimer);
+            window._msAutoTimer = null;
+        }
+
+        if (GameState.manuscriptsState.auto) {
+            UI.notify('⚡ Automatika opisování zapnuta');
+            window._msAutoTimer = setInterval(() => {
+                const success = UI.copyFolium(1);
+                if (!success) {
+                    UI.toggleManuscriptAutomation();
+                }
+            }, 3000);
+        } else {
+            UI.notify('⚡ Automatika opisování vypnuta');
+        }
+
+        UI.renderManuscriptCopying();
+        if (typeof Game !== 'undefined' && Game.save) Game.save();
     },
 
     switchHomeTab: function (tab, btn) {
@@ -3011,8 +3371,8 @@ const UI = {
                             ? `<div style="font-size:0.6rem; opacity:0.5;">☠️ ${lang === 'en' ? 'gone' : 'zesnulý'}</div>`
                             : '';
                 h += `<div style="padding:8px 10px; background:rgba(255,255,255,0.4); border:1px solid rgba(197,160,89,0.2); border-radius:6px;">
-                    <div style="font-size:0.8rem; font-weight:bold;">${icon} ${lang === 'en' ? (a.label_en || a.label) : a.label}</div>
-                    <div style="font-size:0.6rem; opacity:0.6; margin-bottom:4px;">${lang === 'en' ? (a.profession_en || a.profession) : a.profession}</div>
+                    <div style="font-size:0.8rem; font-weight:bold;">${icon} ${a.label}</div>
+                    <div style="font-size:0.6rem; opacity:0.6; margin-bottom:4px;">${a.profession}</div>
                     <div style="display:flex; align-items:center; gap:4px; margin-bottom:2px;">
                         <span style="font-size:0.58rem; width:34px; opacity:0.6;">${lang === 'en' ? 'mood' : 'nálada'}</span>
                         <div style="flex:1; height:4px; background:rgba(0,0,0,0.1); border-radius:2px; overflow:hidden;">

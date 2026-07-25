@@ -718,12 +718,6 @@ const Game = {
                     _tickCounter = 0;
                     CellariumSystem.checkGiacomoEvent();
                     CellariumSystem.checkStationariusEvent();
-                    // CHRONICON — periodický re-fetch (self-guarded 6h TTL uvnitř
-                    // _fetch). Bez tohohle se dlouho otevřená session nikdy
-                    // nedozví o novém tiku, dokud hráč nereloadne stránku —
-                    // teď dorazí sama, jakmile TTL vyprší (až 4×/den, mirror
-                    // CHRONICON engine kadence 6/12/18/00).
-                    if (typeof ChroniconSystem !== 'undefined' && ChroniconSystem._fetch) ChroniconSystem._fetch();
                     // v8.x: Orchard growing → mature transition
                     Game.checkOrchardGrowth();
                     if (typeof GardenSystem !== 'undefined') GardenSystem.checkFieldGrowth();
@@ -742,10 +736,6 @@ const Game = {
                     if (typeof TemplumSystem !== 'undefined' && TemplumSystem.updateTabVisibility) TemplumSystem.updateTabVisibility();
                     // Infirmarium — viditelnost tabu dle tech_infirmarium (levný DOM check)
                     if (typeof InfirmariumSystem !== 'undefined' && InfirmariumSystem.updateTabVisibility) InfirmariumSystem.updateTabVisibility();
-                    // Infirmarium — hospes recovery/discharge (self-guarded 24h)
-                    if (typeof InfirmariumSystem !== 'undefined' && InfirmariumSystem.hospesDailyTick) InfirmariumSystem.hospesDailyTick();
-                    // Ubytovna — odchod hostů po plannedDays (self-guarded 24h, ubytovna-mrd.md §8c-B)
-                    if (typeof ChroniconSystem !== 'undefined' && ChroniconSystem.ubytovnaDailyTick) ChroniconSystem.ubytovnaDailyTick();
                     // Templum — denní chod kostela (self-guarded 24h, gate frater+)
                     if (typeof Game !== 'undefined' && Game.templumDailyTick) Game.templumDailyTick();
                     // Templum — týdenní zpověď (self-guarded, gate frater+)
@@ -3217,8 +3207,6 @@ const Game = {
                     if(Math.random() < 0.15) this.addItem('crayfish', 1);
                     // Orobinec — kořen z mokřadu
                     if(Math.random() < 0.06) this.addItem('cattail_root', 1);
-                    // Proutí — vrbové pruty u mokřadu, běžný stavební materiál (Columbarium)
-                    if(Math.random() < 0.20) this.addItem('wicker', 2);
                 }
                 else if (type === 'resin_harvest') {
                     if(r<0.5) this.addItem('resin', 1);
@@ -3550,8 +3538,6 @@ const Game = {
                 if(Math.random() < 0.15) this.addItem('crayfish', 1);
                 // Orobinec — kořen z mokřadu
                 if(Math.random() < 0.06) this.addItem('cattail_root', 1);
-                // Proutí — vrbové pruty u mokřadu, běžný stavební materiál (Columbarium)
-                if(Math.random() < 0.20) this.addItem('wicker', 2);
             }
             else if (type === 'resin_harvest') {
                 if(r<0.5) this.addItem('resin', 1);
@@ -5619,11 +5605,6 @@ const Game = {
         t.nextMass = now + 7 * 24 * 60 * 60 * 1000;
         t.lastMass = { ts: now, incense: incenseId, degraded: degraded };
         Game._templumLog({ type: 'mass', incense: incenseId, degraded: degraded, feastName: feastName, eccl: eccl });
-        // CHRONICON — anonymní denní favor report pro 'klaster' (Path C,
-        // 25.7.2026). Mše = jádro klášterní legitimity, přirozený spouštěč.
-        if (typeof ChroniconSystem !== 'undefined' && ChroniconSystem._reportActorFavorIfNewDay) {
-            ChroniconSystem._reportActorFavorIfNewDay('klaster');
-        }
         // R1: odsloužená mše = držený kanonický rytmus (frater vyžaduje streak ≥ 7)
         if (GameState.rank) {
             GameState.rank.canonicalStreak = (GameState.rank.canonicalStreak || 0) + 1;
@@ -8270,32 +8251,103 @@ const Game = {
             }
         }
 
-        // ── Scriptorium (L1): přiřazený bratr (specializace "Skriptor") čte
-        //    za hráče odemčené, ale dosud nepřečtené knihy — jedna kniha za
-        //    24h tick, self-guarded. Scriptorium je čtenářský tab (LibraryDB),
-        //    ne výrobní — žádný Conversi task pro něj neexistuje, čistě
-        //    bratrovská role, stejně jako Athanor. ──
+        // ── Scriptorium (L1): přiřazený bratr (specializace "Skriptor") ──
+        //    Přiřazený bratr v Dormitoriu (Skriptor):
+        //    1) Opisuje folia aktivního kodexu v Scriptorium (dle své úrovně Skriptor, spotřebovává Inkoust + Papír/Pergamen)
+        //    2) Čte odemčené, dosud nepřečtené knihy v knihovně jako doplňkovou činnost.
         const scriptoriumBrother = (GameState.dormitorium && GameState.dormitorium.brothers || [])
-            .find(b => b.assignedTab === 'scriptorium');
-        if ((!onlyTab || onlyTab === 'scriptorium') && scriptoriumBrother && GameState.library && typeof LibraryDB !== 'undefined' && typeof LibraryHelpers !== 'undefined') {
+            .find(b => b.assignedTab === 'scriptorium' && (b.fatigue || 0) < 90);
+
+        if ((!onlyTab || onlyTab === 'scriptorium') && scriptoriumBrother && GameState.library) {
             if (!GameState.conversiScriptoriumLastTick) GameState.conversiScriptoriumLastTick = 0;
             if (Date.now() - GameState.conversiScriptoriumLastTick >= DAY) {
                 GameState.conversiScriptoriumLastTick = Date.now();
 
-                const unread = LibraryDB.books.find(b =>
-                    GameState.library.unlockedBooks.includes(b.id) &&
-                    !GameState.library.readBooks.includes(b.id)
-                );
+                let workDone = false;
 
-                if (unread) {
-                    LibraryHelpers.readBook(unread.id);
+                // 1) Opisování rukopisů
+                if (!GameState.manuscriptsState) {
+                    GameState.manuscriptsState = { activeId: 'anselm', progress: 0, auto: false, copies: {} };
+                }
+                const ms = GameState.manuscriptsState;
+                if (!ms.copies) ms.copies = {};
+
+                const MANUSCRIPTS_DB = {
+                    anselm: 10, benedict: 20, chronica: 35, herbar: 50, homiliar: 75, gigas: 120
+                };
+                const MANUSCRIPT_NAMES = {
+                    anselm: 'Žaltář sv. Anselma', benedict: 'Řehole sv. Benedikta', chronica: 'Kronika kláštera Kladruby',
+                    herbar: 'Herbář a Lékařství', homiliar: 'Homiliář a Kázání', gigas: 'Codex Gigas'
+                };
+
+                const totalFolios = MANUSCRIPTS_DB[ms.activeId] || 10;
+                const msName = MANUSCRIPT_NAMES[ms.activeId] || ms.activeId;
+
+                const level = this.dormitoriumBrotherLevel(scriptoriumBrother, 'scriptorium') || 1;
+                const maxFoliosToCopy = 1 + level; // Úroveň 1 = 2 folia, Úroveň 4 = 5 folií za den
+
+                let foliosCopied = 0;
+                for (let f = 0; f < maxFoliosToCopy; f++) {
+                    const paper = GameState.inventory['paper'] || 0;
+                    const parchment = GameState.inventory['parchment'] || 0;
+                    const ink = GameState.inventory['ink'] || 0;
+
+                    if (ink <= 0 || (paper <= 0 && parchment <= 0)) break;
+
+                    GameState.inventory['ink'] = ink - 1;
+                    if (parchment > 0) GameState.inventory['parchment'] = parchment - 1;
+                    else GameState.inventory['paper'] = paper - 1;
+
+                    ms.progress = (ms.progress || 0) + 1;
+                    GameState.inventory['research'] = (GameState.inventory['research'] || 0) + 3;
+                    foliosCopied++;
+
+                    if (ms.progress >= totalFolios) {
+                        ms.progress = 0;
+                        ms.copies[ms.activeId] = (ms.copies[ms.activeId] || 0) + 1;
+                        GameState.inventory['research'] += 20;
+                        GameState.inventory['parchment'] = (GameState.inventory['parchment'] || 0) + 2;
+                        this._reportWork(
+                            `📜 ${scriptoriumBrother.name} (Skriptor) dokončil opis kodexu „${msName}“! (+20 Zápisků, +2 Pergamene).`,
+                            `📜 ${scriptoriumBrother.name} (Scriptor) completed manuscript "${msName}"!`
+                        );
+                        break;
+                    }
+                }
+
+                if (foliosCopied > 0) {
+                    workDone = true;
                     this.dormitoriumAddXp(scriptoriumBrother, 'scriptorium');
                     scriptoriumBrother.fatigue = Math.min(100, (scriptoriumBrother.fatigue || 0) + 10);
-                    const title = unread.title || unread.id;
                     this._reportWork(
-                        `📜 ${scriptoriumBrother.name} (Scriptorium) přečetl: „${title}“.`,
-                        `📜 ${scriptoriumBrother.name} (Scriptorium) read: "${title}".`
+                        `✒️ ${scriptoriumBrother.name} (Skriptor) opsal ${foliosCopied} folia kodexu „${msName}“ (+${foliosCopied * 3} Zápisků).`,
+                        `✒️ ${scriptoriumBrother.name} (Scriptor) copied ${foliosCopied} folios of "${msName}".`
                     );
+                }
+
+                // 2) Čtení odemčených knih z knihovny
+                if (typeof LibraryDB !== 'undefined' && typeof LibraryHelpers !== 'undefined') {
+                    const unread = LibraryDB.books.find(b =>
+                        GameState.library.unlockedBooks.includes(b.id) &&
+                        !GameState.library.readBooks.includes(b.id)
+                    );
+
+                    if (unread) {
+                        LibraryHelpers.readBook(unread.id);
+                        if (!workDone) {
+                            this.dormitoriumAddXp(scriptoriumBrother, 'scriptorium');
+                            scriptoriumBrother.fatigue = Math.min(100, (scriptoriumBrother.fatigue || 0) + 10);
+                        }
+                        const title = unread.title || unread.id;
+                        this._reportWork(
+                            `📖 ${scriptoriumBrother.name} (Skriptor) přečetl knihu: „${title}“.`,
+                            `📖 ${scriptoriumBrother.name} (Scriptor) read book: "${title}".`
+                        );
+                        workDone = true;
+                    }
+                }
+
+                if (workDone) {
                     Game.save();
                 }
             }

@@ -2,7 +2,7 @@
 // Základ: STRINGS_cs. Chybějící klíče → fallback na CS automaticky.
 
 const STRINGS_en = {
-    nav: { home: 'Workshop', garden: 'Garden', craft: 'Craft', inv: 'Penum', lore: 'Script<br>orium', library: 'Library' },
+    nav: { home: 'Workshop', garden: 'Garden', craft: 'Craft', inv: 'Penum', lore: 'Scriptorium', library: 'Library' },
     screens: { home: 'Officina', garden: 'The Garden', craft: 'Crafting', inv: 'Penum', lore: 'Scriptorium', library: 'The Library', settings: 'Settings', scavenge: 'Scavenge', mine: 'Mine' },
     header: { weatherNow: 'Presently in Prague (click to refresh)', weatherTomorrow: 'Morrow\'s forecast', hunger: 'Hunger', streak: 'Daily Streak', research: 'Knowledge Gathered', settings: 'Settings' },
     // ------------------------------
@@ -12,7 +12,7 @@ const STRINGS_en = {
         diedOutShort: 'The hearth has died out', diedOut: '❄️ The fire has died out.',
         full: 'The hearth is full!', fuelAdded: 'Fuel added.',
         notEnough: 'Not enough {item}.',
-        foculusTab: 'Foculus', foculusLocked: "Study Meteorologica to manage the hearth's fuel.", foculusSubLocked: 'Additional hearth rituals (teas, coffee substitutes, drying, incense...) require researching Meteorologica technology.',
+        foculusTab: 'Foculus', foculusLocked: "Study Meteorologica to manage the hearth's fuel.",
         statusLabel: 'Fire status:',
         burnNow: 'dying out', burnSoon: 'burning out soon',
         burnToday: 'burns out today {part}', burnTomorrow: 'burns out tomorrow {part}',
@@ -105,10 +105,6 @@ const STRINGS_en = {
         themeWinter: 'Winter ❄️',
         themeAuto: 'Auto (Weather) 🌦️',
         themeAutoDesc: 'The theme shall adapt to the present weather in Prague.',
-        designStyleLabel: '⚜️ Object & Card Style',
-        designMarniva: '✨ Vanity (New Ornate Art Deco Look)',
-        designPokorna: '🪨 Humble (Older Simpler Look)',
-        designStyleDesc: 'Choose between the humble monastic style and the ornate secular Art Deco design.',
         reset: 'Reset',
         resetDesc: 'Erase thy progress.',
         resetBtn: 'Erase',
@@ -381,8 +377,6 @@ const STRINGS_en = {
     },
     lore: {
         tabResearch: 'Research',
-        tabTasks: '📜 Daily Horarium',
-        tabManuscripts: '✒️ Transcriptions',
         tabCodex: 'Codex',
         tabNotebooks: '📓 Notebooks',
         tabAchievements: 'Achievements',
